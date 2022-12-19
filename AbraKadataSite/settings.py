@@ -57,7 +57,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'abrakadatasite.urls'
+ROOT_URLCONF = 'AbraKadataSite.urls'
 
 TEMPLATES = [
     {
@@ -75,7 +75,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'abrakadatasite.wsgi.application'
+WSGI_APPLICATION = 'AbraKadataSite.wsgi.application'
 
 
 # Database
