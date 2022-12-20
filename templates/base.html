@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<style type="text/css">
+	.stat-bar {
+		height: 33px;
+		border-style: solid;
+		border-width: 1.5px;
+	}
+	.stat-bar-background {
+		height: 45px;
+		width: 261px;
+		padding-top: 4px;
+		padding-left: 3px;
+		border-style: solid;
+		border-color: lightblue;
+		border-width: 2px;
+	}
+	.type-bubble {
+		height: 35px;
+		width: 80px;
+		border-style: solid;
+		border-color: black;
+		border-radius: 20px;
+		text-align: center;
+		color: white;
+		font-weight: bold;
+		text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
+		display: inline-block;
+	}
+	.table-responsive {
+		overflow: auto;
+		max-height: 500px;
+		height: 80%
+	}
+	.thead-fix {
+		position: sticky;
+		top: 0;
+		z-index: 1;
+		background: white;
+	}
+	.wrapper {
+		display: flex;
+		width: 100%;
+	}
+	#sidebar-wrapper {
+		width: 300px;
+		height: 100%;
+		background: white;
+	}
+	#sidebar-wrapper.active {
+		margin-left: -300px;
+	}
+	#sidebar {
+		width: 300px;
+		height: 100%;
+		padding-top: 60px;
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 999;
+		transition: all 0.3s;
+		overflow-y: auto;
+		background: white;
+	}
+	#sidebar.active {
+		margin-left: -300px;
+	}
+	.sidebar-header {
+		background: white;
+	}
+	.typeahead, .tt-query, .tt-hint {
+		border: 2px solid #CCCCCC;
+		border-radius: 8px;
+		font-size: 22px; /* Set input font size */
+		height: 30px;
+		line-height: 30px;
+		outline: medium none;
+		padding: 8px 12px;
+		width: 396px;
+	}
+	.typeahead {
+		background-color: #FFFFFF;
+	}
+	.typeahead:focus {
+		border: 2px solid #0097CF;
+	}
+	.tt-query {
+		box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+	}
+	.tt-hint {
+		color: #999999;
+	}
+	.tt-menu {
+		background-color: #FFFFFF;
+		border: 1px solid rgba(0, 0, 0, 0.2);
+		border-radius: 8px;
+		box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+		margin-top: 12px;
+		padding: 8px 0;
+		width: 210px;
+		overflow-y: auto;
+	}
+	.tt-suggestion {
+		font-size: 22px;  /* Set suggestion dropdown font size */
+		padding: 3px 20px;
+	}
+	.tt-suggestion:hover {
+		cursor: pointer;
+		background-color: #0097CF;
+		color: #FFFFFF;
+	}
+	.tt-suggestion p {
+		margin: 0;
+	}
+</style>
+<html>
+	<head>
+		<title>Abra Kadata</title>
+		{% load static %}
+		<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+	</head>
+	<body style="margin-top: 100px;">
+		{% include 'navbar.html' %}
+
+		{% block content %}
+		{% endblock content %}
+		<script src="{% static 'bootstrap/js/jquery.js' %}"></script>
+		<script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+		<script src="{% static 'bootstrap/js/tablesort.js' %}"></script>
+		<script src="{% static 'bootstrap/js/typeahead.js' %}"></script>
+<!-- 		<script type="module" src="{% static 'bootstrap/js/typeahead_search_list.js' %}"></script>
+		<script type="module" src="{% static 'bootstrap/js/typeahead_search_redirect.js' %}"></script> -->
+		<script type="text/javascript">
+			$(document).ready(function () {
+
+			    $('#sidebarCollapse').on('click', function () {
+			        $('#sidebar').toggleClass('active');
+			        $('#sidebar-wrapper').toggleClass('active');
+			    });
+
+			});
+		</script>
+	</body>
+</html>
