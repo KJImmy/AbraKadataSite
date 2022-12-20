@@ -1,0 +1,41 @@
+{% load static %}
+
+<table class="table table-striped" id="sortable2">
+	<thead style="position: sticky; top: 0; z-index: 1; background: white;">
+		<tr>
+			<th onclick="sortTable(0,'2')" style="width: 50%; text-align: center;">Move</th>
+			<th onclick="sortTable(1,'2')" style="width: 25%; text-align: center;">Winrate</th>
+			<th onclick="sortTable(2,'2')" style="width: 25%; text-align: center;">Move Frequency</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for m in moves %}
+		{% with m.img_number|slugify as img_num %}
+		{% with "sprites/pokemon/"|add:img_num|add:".png" as img_file %}
+		{% if m.id != pokemon.id %}
+		<tr>
+			<td class="align-middle">
+				<div class="row" style="padding-left: 20px;">
+					{{ m.move_display_name }} 
+					<div class="type-bubble" style="background: {{ m.move_type.type_color }}; margin-left: 10px;">
+						{{ m.move_type.type_name }}
+					</div>	
+				</div>
+			</td>
+			<td class="align-middle" style="text-align: center;">
+				{{ m.winrate|floatformat:2 }}%
+			</td>
+			<td class="align-middle" style="text-align: center;">
+				{% if m.move_frequency < 10 %}
+				0{{ m.move_frequency|floatformat:2 }}%
+				{% else %}
+				{{ m.move_frequency|floatformat:2 }}%
+				{% endif %}
+			</td>
+		</tr>
+		{% endif %}
+		{% endwith %}
+		{% endwith %}
+		{% endfor %}
+	</tbody>
+</table>

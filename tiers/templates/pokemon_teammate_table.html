@@ -1,0 +1,52 @@
+{% load static %}
+
+<table class="table table-striped" id="sortable">
+	<thead style="position: sticky; top: 0; z-index: 1; background: white;">
+		<tr>
+			<th onclick="sortTable(0,'')" style="width: 50%; text-align: center;">Pokemon</th>
+			<th onclick="sortTable(1,'')" style="width: 25%; text-align: center;">Winrate</th>
+			<th onclick="sortTable(2,'')" style="width: 25%; text-align: center;">Pairing Frequency</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for t in teammates %}
+		{% with t.img_number|slugify as img_num %}
+		{% with "sprites/pokemon/"|add:img_num|add:".png" as img_file %}
+		{% if t.id != pokemon.id %}
+		<tr>
+			<td class="align-middle">
+				<span style="white-space: nowrap; display: inline-block;">
+					{% if t in common_pokemon %}
+					<a href="{% url 'format_pokemon' tier.generation tier.tier_name t.pokemon_unique_name %}">
+						<img src="{% static img_file %}" style="height: 70px;">
+						{{ t.pokemon_display_name }}
+						{% with t.types_of_pokemon.all as type %}
+						{% include 'pokemon_type_block.html' %}
+						{% endwith %}
+					</a>
+					{% else %}
+						<img src="{% static img_file %}" style="height: 70px;">
+						{{ t.pokemon_display_name }}
+						{% with t.types_of_pokemon.all as type %}
+						{% include 'pokemon_type_block.html' %}
+						{% endwith %}
+					{% endif %}
+				</span>
+			</td>
+			<td class="align-middle" style="text-align: center;">
+				{{ t.winrate|floatformat:2 }}%
+			</td>
+			<td class="align-middle" style="text-align: center;">
+				{% if t.pairing_frequency < 10 %}
+				0{{ t.pairing_frequency|floatformat:2 }}%
+				{% else %}
+				{{ t.pairing_frequency|floatformat:2 }}%
+				{% endif %}
+			</td>
+		</tr>
+		{% endif %}
+		{% endwith %}
+		{% endwith %}
+		{% endfor %}
+	</tbody>
+</table>

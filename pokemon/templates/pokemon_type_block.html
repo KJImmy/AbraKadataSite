@@ -1,0 +1,19 @@
+{% if type|length == 2 %}
+	{% for t in type %}
+		{% if t.slot == 1 %}
+		<div class="type-bubble" style="background: {{ t.pokemon_type.type_color }};">
+			{{ t.pokemon_type.type_name }}
+		</div>
+		<span style="width: 5px;"></span>
+		{% endif %}
+		{% if t.slot == 2 %}
+		<div class="type-bubble" style="background: {{ t.pokemon_type.type_color }};">
+			{{ t.pokemon_type.type_name }}
+		</div>
+		{% endif %}
+	{% endfor %}
+{% else %}
+<div class="type-bubble" style="background: {{ type.first.pokemon_type.type_color }}">
+	{{ type.first.pokemon_type.type_name }}
+</div>
+{% endif %}
