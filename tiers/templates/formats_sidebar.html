@@ -1,0 +1,33 @@
+<div id="sidebar-wrapper">
+	<div id="sidebar">
+		<div class="sidebar-header">
+			<h3 style="text-align: center;">Game Formats</h3>
+		</div>	
+		<div class="list-group list-group-flush overflow-auto">
+			<div class="dropdown">
+			{% for g in gens %}
+				<button class="btn dropdown-toggle" 
+						type="button" 
+						data-toggle="collapse" 
+						data-target="#collapse-{{ g.generation }}" 
+						aria-expanded="true" 
+						aria-controls="collapse-{{ g.generation }}"
+						style="width: 300px; background: white;">
+						<h5 style="padding-top: 10px; padding-left: 5px;">Generation {{ g.generation }}</h5>
+				</button>
+				<div class="collapse show" id="collapse-{{ g.generation }}">
+				{% for t in tiers %}
+				{% if t.generation == g.generation %}
+					<div class="card">
+						<a href="{% url 'format_base' t.generation t.tier_name %}" class="dropdown-item list-group-item list-group-item-action h-100">
+						{{ t.tier_display_name }}				
+						</a>						
+					</div>
+				{% endif %}
+				{% endfor %}					
+				</div>
+			{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>

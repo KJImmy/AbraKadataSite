@@ -1,0 +1,24 @@
+{% load static %}
+
+<div id="sidebar-wrapper">
+	<div id="sidebar">
+		<div class="sidebar-header">
+			<h3 style="text-align: center;">Common Pokemon in Gen[{{ tier.generation }}] {{ tier.tier_display_name }}</h3>
+		</div>	
+		<div class="list-group list-group-flush overflow-auto">
+			{% for mon in common_pokemon %}
+			{% with mon.img_number|slugify as img_num %}
+			{% with "sprites/pokemon/"|add:img_num|add:".png" as img_file %}
+			{% if mon.id != pokemon.id %}
+			<a href="{% url 'format_pokemon' tier.generation tier.tier_name mon.pokemon_unique_name %}" 
+			class="list-group-item list-group-item-action h-100">
+				<img src="{% static img_file %}" style="height: 30px;">
+				{{ mon.pokemon_display_name }}
+			</a>
+			{% endif %}
+			{% endwith %}
+			{% endwith %}
+			{% endfor %}
+		</div>
+	</div>
+</div>

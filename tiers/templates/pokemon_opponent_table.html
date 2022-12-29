@@ -1,0 +1,48 @@
+{% load static %}
+
+<table class="table table-striped" id="sortable1">
+	<thead style="position: sticky; top: 0; z-index: 1; background: white;">
+		<tr>
+			<th onclick="sortTable(0,'1')" style="width: 70%; text-align: center;">Pokemon</th>
+			<th onclick="sortTable(1,'1')" style="width: 30%; text-align: center;">Winrate</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for o in opponents %}
+		{% with o.img_number|slugify as img_num %}
+		{% with "sprites/pokemon/"|add:img_num|add:".png" as img_file %}
+		{% if o.id != pokemon.id %}
+		<tr>
+			<td class="align-middle">
+				<span style="white-space: nowrap; display: inline-block;">
+					{% if o in common_pokemon %}
+					<a href="{% url 'format_pokemon' tier.generation tier.tier_name o.pokemon_unique_name %}">
+						<img src="{% static img_file %}" style="height: 50px;">
+						{{ o.pokemon_display_name }}
+						{% with o.types_of_pokemon.all as type %}
+						{% include 'pokemon_type_block.html' %}
+						{% endwith %}
+					</a>
+					{% else %}
+						<img src="{% static img_file %}" style="height: 50px;">
+						{{ o.pokemon_display_name }}
+						{% with o.types_of_pokemon.all as type %}
+						{% include 'pokemon_type_block.html' %}
+						{% endwith %}
+					{% endif %}
+				</span>
+			</td>
+			<td class="align-middle" style="text-align: center;">
+				{% if o.winrate < 10 %}
+				0{{ o.winrate|floatformat:2 }}%
+				{% else %}
+				{{ o.winrate|floatformat:2 }}%
+				{% endif %}
+			</td>
+		</tr>
+		{% endif %}
+		{% endwith %}
+		{% endwith %}
+		{% endfor %}
+	</tbody>
+</table>

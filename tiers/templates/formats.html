@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+	<div class="row justify-content-center" style="padding-top: 30px;">
+		<h1>GAME FORMATS</h1>
+	</div>
+	{% for g in gens %}
+	<div class="row justify-content-center" style="padding-top: 30px;">
+		<h3>Gen {{g.generation}}</h3>
+	</div>
+	{% for t in tiers %}
+	{% if t.games_of_format.count > 1000 and t.generation == g.generation %}
+	<div class="row justify-content-center">	
+		<a href="{% url 'format_base' t.generation t.tier_name %}">{{t.tier_display_name}}</a>
+	</div>
+	{% endif %}
+	{% endfor %}
+	{% endfor %}
+</div>
+
+{% endblock content %}
