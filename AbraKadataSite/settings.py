@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'pages',
     'pokemon',
     'tiers',
+    'static',
 ]
 
 MIDDLEWARE = [
