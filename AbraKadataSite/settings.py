@@ -45,6 +45,10 @@ INSTALLED_APPS = [
 
     #My Apps
     'AbraKadataSite',
+    'games',
+    'pages',
+    'pokemon',
+    'tiers',
 ]
 
 MIDDLEWARE = [
