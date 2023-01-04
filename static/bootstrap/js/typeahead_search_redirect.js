@@ -1,8 +1,9 @@
-import search_dict from './search_dict.json' assert {type: 'json'};
+// import search_dict from './search_dict.json' assert {type: 'json'};
 
 // {% url 'format_pokemon' tier.generation tier.tier_name t.pokemon_unique_name %}
 
 window.searchRedirect = function() {
+	let search_dict = await fetch('./search_dict.json')
 	const search = document.getElementById("search_form")
     const search_text = document.getElementById("search_input");
     if (!(search_text.value in search_dict)) {

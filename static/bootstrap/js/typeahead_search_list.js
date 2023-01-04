@@ -1,8 +1,9 @@
-import search_list from './search_list.json' assert {type: 'json'};
+// import search_list from './search_list.json' assert {type: 'json'};
 
 $(document).ready(function(){
     // Defining the local dataset
     // var searchable = ['Audi', 'BMW', 'Bugatti', 'Ferrari', 'Ford', 'Lamborghini', 'Mercedes Benz', 'Porsche', 'Rolls-Royce', 'Volkswagen'];
+    let search_list = await fetch('./search_list.json')
 
     var searchable = search_list
 
