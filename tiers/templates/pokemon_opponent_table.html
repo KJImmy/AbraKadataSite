@@ -5,6 +5,7 @@
 		<tr>
 			<th onclick="sortTable(0,'1')" style="width: 70%; text-align: center;">Pokemon</th>
 			<th onclick="sortTable(1,'1')" style="width: 30%; text-align: center;">Winrate</th>
+<!-- 			<th onclick="sortTable(2,'1')" style="width: 30%; text-align: center;">Appearance Rate</th> -->
 		</tr>
 	</thead>
 	<tbody>
@@ -39,6 +40,9 @@
 				{{ o.winrate|floatformat:2 }}%
 				{% endif %}
 			</td>
+<!-- 			<td>
+				{{ o.appearance_rate|floatformat:2 }}%
+			</td> -->
 		</tr>
 		{% endif %}
 		{% endwith %}

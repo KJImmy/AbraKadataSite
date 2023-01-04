@@ -60,6 +60,11 @@ def format_pokemon_view(request,generation,tier_name,pokemon_unique_name):
 	# games_with_tera_pokemon_count = Game.objects.filter(Q(players_in_game__pokemon_of_player__pokemon=pokemon)&Q(tier=tier)&~Q(players_in_game__pokemon_of_player__tera_type=None)).count()
 
 
+	common_pokemon = Pokemon.objects.filter(game_where_pokemon_used__game_player__game__tier=tier). \
+			annotate(game_count=Count('game_where_pokemon_used')). \
+			annotate(appearance_rate=ExpressionWrapper(F('game_count') * Decimal('100.0') / teams_in_tier,FloatField())). \
+			filter(appearance_rate__gte=5). \
+			order_by('pokemon_display_name')
 
 
 	individual = Pokemon.objects.filter(pokemon_unique_name=pokemon_unique_name).values(). \
@@ -90,14 +95,17 @@ def format_pokemon_view(request,generation,tier_name,pokemon_unique_name):
 		annotate(winrate=ExpressionWrapper(F('game_wins') * Decimal('100.0') / F('game_count'),FloatField())). \
 		annotate(appearance_rate=ExpressionWrapper(F('game_count') * Decimal('100.0') / teams_in_tier,FloatField())). \
 		annotate(pairing_frequency=ExpressionWrapper(F('game_count') * Decimal('100.0') / individual['game_count'],FloatField())). \
+		filter(pairing_frequency__gte=5). \
 		order_by('-winrate')
 
+	# Determine whether to use all games where both mons in team preview or only games where both mons used
 	opponents = Pokemon.objects.filter(Q(game_where_pokemon_used__game_player__in=players_against_pokemon)). \
 		annotate(game_count=Count('pk',filter=Q(game_where_pokemon_used__game_player__in=players_against_pokemon))). \
 		filter(game_count__gte=100). \
 		annotate(game_wins=Count('pk',filter=Q(game_where_pokemon_used__game_player__in=players_against_pokemon)&Q(game_where_pokemon_used__game_player__winner=False))). \
 		annotate(winrate=ExpressionWrapper(F('game_wins') * Decimal('100.0') / F('game_count'),FloatField())). \
 		annotate(appearance_rate=ExpressionWrapper(F('game_count') * Decimal('100.0') / teams_in_tier,FloatField())). \
+		filter(id__in=common_pokemon). \
 		order_by('-winrate')
 
 	moves = Move.objects.filter(Q(pokemon_that_used_move__pokemon__pokemon=pokemon)&Q(pokemon_that_used_move__pokemon__game_player__game__tier=tier)). \
@@ -106,6 +114,7 @@ def format_pokemon_view(request,generation,tier_name,pokemon_unique_name):
 		annotate(game_wins=Count('pk',filter=Q(pokemon_that_used_move__pokemon__pokemon=pokemon)&Q(pokemon_that_used_move__pokemon__game_player__winner=True))). \
 		annotate(winrate=ExpressionWrapper(F('game_wins') * Decimal('100.0') / F('game_count'),FloatField())). \
 		annotate(move_frequency=ExpressionWrapper(F('game_count') * Decimal('100.0') / individual['used_count'],FloatField())). \
+		filter(move_frequency__gte=5). \
 		order_by('-winrate')
 
 	tera_types = Type.objects.filter(Q(tera_type_of_pokemon__pokemon=pokemon)&Q(tera_type_of_pokemon__game_player__game__tier=tier)). \
@@ -114,13 +123,8 @@ def format_pokemon_view(request,generation,tier_name,pokemon_unique_name):
 		annotate(winrate=ExpressionWrapper(F('game_wins') * Decimal('100.0') / F('game_count'),FloatField())). \
 		filter(game_count__gte=100). \
 		annotate(tera_frequency=ExpressionWrapper(F('game_count') * Decimal('100.0') / individual['tera_games'],FloatField())). \
+		filter(tera_frequency__gte=5). \
 		order_by('-winrate')
-
-	common_pokemon = Pokemon.objects.filter(game_where_pokemon_used__game_player__game__tier=tier). \
-			annotate(game_count=Count('game_where_pokemon_used')). \
-			annotate(appearance_rate=ExpressionWrapper(F('game_count') * Decimal('100.0') / teams_in_tier,FloatField())). \
-			filter(appearance_rate__gte=5). \
-			order_by('pokemon_display_name')
 
 	context = {
 		'tier':tier,

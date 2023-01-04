@@ -1,8 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<p>This is my home page</p>
+<div class="container">
+	<p style="text-align: center;">This is my home page</p>
 
-{% include 'pokemon.html' %}
+	<h1 style="text-align: center; padding-top: 30px;">Featured Pok&eacute;mon</h1>
+	{% include 'pokemon.html' %}
+
+	<h1 style="text-align: center; padding-top: 30px;">Latest Report</h1>
+	<div class="row justify-content-center">
+		<a href="#" style="text-align: center;">VGC Series 1 Report</a>
+	</div>
+</div>
 
 {% endblock content %}
