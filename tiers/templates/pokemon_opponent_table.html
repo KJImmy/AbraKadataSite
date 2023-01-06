@@ -5,29 +5,28 @@
 		<tr>
 			<th onclick="sortTable(0,'1')" style="width: 70%; text-align: center;">Pokemon</th>
 			<th onclick="sortTable(1,'1')" style="width: 30%; text-align: center;">Winrate</th>
-<!-- 			<th onclick="sortTable(2,'1')" style="width: 30%; text-align: center;">Appearance Rate</th> -->
 		</tr>
 	</thead>
 	<tbody>
 		{% for o in opponents %}
-		{% with o.img_number|slugify as img_num %}
+		{% with o.opponent.img_number|slugify as img_num %}
 		{% with "sprites/pokemon/"|add:img_num|add:".png" as img_file %}
 		{% if o.id != pokemon.id %}
 		<tr>
 			<td class="align-middle">
 				<span style="white-space: nowrap; display: inline-block;">
-					{% if o in common_pokemon %}
-					<a href="{% url 'format_pokemon' tier.generation tier.tier_name o.pokemon_unique_name %}">
+					{% if o.opponent in common_pokemon %}
+					<a href="{% url 'format_pokemon' tier.generation tier.tier_name o.pokemon.pokemon_unique_name %}">
 						<img src="{% static img_file %}" style="height: 50px;">
-						{{ o.pokemon_display_name }}
-						{% with o.types_of_pokemon.all as type %}
+						{{ o.opponent.pokemon_display_name }}
+						{% with o.opponent.types_of_pokemon.all as type %}
 						{% include 'pokemon_type_block.html' %}
 						{% endwith %}
 					</a>
 					{% else %}
 						<img src="{% static img_file %}" style="height: 50px;">
-						{{ o.pokemon_display_name }}
-						{% with o.types_of_pokemon.all as type %}
+						{{ o.opponent.pokemon_display_name }}
+						{% with o.opponent.types_of_pokemon.all as type %}
 						{% include 'pokemon_type_block.html' %}
 						{% endwith %}
 					{% endif %}
@@ -40,9 +39,6 @@
 				{{ o.winrate|floatformat:2 }}%
 				{% endif %}
 			</td>
-<!-- 			<td>
-				{{ o.appearance_rate|floatformat:2 }}%
-			</td> -->
 		</tr>
 		{% endif %}
 		{% endwith %}

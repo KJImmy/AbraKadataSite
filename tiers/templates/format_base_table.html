@@ -10,14 +10,14 @@
 	</thead>
 	<tbody>
 		{% for w in winrates %}
-		{% with w.img_number|slugify as img_num %}
+		{% with w.pokemon.img_number|slugify as img_num %}
 		{% with "sprites/pokemon/"|add:img_num|add:".png" as img_file %}
 		<tr>
 			<td class="align-middle">
-				<a href="{% url 'format_pokemon' tier.generation tier.tier_name w.pokemon_unique_name %}">
+				<a href="{% url 'format_pokemon' tier.generation tier.tier_name w.pokemon.pokemon_unique_name %}">
 					<img src="{% static img_file %}" style="height: 70px;">
-					{{ w.pokemon_display_name }}
-					{% with w.types_of_pokemon.all as type %}
+					{{ w.pokemon.pokemon_display_name }}
+					{% with w.pokemon.types_of_pokemon.all as type %}
 					{% include 'pokemon_type_block.html' %}
 					{% endwith %}
 				</a>

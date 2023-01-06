@@ -10,24 +10,24 @@
 	</thead>
 	<tbody>
 		{% for t in teammates %}
-		{% with t.img_number|slugify as img_num %}
+		{% with t.teammate.img_number|slugify as img_num %}
 		{% with "sprites/pokemon/"|add:img_num|add:".png" as img_file %}
-		{% if t.id != pokemon.id %}
+		{% if t.teammate.id != pokemon.id %}
 		<tr>
 			<td class="align-middle">
 				<span style="white-space: nowrap; display: inline-block;">
-					{% if t in common_pokemon %}
-					<a href="{% url 'format_pokemon' tier.generation tier.tier_name t.pokemon_unique_name %}">
+					{% if t.teammate in common_pokemon %}
+					<a href="{% url 'format_pokemon' tier.generation tier.tier_name t.teammate.pokemon_unique_name %}">
 						<img src="{% static img_file %}" style="height: 70px;">
-						{{ t.pokemon_display_name }}
-						{% with t.types_of_pokemon.all as type %}
+						{{ t.teammate.pokemon_display_name }}
+						{% with t.teammate.types_of_pokemon.all as type %}
 						{% include 'pokemon_type_block.html' %}
 						{% endwith %}
 					</a>
 					{% else %}
 						<img src="{% static img_file %}" style="height: 70px;">
-						{{ t.pokemon_display_name }}
-						{% with t.types_of_pokemon.all as type %}
+						{{ t.teammate.pokemon_display_name }}
+						{% with t.teammate.types_of_pokemon.all as type %}
 						{% include 'pokemon_type_block.html' %}
 						{% endwith %}
 					{% endif %}

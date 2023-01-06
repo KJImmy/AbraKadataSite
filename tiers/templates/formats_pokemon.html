@@ -26,10 +26,10 @@
 				<strong>Winrate: </strong><span style="width: 5px;"></span> {{ individual.winrate|floatformat:2 }}%
 			</div>
 			<div class="row justify-content-center">
-				<strong>Used Winrate: </strong><span style="width: 5px;"></span> {{ individual.used_winrate|floatformat:2 }}%
+				<strong>Used Winrate: </strong><span style="width: 5px;"></span> {{ individual.winrate_used|floatformat:2 }}%
 			</div>
 			<div class="row justify-content-center">
-				<strong>Lead Winrate: </strong><span style="width: 5px;"></span> {{ individual.lead_winrate|floatformat:2 }}%
+				<strong>Lead Winrate: </strong><span style="width: 5px;"></span> {{ individual.winrate_lead|floatformat:2 }}%
 			</div>
 			{% if tier.has_tera %}
 			<div class="row justify-content-center">

@@ -10,12 +10,12 @@
 		{% for t in tera_types %}
 		<tr>
 			<td class="align-middle">
-				<div class="type-bubble" style="background: {{ t.type_color }}">
-					{{ t.type_name }}
+				<div class="type-bubble" style="background: {{ t.tera_type.type_color }}">
+					{{ t.tera_type.type_name }}
 				</div>
 			</td>
 			<td class="align-middle" style="text-align: center;">{{ t.winrate|floatformat:2 }}%</td>
-			<td class="align-middle" style="text-align: center;">{{ t.tera_frequency|floatformat:2 }}%</td>
+			<td class="align-middle" style="text-align: center;">{{ t.type_frequency|floatformat:2 }}%</td>
 		</tr>
 		{% endfor %}
 	</tbody>

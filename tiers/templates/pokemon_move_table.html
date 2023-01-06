@@ -10,15 +10,12 @@
 	</thead>
 	<tbody>
 		{% for m in moves %}
-		{% with m.img_number|slugify as img_num %}
-		{% with "sprites/pokemon/"|add:img_num|add:".png" as img_file %}
-		{% if m.id != pokemon.id %}
 		<tr>
 			<td class="align-middle">
 				<div class="row" style="padding-left: 20px;">
-					{{ m.move_display_name }} 
-					<div class="type-bubble" style="background: {{ m.move_type.type_color }}; margin-left: 10px;">
-						{{ m.move_type.type_name }}
+					{{ m.move.move_display_name }} 
+					<div class="type-bubble" style="background: {{ m.move.move_type.type_color }}; margin-left: 10px;">
+						{{ m.move.move_type.type_name }}
 					</div>	
 				</div>
 			</td>
@@ -33,9 +30,6 @@
 				{% endif %}
 			</td>
 		</tr>
-		{% endif %}
-		{% endwith %}
-		{% endwith %}
 		{% endfor %}
 	</tbody>
 </table>
