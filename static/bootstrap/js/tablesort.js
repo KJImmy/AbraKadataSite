@@ -2,6 +2,7 @@ function sortTable(n,t) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
   table = document.getElementById("sortable"+t);
   switching = true;
+  console.log("running tablesort.js")
   //Set the sorting direction to ascending:
   dir = "asc";
   /*Make a loop that will continue until
@@ -50,5 +51,26 @@ function sortTable(n,t) {
         switching = true;
       }
     }
+  }
+  columns = table.rows[0].cells.length;
+  for (i = 0; i < columns; i++) {
+    arrow = document.getElementById("arrow"+t+i);
+    arrow.classList.add("fa-sort");
+    arrow.classList.remove("fa-sort-up");
+    arrow.classList.remove("fa-sort-down");
+  }
+  if (dir == "asc") {
+    console.log("doing thing");
+    arrow = document.getElementById("arrow"+t+n);
+    arrow.classList.add("fa-sort-up");
+    arrow.classList.remove("fa-sort");
+    arrow.classList.remove("fa-sort-down");
+  }
+  else if (dir == "desc") {
+    console.log("doing thing");
+    arrow = document.getElementById("arrow"+t+n);
+    arrow.classList.add("fa-sort-down");
+    arrow.classList.remove("fa-sort");
+    arrow.classList.remove("fa-sort-up");
   }
 }
