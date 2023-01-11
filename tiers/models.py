@@ -25,7 +25,7 @@ class IndividualWinrate(models.Model):
 	appearance_rate = models.DecimalField(max_digits=5,decimal_places=2)
 	used_rate = models.DecimalField(max_digits=5,decimal_places=2)
 	lead_rate = models.DecimalField(max_digits=5,decimal_places=2)
-	winrate = models.DecimalField(max_digits=5,decimal_places=2)
+	winrate = models.DecimalField(max_digits=5,decimal_places=2,null=True)
 	winrate_used = models.DecimalField(max_digits=5,decimal_places=2,null=True)
 	winrate_lead = models.DecimalField(max_digits=5,decimal_places=2,null=True)
 	dynamax_frequency = models.DecimalField(max_digits=5,decimal_places=2,null=True)
