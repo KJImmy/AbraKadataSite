@@ -16,7 +16,7 @@
 			<td class="align-middle">
 				<span style="white-space: nowrap; display: inline-block;">
 					{% if o.opponent in common_pokemon %}
-					<a href="{% url 'format_pokemon' tier.generation tier.tier_name o.pokemon.pokemon_unique_name %}">
+					<a href="{% url 'format_pokemon' tier.generation tier.tier_name o.opponent.pokemon_unique_name %}">
 						<img src="{% static img_file %}" style="height: 50px;">
 						{{ o.opponent.pokemon_display_name }}
 						{% with o.opponent.types_of_pokemon.all as type %}
