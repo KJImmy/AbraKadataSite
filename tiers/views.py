@@ -33,10 +33,24 @@ def format_base_view(request,generation,tier_name):
 	# 		order_by('-winrate')
 
 	pokemon_winrates = IndividualWinrate.objects.filter(Q(tier=tier)&Q(appearance_rate__gte=5)).order_by('-winrate')
+	lead_winrates = TeammateWinrate.objects.filter(Q(tier=tier)&Q(appearance_rate_lead__gte=1)).order_by('-winrate_lead')
+	lead_pairs = []
+	exclude_pks = []
+	for l in lead_winrates.iterator():
+		pair_list = []
+		pair_list.append(l.pokemon.pokemon_display_name)
+		pair_list.append(l.teammate.pokemon_display_name)
+		pair_list.sort()
+		if pair_list not in lead_pairs:
+			lead_pairs.append(pair_list)
+		else:
+			exclude_pks.append(l.id)
+	lead_winrates = TeammateWinrate.objects.filter(Q(tier=tier)&Q(appearance_rate_lead__gte=1)).exclude(pk__in=exclude_pks).order_by('-winrate_lead')
 
 	context = {
 		'tier':tier,
 		'winrates':pokemon_winrates,
+		'leads':lead_winrates,
 		'tiers':tier_list,
 		'gens':generation_list
 	}
