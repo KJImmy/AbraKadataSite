@@ -1,11 +1,14 @@
 // import search_list from './search_list.json' assert {type: 'json'};
 
-$(document).ready(function(){
+$(document).ready(async function(){
     // Defining the local dataset
-    // var searchable = ['Audi', 'BMW', 'Bugatti', 'Ferrari', 'Ford', 'Lamborghini', 'Mercedes Benz', 'Porsche', 'Rolls-Royce', 'Volkswagen'];
-    let search_list = await fetch('./search_list.json')
+    var searchable = ['Audi', 'BMW', 'Bugatti', 'Ferrari', 'Ford', 'Lamborghini', 'Mercedes Benz', 'Porsche', 'Rolls-Royce', 'Volkswagen'];
+    
+    let response = await fetch('/static/bootstrap/js/search_list.json');
+    
+    // let search_list = require('./search_list.json');
 
-    var searchable = search_list
+    var searchable = await response.json();
 
     // Constructing the suggestion engine
     var searchable = new Bloodhound({
