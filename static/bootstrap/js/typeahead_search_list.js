@@ -2,7 +2,7 @@
 
 $(document).ready(async function(){
     // Defining the local dataset
-    var searchable = ['Audi', 'BMW', 'Bugatti', 'Ferrari', 'Ford', 'Lamborghini', 'Mercedes Benz', 'Porsche', 'Rolls-Royce', 'Volkswagen'];
+    // var searchable = ['Audi', 'BMW', 'Bugatti', 'Ferrari', 'Ford', 'Lamborghini', 'Mercedes Benz', 'Porsche', 'Rolls-Royce', 'Volkswagen'];
     
     let response = await fetch('/static/bootstrap/js/search_list.json');
     
