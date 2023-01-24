@@ -19,7 +19,7 @@
 		<tr>
 			<td class="align-middle">
 				<a href="{% url 'format_pokemon' tier.generation tier.tier_name w.pokemon.pokemon_unique_name %}">
-					<img src="{% static img_file %}" style="height: 70px;">
+					<img src="{% static img_file %}" class="img-fluid" style="max-height: 70px;">
 					{{ w.pokemon.pokemon_display_name }}
 					{% with w.pokemon.types_of_pokemon.all as type %}
 					{% include 'pokemon_type_block.html' %}

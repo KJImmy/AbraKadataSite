@@ -33,9 +33,10 @@ def format_base_view(request,generation,tier_name):
 	# 		order_by('-winrate')
 
 	pokemon_winrates = IndividualWinrate.objects.filter(Q(tier=tier)&Q(appearance_rate__gte=5)).order_by('-winrate')
-	lead_winrates = TeammateWinrate.objects.filter(Q(tier=tier)&Q(appearance_rate_lead__gte=1)).order_by('-winrate_lead')
+	lead_winrates = TeammateWinrate.objects.filter(Q(tier=tier)&Q(appearance_rate_lead__gte=0.1)).order_by('-appearance_rate_lead')
 	lead_pairs = []
 	exclude_pks = []
+	new_lead_set = []
 	for l in lead_winrates.iterator():
 		pair_list = []
 		pair_list.append(l.pokemon.pokemon_display_name)
@@ -43,14 +44,16 @@ def format_base_view(request,generation,tier_name):
 		pair_list.sort()
 		if pair_list not in lead_pairs:
 			lead_pairs.append(pair_list)
+			new_lead_set.append(l)
 		else:
 			exclude_pks.append(l.id)
-	lead_winrates = TeammateWinrate.objects.filter(Q(tier=tier)&Q(appearance_rate_lead__gte=1)).exclude(pk__in=exclude_pks).order_by('-winrate_lead')
+	new_lead_queryset = new_lead_set[:10]
+	# lead_winrates = TeammateWinrate.objects.filter(Q(tier=tier)&Q(appearance_rate_lead__gte=1)).exclude(pk__in=exclude_pks).order_by('-winrate_lead')
 
 	context = {
 		'tier':tier,
 		'winrates':pokemon_winrates,
-		'leads':lead_winrates,
+		'leads':new_lead_queryset,
 		'tiers':tier_list,
 		'gens':generation_list
 	}

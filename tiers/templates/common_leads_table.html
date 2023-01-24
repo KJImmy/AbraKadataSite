@@ -4,8 +4,8 @@
 	<thead style="position: sticky; top: 0; z-index: 1; background: white;">
 		<tr>
 			<th style="width: 50%; text-align: center; cursor: auto;">Lead Pair</th>
-			<th onclick="sortTable(1,'2')" style="width: 25%; text-align: center;">Winrate <i id="arrow21" class="fa-solid fa-sort-down"></th>
-			<th onclick="sortTable(2,'2')" style="width: 25%; text-align: center;">Appearance Rate <i id="arrow22" class="fa-solid fa-sort"></th>
+			<th onclick="sortTable(1,'2')" style="width: 25%; text-align: center;">Winrate <i id="arrow21" class="fa-solid fa-sort"></th>
+			<th onclick="sortTable(2,'2')" style="width: 25%; text-align: center;">Appearance Rate <i id="arrow22" class="fa-solid fa-sort-down"></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -16,7 +16,12 @@
 		{% with "sprites/pokemon/"|add:img_num_2|add:".png" as img_file_2 %}
 		<tr>
 			<td class="align-middle">
-				<img src="{% static img_file_1 %}" style="height: 70px;"> {{ l.pokemon.pokemon_display_name }} <img src="{% static img_file_2 %}" style="height: 70px;"> {{ l.teammate.pokemon_display_name }}
+				<div class="col">
+					<img src="{% static img_file_1 %}" class="img-fluid" style="max-height: 70px;"> {{ l.pokemon.pokemon_display_name }}
+				</div>
+				<div class="col">
+					<img src="{% static img_file_2 %}" class="img-fluid" style="max-height: 70px;"> {{ l.teammate.pokemon_display_name }}
+				</div>
 			</td>
 			<td class="align-middle" style="text-align: center;">
 				{{ l.winrate_lead }}%
