@@ -1,0 +1,100 @@
+{% load static %}
+
+<table class="table table-striped" id="sortable" style="min-width: 1500px;">
+	<thead style="position: sticky; top: 0; z-index: 1; background: white;">
+		<tr>
+			<th onclick="sortTable(0,'')" style="width: 30%; text-align: center;">Pokemon <i id="arrow0" class="fa-solid fa-sort"></i></th>
+			<th onclick="sortTable(1,'')" style="width: 10%; text-align: center;">Appearance Rate <i id="arrow1" class="fa-solid fa-sort"></i></th>
+			<th onclick="sortTable(2,'')" style="width: 10%; text-align: center;">Winrate <i id="arrow2" class="fa-solid fa-sort-down"></i></th>
+			<th onclick="sortTable(3,'')" style="width: 10%; text-align: center;">Used Rate <i id="arrow3" class="fa-solid fa-sort"></i></th>
+			<th onclick="sortTable(4,'')" style="width: 10%; text-align: center;">Used Winrate <i id="arrow4" class="fa-solid fa-sort"></i></th>
+			<th onclick="sortTable(5,'')" style="width: 10%; text-align: center;">Lead Rate <i id="arrow5" class="fa-solid fa-sort"></i></th>
+			<th onclick="sortTable(6,'')" style="width: 10%; text-align: center;">Lead Winrate <i id="arrow6" class="fa-solid fa-sort"></i></th>
+			<th {% if not tier.has_tera %} hidden {% endif %} onclick="sortTable(7,'')" style="width: 25%; text-align: center;">Tera Frequency <i id="arrow7" class="fa-solid fa-sort"></i></th>
+			<th {% if not tier.has_dynamax %} hidden {% endif %} onclick="sortTable(8,'')" style="width: 25%; text-align: center;">Dynamax Frequency <i id="arrow8" class="fa-solid fa-sort"></i></th>
+			<th {% if not tier.has_dynamax %} hidden {% endif %} onclick="sortTable(9,'')" style="width: 25%; text-align: center;">Dynamax Winrate <i id="arrow9" class="fa-solid fa-sort"></i></th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for w in winrates %}
+		{% with w.pokemon.img_number|slugify as img_num %}
+		{% with "sprites/pokemon/"|add:img_num|add:".png" as img_file %}
+		<tr>
+			<td class="align-middle">
+				<a href="{% url 'format_pokemon' tier.generation tier.tier_name w.pokemon.pokemon_unique_name %}">
+					<img src="{% static img_file %}" style="height: 70px;">
+					{{ w.pokemon.pokemon_display_name }}
+					{% with w.pokemon.types_of_pokemon.all as type %}
+					{% include 'pokemon_type_block.html' %}
+					{% endwith %}
+				</a>
+			</td>
+			<td class="align-middle" style="text-align: center;">
+				{% if w.appearance_rate < 10 %}
+				0{{ w.appearance_rate|floatformat:2 }}%
+				{% else %}
+				{{ w.appearance_rate|floatformat:2 }}%
+				{% endif %}
+			</td>
+			<td class="align-middle" style="text-align: center;">
+				{% if w.winrate < 10%}
+				0{{ w.winrate|floatformat:2 }}%
+				{% else %}
+				{{ w.winrate|floatformat:2 }}%
+				{% endif %}
+			</td>
+			<td class="align-middle" style="text-align: center;">
+				{% if w.used_rate < 10 %}
+				0{{ w.used_rate|floatformat:2 }}%
+				{% else %}
+				{{ w.used_rate|floatformat:2 }}%
+				{% endif %}
+			</td>
+			<td class="align-middle" style="text-align: center;">
+				{% if w.winrate_used < 10 %}
+				0{{ w.winrate_used|floatformat:2 }}%
+				{% else %}
+				{{ w.winrate_used|floatformat:2 }}%
+				{% endif %}
+			</td>
+			<td class="align-middle" style="text-align: center;">
+				{% if w.lead_rate < 10 %}
+				0{{ w.lead_rate|floatformat:2 }}%
+				{% else %}
+				{{ w.lead_rate|floatformat:2 }}%
+				{% endif %}
+			</td>
+			<td class="align-middle" style="text-align: center;">
+				{% if w.winrate_lead < 10 %}
+				0{{ w.winrate_lead|floatformat:2 }}%
+				{% else %}
+				{{ w.winrate_lead|floatformat:2 }}%
+				{% endif %}
+			</td>
+			<td {% if not tier.has_tera %} hidden {% endif %} class="align-middle" style="text-align: center;">
+				{% if w.tera_frequency < 10 %}
+				0{{ w.tera_frequency|floatformat:2 }}%
+				{% else %}
+				{{ w.tera_frequency|floatformat:2 }}%
+				{% endif %}
+			</td>
+			<td {% if not tier.has_dynamax %} hidden {% endif %} class="align-middle" style="text-align: center;">
+				{% if w.dynamax_frequency < 10 %}
+				0{{ w.dynamax_frequency|floatformat:2 }}%
+				{% else %}
+				{{ w.dynamax_frequency|floatformat:2 }}%
+				{% endif %}
+			</td>
+			<td {% if not tier.has_dynamax %} hidden {% endif %} class="align-middle" style="text-align: center;">
+				{% if w.dynamax_winrate < 10 %}
+				0{{ w.dynamax_winrate|floatformat:2 }}%
+				{% else %}
+				{{ w.dynamax_winrate|floatformat:2 }}%
+				{% endif %}
+			</td>
+		</tr>
+		{% endwith %}
+		{% endwith %}
+		{% endfor%}
+	</tbody>
+</table>
