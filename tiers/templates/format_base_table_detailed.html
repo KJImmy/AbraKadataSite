@@ -1,18 +1,20 @@
 {% load static %}
 
-<table class="table table-striped" id="sortable" style="min-width: 1500px;">
+<table class="table table-striped" id="sortable1" style="min-width: 1500px;">
 	<thead style="position: sticky; top: 0; z-index: 1; background: white;">
 		<tr>
-			<th onclick="sortTable(0,'')" style="width: 30%; text-align: center;">Pokemon <i id="arrow0" class="fa-solid fa-sort"></i></th>
-			<th onclick="sortTable(1,'')" style="width: 10%; text-align: center;">Appearance Rate <i id="arrow1" class="fa-solid fa-sort"></i></th>
-			<th onclick="sortTable(2,'')" style="width: 10%; text-align: center;">Winrate <i id="arrow2" class="fa-solid fa-sort-down"></i></th>
-			<th onclick="sortTable(3,'')" style="width: 10%; text-align: center;">Used Rate <i id="arrow3" class="fa-solid fa-sort"></i></th>
-			<th onclick="sortTable(4,'')" style="width: 10%; text-align: center;">Used Winrate <i id="arrow4" class="fa-solid fa-sort"></i></th>
-			<th onclick="sortTable(5,'')" style="width: 10%; text-align: center;">Lead Rate <i id="arrow5" class="fa-solid fa-sort"></i></th>
-			<th onclick="sortTable(6,'')" style="width: 10%; text-align: center;">Lead Winrate <i id="arrow6" class="fa-solid fa-sort"></i></th>
-			<th {% if not tier.has_tera %} hidden {% endif %} onclick="sortTable(7,'')" style="width: 25%; text-align: center;">Tera Frequency <i id="arrow7" class="fa-solid fa-sort"></i></th>
-			<th {% if not tier.has_dynamax %} hidden {% endif %} onclick="sortTable(8,'')" style="width: 25%; text-align: center;">Dynamax Frequency <i id="arrow8" class="fa-solid fa-sort"></i></th>
-			<th {% if not tier.has_dynamax %} hidden {% endif %} onclick="sortTable(9,'')" style="width: 25%; text-align: center;">Dynamax Winrate <i id="arrow9" class="fa-solid fa-sort"></i></th>
+			<th onclick="sortTable(0,'1')" 
+				style="width: 30%; text-align: center; position: sticky; left: 0; background: white;">
+				Pokemon <i id="arrow10" class="fa-solid fa-sort"></i></th>
+			<th onclick="sortTable(1,'1')" style="width: 10%; text-align: center;">Appearance Rate <i id="arrow11" class="fa-solid fa-sort"></i></th>
+			<th onclick="sortTable(2,'1')" style="width: 10%; text-align: center;">Winrate <i id="arrow12" class="fa-solid fa-sort-down"></i></th>
+			<th onclick="sortTable(3,'1')" style="width: 10%; text-align: center;">Used Rate <i id="arrow13" class="fa-solid fa-sort"></i></th>
+			<th onclick="sortTable(4,'1')" style="width: 10%; text-align: center;">Used Winrate <i id="arrow14" class="fa-solid fa-sort"></i></th>
+			<th onclick="sortTable(5,'1')" style="width: 10%; text-align: center;">Lead Rate <i id="arrow15" class="fa-solid fa-sort"></i></th>
+			<th onclick="sortTable(6,'1')" style="width: 10%; text-align: center;">Lead Winrate <i id="arrow16" class="fa-solid fa-sort"></i></th>
+			<th {% if not tier.has_tera %} hidden {% endif %} onclick="sortTable(7,'1')" style="width: 25%; text-align: center;">Tera Frequency <i id="arrow17" class="fa-solid fa-sort"></i></th>
+			<th {% if not tier.has_dynamax %} hidden {% endif %} onclick="sortTable(8,'1')" style="width: 25%; text-align: center;">Dynamax Frequency <i id="arrow18" class="fa-solid fa-sort"></i></th>
+			<th {% if not tier.has_dynamax %} hidden {% endif %} onclick="sortTable(9,'1')" style="width: 25%; text-align: center;">Dynamax Winrate <i id="arrow19" class="fa-solid fa-sort"></i></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -20,7 +22,7 @@
 		{% with w.pokemon.img_number|slugify as img_num %}
 		{% with "sprites/pokemon/"|add:img_num|add:".png" as img_file %}
 		<tr>
-			<td class="align-middle">
+			<td style="position: sticky; left: 0;" class="align-middle">
 				<a href="{% url 'format_pokemon' tier.generation tier.tier_name w.pokemon.pokemon_unique_name %}">
 					<img src="{% static img_file %}" style="height: 70px;">
 					{{ w.pokemon.pokemon_display_name }}
