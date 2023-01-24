@@ -29,7 +29,10 @@
 	.table-responsive {
 		overflow: auto;
 		max-height: 500px;
-		height: 80%
+		height: 80%;
+	}
+	.table-responsive table {
+		width: 100%;
 	}
 	.thead-fix {
 		position: sticky;
@@ -153,6 +156,24 @@
 			    $('#sidebarCollapse').on('click', function () {
 			        $('#sidebar').toggleClass('active');
 			        $('#sidebar-wrapper').toggleClass('active');
+			    });
+
+			});
+			$(function () {
+			  $('[data-toggle="tooltip"]').tooltip()
+			})
+		</script>
+		<script type="text/javascript">
+			$(document).ready(function () {
+
+			    $('#formatTableSwitch1').on('click', function () {
+			        $('#baseTable').toggleClass('collapse');
+			        $('#detailTable').toggleClass('collapse');
+			    });
+
+			    $('#formatTableSwitch2').on('click', function () {
+			        $('#baseTable').toggleClass('collapse');
+			        $('#detailTable').toggleClass('collapse');
 			    });
 
 			});

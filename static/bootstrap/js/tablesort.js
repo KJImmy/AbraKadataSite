@@ -55,9 +55,11 @@ function sortTable(n,t) {
   columns = table.rows[0].cells.length;
   for (i = 0; i < columns; i++) {
     arrow = document.getElementById("arrow"+t+i);
-    arrow.classList.add("fa-sort");
-    arrow.classList.remove("fa-sort-up");
-    arrow.classList.remove("fa-sort-down");
+    if (arrow) {
+      arrow.classList.add("fa-sort");
+      arrow.classList.remove("fa-sort-up");
+      arrow.classList.remove("fa-sort-down");
+    }
   }
   if (dir == "asc") {
     console.log("doing thing");

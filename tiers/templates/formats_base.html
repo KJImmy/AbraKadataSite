@@ -12,13 +12,25 @@
 		<div class="row justify-content-center">
 			<h1>[Gen {{ tier.generation}}] {{ tier.tier_display_name }}</h1>
 		</div>
-<!-- 		<div class="row justify-content-center">
-			{{ game_count }}
-		</div> -->
 		<div class="row justify-content-center" style="padding-top: 20px; padding-bottom: 50px;">
-			<h3>Common Pok&eacute;mon Winrates</h3>
-			<div class="table-responsive">
-				{% include 'format_base_table.html' %}
+			<div>
+				<h3>Common Pok&eacute;mon Winrates</h3>
+			</div>
+			<div id="baseTable" style="width: 100%;">
+				<div style="padding-bottom: 10px;" class="row justify-content-center">
+					<button style="width: 125px;" class="btn btn-primary" id="formatTableSwitch1">Detailed View</button>					
+				</div>
+				<div class="table-responsive">
+					{% include 'format_base_table.html' %}
+				</div>
+			</div>
+			<div id="detailTable" class="collapse" style="width: 100%;">
+				<div style="padding-bottom: 10px;" class="row justify-content-center">
+					<button style="width: 125px;" class="btn btn-primary" id="formatTableSwitch2">Base View</button>
+				</div>
+				<div class="table-responsive">
+					{% include 'format_base_table_detailed.html' %}
+				</div>
 			</div>
 		</div>
 		<div class="row justify-content-center" style="padding-top: 20px;">
