@@ -3,9 +3,13 @@
 <table class="table table-striped" id="sortable">
 	<thead style="position: sticky; top: 0; z-index: 1; background: white;">
 		<tr>
-			<th onclick="sortTable(0,'')" style="width: 50%; text-align: center;">Pokemon <i id="arrow0" class="fa-solid fa-sort"></i></th>
-			<th onclick="sortTable(1,'')" style="width: 25%; text-align: center;">Winrate <i id="arrow1" class="fa-solid fa-sort-down"></i></th>
-			<th onclick="sortTable(2,'')" style="width: 25%; text-align: center;">Appearance Rate <i id="arrow2" class="fa-solid fa-sort"></i></th>
+			<th onclick="sortTable(0,'')" style="width: 50%; text-align: center;">Pok&eacute;mon <i id="arrow0" class="fa-solid fa-sort"></i></th>
+			<th onclick="sortTable(1,'')" style="width: 25%; text-align: center;">
+				<i id="move-frequency-help" class="fa-solid fa-circle-question" data-toggle="tooltip" title data-original-title="How often a player wins when they use the corresponding Pokémon during the battle"></i> 
+				Used Winrate <i id="arrow1" class="fa-solid fa-sort-down"></i></th>
+			<th onclick="sortTable(2,'')" style="width: 25%; text-align: center;">
+				<i id="move-frequency-help" class="fa-solid fa-circle-question" data-toggle="tooltip" title data-original-title="How often a Pokémon appears in team preview"></i> 
+				Appearance Rate <i id="arrow2" class="fa-solid fa-sort"></i></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -23,10 +27,10 @@
 				</a>
 			</td>
 			<td class="align-middle" style="text-align: center;">
-				{% if w.winrate < 10%}
+				{% if w.winrate_used < 10%}
 				0{{ w.winrate|floatformat:2 }}%
 				{% else %}
-				{{ w.winrate|floatformat:2 }}%
+				{{ w.winrate_used|floatformat:2 }}%
 				{% endif %}
 			</td>
 			<td class="align-middle" style="text-align: center;">
