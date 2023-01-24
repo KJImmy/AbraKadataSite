@@ -14,7 +14,7 @@ class Game(models.Model):
 		related_name='games_of_format',
 		on_delete=models.PROTECT)
 	rating = models.PositiveIntegerField(null=True)
-	public = models.BooleanField(default=True)
+	public = models.BooleanField()
 
 class PokemonUsage(models.Model):
 	pokemon = models.ForeignKey(
