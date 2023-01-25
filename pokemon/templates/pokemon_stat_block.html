@@ -15,117 +15,70 @@
 <div class="container rounded" 
 	style="	background: lightblue; 
 			height: 365px; 
-			width: 530px; 
+			min-width: 500px;
+			max-width: 500px;
 			border-style: solid; 
 			border-col-smor: blue;">
 	<div class="row justify-content-center align-items-center" style="height: 50px;">
 		<h3>Base Stats</h3>
 	</div>
-	<div class="row align-items-center">
-		<div class="col-sm-4">
-			<strong>HP:</strong>
-		</div>
-		<div class="col-sm-1">
-			<div class="row justify-content-end">
-				<strong>{{ pokemon.stats_hp }}</strong>
-			</div>
-		</div>
-		<div class="col-sm-7">
-			<div class="stat-bar-background" style="background: #FF5959;">
-				<div class="stat-bar" 
-					style="width: {{ pokemon.stats_hp }}px; 
-					background: #FF0000;">
-				</div>
+	<div class="row align-items-center" style="white-space: nowrap;">
+		<strong style="padding-left: 20px; width: 175px;">HP:</strong>
+		<strong style="width: 30px; text-align: right; padding-right: 5px;">{{ pokemon.stats_hp }}</strong>
+		<div class="stat-bar-background" style="background: #FF5959;">
+			<div class="stat-bar" 
+				style="width: {% widthratio pokemon.stats_hp 255 100 %}%; 
+				background: #FF0000;">
 			</div>
 		</div>
 	</div>
 	<div class="row align-items-center">
-		<div class="col-sm-4">
-			<strong>Attack:</strong>
-		</div>
-		<div class="col-sm-1">
-			<div class="row justify-content-end">
-				<strong>{{ pokemon.stats_attack }}</strong>
-			</div>
-		</div>
-		<div class="col-sm-7">
-			<div class="stat-bar-background" style="background: #F5AC78;">
-				<div class="stat-bar" 
-					style="width: {{ pokemon.stats_attack }}px; 
-					background: #F08030;">
-				</div>
+		<strong style="padding-left: 20px; width: 175px;">Attack:</strong>
+		<strong style="width: 30px; text-align: right; padding-right: 5px;">{{ pokemon.stats_attack }}</strong>
+		<div class="stat-bar-background" style="background: #F5AC78;">
+			<div class="stat-bar" 
+				style="width: {% widthratio pokemon.stats_attack 255 100 %}%;
+				background: #F08030;">
 			</div>
 		</div>
 	</div>
 	<div class="row align-items-center">
-		<div class="col-sm-4">
-			<strong>Defense:</strong>
-		</div>
-		<div class="col-sm-1">
-			<div class="row justify-content-end">
-				<strong>{{ pokemon.stats_defense }}</strong>
-			</div>
-		</div>
-		<div class="col-sm-7">
-			<div class="stat-bar-background" style="background: #FAE078;">
-				<div class="stat-bar" 
-					style="width: {{ pokemon.stats_defense }}px; 
-					background: #F8D030;">
-				</div>
+		<strong style="padding-left: 20px; width: 175px;">Defense:</strong>
+		<strong style="width: 30px; text-align: right; padding-right: 5px;">{{ pokemon.stats_defense }}</strong>
+		<div class="stat-bar-background" style="background: #FAE078;">
+			<div class="stat-bar" 
+				style="width: {% widthratio pokemon.stats_defense 255 100 %}%; 
+				background: #F8D030;">
 			</div>
 		</div>
 	</div>
 	<div class="row align-items-center">
-		<div class="col-sm-4">
-			<strong>Special Attack:</strong>
-		</div>
-		<div class="col-sm-1">
-			<div class="row justify-content-end">
-				<strong>{{ pokemon.stats_special_attack }}</strong>
-			</div>
-		</div>
-		<div class="col-sm-7">
-			<div class="stat-bar-background" style="background: #9DB7F5;">
-				<div class="stat-bar" 
-					style="width: {{ pokemon.stats_special_attack }}px; 
-					background: #6890F0;">
-				</div>
+		<strong style="padding-left: 20px; width: 175px;">Special Attack:</strong>
+		<strong style="width: 30px; text-align: right; padding-right: 5px;">{{ pokemon.stats_special_attack }}</strong>
+		<div class="stat-bar-background" style="background: #9DB7F5;">
+			<div class="stat-bar" 
+				style="width: {% widthratio pokemon.stats_special_attack 255 100 %}%; 
+				background: #6890F0;">
 			</div>
 		</div>
 	</div>
 	<div class="row align-items-center">
-		<div class="col-sm-4">
-			<strong>Special Defense:</strong>
-		</div>
-		<div class="col-sm-1">
-			<div class="row justify-content-end">
-				<strong>{{ pokemon.stats_special_defense }}</strong>
-			</div>
-		</div>
-		<div class="col-sm-7">
-			<div class="stat-bar-background" style="background: #A7DB8D;">
-				<div class="stat-bar" 
-					style="width: {{ pokemon.stats_special_defense }}px; 
-					background: #78C850;">
-				</div>
+		<strong style="padding-left: 20px; width: 175px;">Special Defense:</strong>
+		<strong style="width: 30px; text-align: right; padding-right: 5px;">{{ pokemon.stats_special_defense }}</strong>
+		<div class="stat-bar-background" style="background: #A7DB8D;">
+			<div class="stat-bar" 
+				style="width: {% widthratio pokemon.stats_special_defense 255 100 %}%; 
+				background: #78C850;">
 			</div>
 		</div>
 	</div>
 	<div class="row align-items-center">
-		<div class="col-sm-4">
-			<strong>Speed:</strong>
-		</div>
-		<div class="col-sm-1">
-			<div class="row justify-content-end">
-				<strong>{{ pokemon.stats_speed }}</strong>
-			</div>
-		</div>
-		<div class="col-sm-7">
-			<div class="stat-bar-background" style="background: #FA92B2;">
-				<div class="stat-bar" 
-					style="width: {{ pokemon.stats_speed }}px; 
-					background: #F85888;">
-				</div>
+		<strong style="padding-left: 20px; width: 175px;">Speed:</strong>
+		<strong style="width: 30px; text-align: right; padding-right: 5px;">{{ pokemon.stats_speed }}</strong>
+		<div class="stat-bar-background" style="background: #FA92B2;">
+			<div class="stat-bar" 
+				style="width: {% widthratio pokemon.stats_speed 255 100 %}%;
+				background: #F85888;">
 			</div>
 		</div>
 	</div>
