@@ -9,6 +9,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.chrome.service import Service
 from fake_useragent import UserAgent
 from django.conf import settings
 
@@ -35,7 +36,7 @@ def get_existing_links(conn,cur):
 	return output
 
 def get_replay_links(game_format, replay_links, replay_logs):
-	driver = webdriver.Chrome(executable_path=settings.BASE_DIR+"/static/logs/chromedriver.exe")
+	driver = webdriver.Chrome(service=Service(settings.BASE_DIR+"/static/logs/chromedriver.exe"))
 	url = "https://replay.pokemonshowdown.com/search/?format="+game_format
 	driver.get(url)
 
