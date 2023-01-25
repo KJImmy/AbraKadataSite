@@ -35,7 +35,7 @@ def get_existing_links(conn,cur):
 	return output
 
 def get_replay_links(game_format, replay_links, replay_logs):
-	driver = webdriver.Chrome()
+	driver = webdriver.Chrome(executable_path=settings.BASE_DIR+"/static/logs/chromedriver.exe")
 	url = "https://replay.pokemonshowdown.com/search/?format="+game_format
 	driver.get(url)
 
