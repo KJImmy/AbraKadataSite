@@ -4,6 +4,7 @@ import pendulum
 import time
 import requests
 import psycopg2 as ps
+from pyvirtualdisplay import Display
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -36,7 +37,16 @@ def get_existing_links(conn,cur):
 	return output
 
 def get_replay_links(game_format, replay_links, replay_logs):
-	driver = webdriver.Chrome(service=Service(settings.BASE_DIR+"/static/logs/chromedriver.exe"))
+	options = webdriver.ChromeOptions()
+	options.add_argument('--no-sandbox')
+	options = webdriver.ChromeOptions()
+	options.add_argument('--disable-extensions')
+	options.add_argument('--headless')
+	options.add_argument('--disable-gpu')
+	options.add_argument('--no-sandbox')
+	options.add_argument('--disable-dev-shm-usage')
+
+	driver = webdriver.Chrome(service=Service(settings.BASE_DIR+"/static/logs/chromedriver.exe"),chrome_options=options)
 	url = "https://replay.pokemonshowdown.com/search/?format="+game_format
 	driver.get(url)
 
