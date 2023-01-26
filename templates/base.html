@@ -14,11 +14,6 @@
 		border-color: lightblue;
 		border-width: 2px;
 	}
-/*	@media only screen and (max-width: 1000px) {
-		.stat-bar-background {
-			width: 128px;
-		}
-	}*/
 	.type-bubble {
 		height: 35px;
 		width: 80px;
@@ -45,6 +40,13 @@
 		z-index: 1;
 		background: white;
 	}
+	.table {
+		min-width: 100%;
+	}
+	.table th,
+	.table td {
+		white-space: nowrap;
+	}
 	th {
 		cursor: pointer;
 	}
@@ -62,14 +64,6 @@
 		width: 300px;
 		height: 100%;
 		background: white;
-	}
-	@media only screen and (max-width: 1500px) {
-		#sidebar-wrapper {
-			display: none;
-		}
-		#sidebarCollapse {
-			display: none;
-		}
 	}
 	#sidebarCollapse {
 		display: none;
@@ -139,21 +133,19 @@
 	.tt-suggestion p {
 		margin: 0;
 	}
-/*	.tooltip-wrap {
-	  position: relative;
+	@media only screen and (max-width: 1500px) {
+		#sidebar-wrapper {
+			display: none;
+		}
+		#sidebarCollapse {
+			display: none;
+		}
 	}
-	.tooltip-wrap .tooltip-content {
-	  display: none;
-	  position: absolute;
-	  bottom: 5%;
-	  left: 5%;
-	  right: 5%;
-	  background-color: red;
-	  padding: .5em;
-	  min-width: 10rem;
-	}
-	.tooltip-wrap:hover .tooltip-content {
-	  display: block;
+	/*@media only screen and (min-width: 1500px;) {
+		.column-one {
+			position: sticky;
+			left: 0;
+		}		
 	}*/
 </style>
 <html>
@@ -162,6 +154,7 @@
 		{% load static %}
 		<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
 		<script src="https://kit.fontawesome.com/4f34b2d2d7.js" crossorigin="anonymous"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 	<body style="margin-top: 100px;">
 		{% include 'navbar.html' %}

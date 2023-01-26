@@ -1,13 +1,13 @@
 {% load static %}
 
-<table class="table table-striped" id="sortable">
+<table class="table table-striped w-auto" id="sortable">
 	<thead style="position: sticky; top: 0; z-index: 1; background: white;">
 		<tr>
-			<th onclick="sortTable(0,'')" style="width: 50%; text-align: center;">Pok&eacute;mon <i id="arrow0" class="fa-solid fa-sort"></i></th>
-			<th onclick="sortTable(1,'')" style="width: 25%; text-align: center;">
+			<th onclick="sortTable(0,'')" style="text-align: center;">Pok&eacute;mon <i id="arrow0" class="fa-solid fa-sort"></i></th>
+			<th onclick="sortTable(1,'')" style="text-align: center;">
 				<i id="move-frequency-help" class="fa-solid fa-circle-question" data-toggle="tooltip" title data-original-title="How often a player wins when they use the corresponding Pokémon during the battle"></i> 
-				Used Winrate <i id="arrow1" class="fa-solid fa-sort-down"></i></th>
-			<th onclick="sortTable(2,'')" style="width: 25%; text-align: center;">
+				Used Winrate <i id="arrow1" class="fa fa-circle-sort fa-sort-down"></i></th>
+			<th onclick="sortTable(2,'')" style="text-align: center;">
 				<i id="move-frequency-help" class="fa-solid fa-circle-question" data-toggle="tooltip" title data-original-title="How often a Pokémon appears in team preview"></i> 
 				Appearance Rate <i id="arrow2" class="fa-solid fa-sort"></i></th>
 		</tr>
@@ -19,12 +19,10 @@
 		<tr>
 			<td class="align-middle">
 				<a href="{% url 'format_pokemon' tier.generation tier.tier_name w.pokemon.pokemon_unique_name %}">
-					<img src="{% static img_file %}" class="img-fluid" style="max-height: 70px;">
-					{{ w.pokemon.pokemon_display_name }}
-					{% with w.pokemon.types_of_pokemon.all as type %}
-					{% include 'pokemon_type_block.html' %}
-					{% endwith %}
-				</a>
+					<img src="{% static img_file %}" class="img-fluid" style="max-height: 70px;">{{ w.pokemon.pokemon_display_name }}</a>
+				{% with w.pokemon.types_of_pokemon.all as type %}
+				{% include 'pokemon_type_block.html' %}
+				{% endwith %}
 			</td>
 			<td class="align-middle" style="text-align: center;">
 				{% if w.winrate_used < 10%}

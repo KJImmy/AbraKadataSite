@@ -1,11 +1,11 @@
 {% load static %}
 
-<table class="table table-striped" id="sortable">
+<table class="table table-striped w-auto" id="sortable">
 	<thead style="position: sticky; top: 0; z-index: 1; background: white;">
 		<tr>
-			<th onclick="sortTable(0,'')" style="width: 50%; text-align: center;">Pokemon <i id="arrow0" class="fa-solid fa-sort"></i></th>
-			<th onclick="sortTable(1,'')" style="width: 25%; text-align: center;">Winrate <i id="arrow1" class="fa-solid fa-sort-down"></i></th>
-			<th onclick="sortTable(2,'')" style="width: 25%; text-align: center;">
+			<th onclick="sortTable(0,'')" style="text-align: center;">Pokemon <i id="arrow0" class="fa-solid fa-sort"></i></th>
+			<th onclick="sortTable(1,'')" style="text-align: center;">Winrate <i id="arrow1" class="fa-solid fa-sort-down"></i></th>
+			<th onclick="sortTable(2,'')" style="text-align: center;">
 				<i id="move-frequency-help" class="fa-solid fa-circle-question" data-toggle="tooltip" title data-original-title="How often the corresponding Pokémon appears on teams that {{ pokemon.pokemon_display_name }} is on"></i> Pairing Frequency <i id="arrow2" class="fa-solid fa-sort"></i></th>
 		</tr>
 	</thead>
@@ -19,12 +19,10 @@
 				<span style="white-space: nowrap; display: inline-block;">
 					{% if t.teammate in common_pokemon %}
 					<a href="{% url 'format_pokemon' tier.generation tier.tier_name t.teammate.pokemon_unique_name %}">
-						<img src="{% static img_file %}" style="height: 70px;">
-						{{ t.teammate.pokemon_display_name }}
+						<img src="{% static img_file %}" style="height: 70px;">{{ t.teammate.pokemon_display_name }}</a>
 						{% with t.teammate.types_of_pokemon.all as type %}
 						{% include 'pokemon_type_block.html' %}
 						{% endwith %}
-					</a>
 					{% else %}
 						<img src="{% static img_file %}" style="height: 70px;">
 						{{ t.teammate.pokemon_display_name }}
