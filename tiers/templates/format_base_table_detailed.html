@@ -43,12 +43,10 @@
 		<tr>
 			<td class="column-one align-middle">
 				<a href="{% url 'format_pokemon' tier.generation tier.tier_name w.pokemon.pokemon_unique_name %}">
-					<img src="{% static img_file %}" style="height: 70px;">
-					{{ w.pokemon.pokemon_display_name }}
+					<img src="{% static img_file %}" style="height: 70px;">{{ w.pokemon.pokemon_display_name }}</a>
 					{% with w.pokemon.types_of_pokemon.all as type %}
 					{% include 'pokemon_type_block.html' %}
 					{% endwith %}
-				</a>
 			</td>
 			<td class="align-middle" style="text-align: center;">
 				{% if w.appearance_rate < 10 %}

@@ -7,15 +7,65 @@
 	</div>
 	{% for g in gens %}
 	<div class="row justify-content-center" style="padding-top: 30px;">
-		<h3>Gen {{g.generation}}</h3>
+		<h2>Gen {{g.generation}}</h2>
 	</div>
-	{% for t in tiers %}
-	{% if t.games_of_format.count > 1000 and t.generation == g.generation %}
-	<div class="row justify-content-center">	
-		<a href="{% url 'format_base' t.generation t.tier_name %}">{{t.tier_display_name}}</a>
+	<div class="row justify-content-center">
+		<div class="col-lg-4">
+			<div class="row justify-content-center">
+				<div class="container">
+					<div class="row justify-content-center">
+						<h4>VGC</h4>
+					</div>
+					<div class="container" style="width: fit-content;">
+						{% for t in tiers %}
+						{% if t.games_of_format.count > 1000 and t.generation == g.generation and t.style == 'VGC' %}
+						<div class="row justify-content-start">	
+							<a href="{% url 'format_base' t.generation t.tier_name %}">{{t.tier_display_name}}</a>
+						</div>
+						{% endif %}
+						{% endfor %}
+					</div>					
+				</div>
+			</div>
+		
+		</div>
+		<div class="col-lg-4">
+			<div class="row justify-content-center">
+				<div class="container">
+					<div class="row justify-content-center">
+						<h4>Smogon Singles</h4>
+					</div>
+					<div class="container" style="width: fit-content;">
+						{% for t in tiers %}
+						{% if t.games_of_format.count > 1000 and t.generation == g.generation and t.style == 'SS' %}
+						<div class="row justify-content-start">	
+							<a href="{% url 'format_base' t.generation t.tier_name %}">{{t.tier_display_name}}</a>
+						</div>
+						{% endif %}
+						{% endfor %}
+					</div>
+				</div>
+			</div>		
+		</div>
+		<div class="col-lg-4">
+			<div class="row justify-content-center">
+				<div class="container">
+					<div class="row justify-content-center">
+						<h4>Smogon Doubles</h4>						
+					</div>
+					<div class="container" style="width: fit-content;">
+						{% for t in tiers %}
+						{% if t.games_of_format.count > 1000 and t.generation == g.generation and t.style == 'SD' %}
+						<div class="row justify-content-start">	
+							<a href="{% url 'format_base' t.generation t.tier_name %}">{{t.tier_display_name}}</a>
+						</div>
+						{% endif %}
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-	{% endif %}
-	{% endfor %}
 	{% endfor %}
 </div>
 

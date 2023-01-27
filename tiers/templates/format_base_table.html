@@ -1,13 +1,13 @@
 {% load static %}
 
 <table class="table table-striped w-auto" id="sortable">
-	<thead style="position: sticky; top: 0; z-index: 1; background: white;">
+	<thead class="thead-fix">
 		<tr>
-			<th onclick="sortTable(0,'')" style="text-align: center;">Pok&eacute;mon <i id="arrow0" class="fa-solid fa-sort"></i></th>
-			<th onclick="sortTable(1,'')" style="text-align: center;">
+			<th onclick="sortTable(0,'')">Pok&eacute;mon <i id="arrow0" class="fa-solid fa-sort"></i></th>
+			<th onclick="sortTable(1,'')">
 				<i id="move-frequency-help" class="fa-solid fa-circle-question" data-toggle="tooltip" title data-original-title="How often a player wins when they use the corresponding Pokémon during the battle"></i> 
 				Used Winrate <i id="arrow1" class="fa fa-circle-sort fa-sort-down"></i></th>
-			<th onclick="sortTable(2,'')" style="text-align: center;">
+			<th onclick="sortTable(2,'')">
 				<i id="move-frequency-help" class="fa-solid fa-circle-question" data-toggle="tooltip" title data-original-title="How often a Pokémon appears in team preview"></i> 
 				Appearance Rate <i id="arrow2" class="fa-solid fa-sort"></i></th>
 		</tr>
@@ -18,7 +18,7 @@
 		{% with "sprites/pokemon/"|add:img_num|add:".png" as img_file %}
 		<tr>
 			<td class="align-middle">
-				<a href="{% url 'format_pokemon' tier.generation tier.tier_name w.pokemon.pokemon_unique_name %}">
+				<a href="{% url 'format_pokemon' tier.generation tier.tier_name w.pokemon.pokemon_unique_name %}" style="font-size: 18px;">
 					<img src="{% static img_file %}" class="img-fluid" style="max-height: 70px;">{{ w.pokemon.pokemon_display_name }}</a>
 				{% with w.pokemon.types_of_pokemon.all as type %}
 				{% include 'pokemon_type_block.html' %}
