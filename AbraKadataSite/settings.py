@@ -93,7 +93,7 @@ WSGI_APPLICATION = 'AbraKadataSite.wsgi.application'
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'abrakadata',
+#         'NAME': 'abrakadata_test2',
 #         'USER': 'postgres',
 #         'PASSWORD': '4N64L1f3',
 #         'HOST': 'localhost',
