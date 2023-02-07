@@ -24,8 +24,7 @@
 						{% include 'pokemon_type_block.html' %}
 						{% endwith %}
 					{% else %}
-						<img src="{% static img_file %}" style="height: 70px;">
-						{{ t.teammate.pokemon_display_name }}
+					<a><img src="{% static img_file %}" style="height: 70px;">{{ t.teammate.pokemon_display_name }}</a>
 						{% with t.teammate.types_of_pokemon.all as type %}
 						{% include 'pokemon_type_block.html' %}
 						{% endwith %}

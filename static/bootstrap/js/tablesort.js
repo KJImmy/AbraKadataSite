@@ -23,13 +23,13 @@ function sortTable(n,t,numbers=false) {
       based on the direction, asc or desc:*/
       if (numbers) {
         if (dir == "asc") {
-          if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          if (x.innerText.toLowerCase() < y.innerText.toLowerCase()) {
             //if so, mark as a switch and break the loop:
             shouldSwitch= true;
             break;
           }
         } else if (dir == "desc") {
-          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          if (x.innerText.toLowerCase() > y.innerText.toLowerCase()) {
             //if so, mark as a switch and break the loop:
             shouldSwitch = true;
             break;
@@ -38,13 +38,14 @@ function sortTable(n,t,numbers=false) {
       }
       else {
         if (dir == "asc") {
-          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          if (x.innerText.toLowerCase() > y.innerText.toLowerCase()) {
+            console.log("inner x is: "+x.innerText,"inner y is: "+y.innerText,x.innerText>y.innerText)
             //if so, mark as a switch and break the loop:
             shouldSwitch= true;
             break;
           }
         } else if (dir == "desc") {
-          if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          if (x.innerText.toLowerCase() < y.innerText.toLowerCase()) {
             //if so, mark as a switch and break the loop:
             shouldSwitch = true;
             break;
