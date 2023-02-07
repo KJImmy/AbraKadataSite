@@ -4,10 +4,10 @@
 	<thead class="thead-fix">
 		<tr>
 			<th onclick="sortTable(0,'')">Pok&eacute;mon <i id="arrow0" class="fa-solid fa-sort"></i></th>
-			<th onclick="sortTable(1,'')">
+			<th onclick="sortTable(1,'',true)">
 				<i id="move-frequency-help" class="fa-solid fa-circle-question" data-toggle="tooltip" title data-original-title="How often a player wins when they use the corresponding Pokémon during the battle"></i> 
 				Used Winrate <i id="arrow1" class="fa fa-circle-sort fa-sort-down"></i></th>
-			<th onclick="sortTable(2,'')">
+			<th onclick="sortTable(2,'',true)">
 				<i id="move-frequency-help" class="fa-solid fa-circle-question" data-toggle="tooltip" title data-original-title="How often a Pokémon appears in team preview"></i> 
 				Appearance Rate <i id="arrow2" class="fa-solid fa-sort"></i></th>
 		</tr>
@@ -25,18 +25,10 @@
 				{% endwith %}
 			</td>
 			<td class="align-middle" style="text-align: center;">
-				{% if w.winrate_used < 10%}
-				0{{ w.winrate|floatformat:2 }}%
-				{% else %}
-				{{ w.winrate_used|floatformat:2 }}%
-				{% endif %}
+				{{ w.winrate_used|stringformat:"05.2F" }}%
 			</td>
 			<td class="align-middle" style="text-align: center;">
-				{% if w.appearance_rate < 10 %}
-				0{{ w.appearance_rate|floatformat:2 }}%
-				{% else %}
-				{{ w.appearance_rate|floatformat:2 }}%
-				{% endif %}
+				{{ w.appearance_rate|stringformat:"05.2F" }}%
 			</td>
 		</tr>
 		{% endwith %}

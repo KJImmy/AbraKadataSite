@@ -4,8 +4,8 @@
 	<thead style="position: sticky; top: 0; z-index: 1; background: white;">
 		<tr>
 			<th onclick="sortTable(0,'')" style="text-align: center;">Pokemon <i id="arrow0" class="fa-solid fa-sort"></i></th>
-			<th onclick="sortTable(1,'')" style="text-align: center;">Winrate <i id="arrow1" class="fa-solid fa-sort-down"></i></th>
-			<th onclick="sortTable(2,'')" style="text-align: center;">
+			<th onclick="sortTable(1,'',true)" style="text-align: center;">Winrate <i id="arrow1" class="fa-solid fa-sort-down"></i></th>
+			<th onclick="sortTable(2,'',true)" style="text-align: center;">
 				<i id="move-frequency-help" class="fa-solid fa-circle-question" data-toggle="tooltip" title data-original-title="How often the corresponding Pokémon appears on teams that {{ pokemon.pokemon_display_name }} is on"></i> Pairing Frequency <i id="arrow2" class="fa-solid fa-sort"></i></th>
 		</tr>
 	</thead>
@@ -33,14 +33,10 @@
 				</span>
 			</td>
 			<td class="align-middle" style="text-align: center;">
-				{{ t.winrate|floatformat:2 }}%
+				{{ t.winrate|stringformat:"05.2F" }}%
 			</td>
 			<td class="align-middle" style="text-align: center;">
-				{% if t.pairing_frequency < 10 %}
-				0{{ t.pairing_frequency|floatformat:2 }}%
-				{% else %}
-				{{ t.pairing_frequency|floatformat:2 }}%
-				{% endif %}
+				{{ t.pairing_frequency|stringformat:"05.2F" }}%
 			</td>
 		</tr>
 		{% endif %}

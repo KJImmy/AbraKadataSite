@@ -1,8 +1,7 @@
-function sortTable(n,t) {
+function sortTable(n,t,numbers=false) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
   table = document.getElementById("sortable"+t);
   switching = true;
-  console.log("running tablesort.js")
   //Set the sorting direction to ascending:
   dir = "asc";
   /*Make a loop that will continue until
@@ -22,17 +21,34 @@ function sortTable(n,t) {
       y = rows[i + 1].getElementsByTagName("TD")[n];
       /*check if the two rows should switch place,
       based on the direction, asc or desc:*/
-      if (dir == "asc") {
-        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-          //if so, mark as a switch and break the loop:
-          shouldSwitch= true;
-          break;
+      if (numbers) {
+        if (dir == "asc") {
+          if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+            //if so, mark as a switch and break the loop:
+            shouldSwitch= true;
+            break;
+          }
+        } else if (dir == "desc") {
+          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+            //if so, mark as a switch and break the loop:
+            shouldSwitch = true;
+            break;
+          }
         }
-      } else if (dir == "desc") {
-        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-          //if so, mark as a switch and break the loop:
-          shouldSwitch = true;
-          break;
+      }
+      else {
+        if (dir == "asc") {
+          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+            //if so, mark as a switch and break the loop:
+            shouldSwitch= true;
+            break;
+          }
+        } else if (dir == "desc") {
+          if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+            //if so, mark as a switch and break the loop:
+            shouldSwitch = true;
+            break;
+          }
         }
       }
     }
@@ -61,18 +77,31 @@ function sortTable(n,t) {
       arrow.classList.remove("fa-sort-down");
     }
   }
-  if (dir == "asc") {
-    console.log("doing thing");
-    arrow = document.getElementById("arrow"+t+n);
-    arrow.classList.add("fa-sort-up");
-    arrow.classList.remove("fa-sort");
-    arrow.classList.remove("fa-sort-down");
-  }
-  else if (dir == "desc") {
-    console.log("doing thing");
-    arrow = document.getElementById("arrow"+t+n);
-    arrow.classList.add("fa-sort-down");
-    arrow.classList.remove("fa-sort");
-    arrow.classList.remove("fa-sort-up");
+  if (numbers) {
+    if (dir == "desc") {
+      arrow = document.getElementById("arrow"+t+n);
+      arrow.classList.add("fa-sort-up");
+      arrow.classList.remove("fa-sort");
+      arrow.classList.remove("fa-sort-down");
+    }
+    else if (dir == "asc") {
+      arrow = document.getElementById("arrow"+t+n);
+      arrow.classList.add("fa-sort-down");
+      arrow.classList.remove("fa-sort");
+      arrow.classList.remove("fa-sort-up");
+    }
+  } else {
+    if (dir == "asc") {
+      arrow = document.getElementById("arrow"+t+n);
+      arrow.classList.add("fa-sort-up");
+      arrow.classList.remove("fa-sort");
+      arrow.classList.remove("fa-sort-down");
+    }
+    else if (dir == "desc") {
+      arrow = document.getElementById("arrow"+t+n);
+      arrow.classList.add("fa-sort-down");
+      arrow.classList.remove("fa-sort");
+      arrow.classList.remove("fa-sort-up");
+    }
   }
 }

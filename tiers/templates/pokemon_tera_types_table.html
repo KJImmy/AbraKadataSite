@@ -16,8 +16,8 @@
 					{{ t.tera_type.type_name }}
 				</div>
 			</td>
-			<td class="align-middle" style="text-align: center;">{{ t.winrate|floatformat:2 }}%</td>
-			<td class="align-middle" style="text-align: center;">{{ t.type_frequency|floatformat:2 }}%</td>
+			<td class="align-middle" style="text-align: center;">{{ t.winrate|stringformat:"05.2F" }}%</td>
+			<td class="align-middle" style="text-align: center;">{{ t.type_frequency|stringformat:"05.2F" }}%</td>
 		</tr>
 		{% endfor %}
 	</tbody>

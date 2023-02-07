@@ -4,8 +4,8 @@
 	<thead style="position: sticky; top: 0; z-index: 1; background: white;">
 		<tr>
 			<th style="text-align: center; cursor: auto;">Lead Pair</th>
-			<th onclick="sortTable(1,'2')" style="text-align: center;">Winrate<i id="arrow21" class="fa-solid fa-sort"></th>
-			<th onclick="sortTable(2,'2')" style="text-align: center;">Appearance Rate<i id="arrow22" class="fa-solid fa-sort-down"></th>
+			<th onclick="sortTable(1,'2',true)" style="text-align: center;">Winrate<i id="arrow21" class="fa-solid fa-sort"></th>
+			<th onclick="sortTable(2,'2',true)" style="text-align: center;">Appearance Rate<i id="arrow22" class="fa-solid fa-sort-down"></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -24,10 +24,10 @@
 				</div>
 			</td>
 			<td class="align-middle" style="text-align: center;">
-				{{ l.winrate_lead }}%
+				{{ l.winrate_lead|stringformat:"05.2F" }}%
 			</td>
 			<td class="align-middle" style="text-align: center;">
-				{{ l.appearance_rate_lead }}%
+				{{ l.appearance_rate_lead|stringformat:"05.2F" }}%
 			</td>
 		</tr>
 		{% endwith %}

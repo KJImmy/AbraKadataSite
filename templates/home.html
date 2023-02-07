@@ -36,20 +36,20 @@
 				</div>
 				<div class="col" style="margin-left: 20px; width: 50%;">
 					<div class="row justify-content-start">
-						{{ top_vgc.appearance_rate|floatformat:2 }}%						
+						{{ top_vgc.appearance_rate|stringformat:"05.2F" }}%						
 					</div>
 					<div class="row justify-content-start">
-						{{ top_vgc.winrate|floatformat:2 }}%						
+						{{ top_vgc.winrate|stringformat:"05.2F" }}%						
 					</div>
 					<div class="row justify-content-start">
-						{{ top_vgc.winrate_used|floatformat:2 }}%						
+						{{ top_vgc.winrate_used|stringformat:"05.2F" }}%						
 					</div>
 					<div class="row justify-content-start">
-						{{ top_vgc.winrate_lead|floatformat:2 }}%						
+						{{ top_vgc.winrate_lead|stringformat:"05.2F" }}%						
 					</div>
 					{% if vgc_tier.has_tera %}
 					<div class="row justify-content-start">
-						{{ top_vgc.tera_frequency|floatformat:2 }}%
+						{{ top_vgc.tera_frequency|stringformat:"05.2F" }}%
 					</div>
 					{% endif %}
 				</div>
@@ -86,20 +86,20 @@
 				</div>
 				<div class="col" style="margin-left: 20px; width: 50%;">
 					<div class="row justify-content-start">
-						{{ top_singles.appearance_rate|floatformat:2 }}%						
+						{{ top_singles.appearance_rate|stringformat:"05.2F" }}%						
 					</div>
 					<div class="row justify-content-start">
-						{{ top_singles.winrate|floatformat:2 }}%						
+						{{ top_singles.winrate|stringformat:"05.2F" }}%						
 					</div>
 					<div class="row justify-content-start">
-						{{ top_singles.winrate_used|floatformat:2 }}%						
+						{{ top_singles.winrate_used|stringformat:"05.2F" }}%						
 					</div>
 					<div class="row justify-content-start">
-						{{ top_singles.winrate_lead|floatformat:2 }}%						
+						{{ top_singles.winrate_lead|stringformat:"05.2F" }}%						
 					</div>
 					{% if singles_tier.has_tera %}
 					<div class="row justify-content-start">
-						{{ top_singles.tera_frequency|floatformat:2 }}%
+						{{ top_singles.tera_frequency|stringformat:"05.2F" }}%
 					</div>
 					{% endif %}
 				</div>
