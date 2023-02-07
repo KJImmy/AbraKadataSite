@@ -144,7 +144,7 @@ def format_pokemon_view(request,generation,tier_name,pokemon_unique_name):
 
 	ranked_bool = True
 
-	common_pokemon = Pokemon.objects.filter(Q(individual_winrates_of_pokemon__tier=tier)&Q(individual_winrates_of_pokemon__appearance_rate__gte=5)).order_by('pokemon_display_name')
+	common_pokemon = Pokemon.objects.filter(Q(individual_winrates_of_pokemon__tier=tier)&Q(individual_winrates_of_pokemon__appearance_rate__gte=5)&Q(individual_winrates_of_pokemon__ranked=True)).order_by('pokemon_display_name')
 	teammates = TeammateWinrate.objects.filter(Q(pokemon=pokemon)&Q(tier=tier)&Q(pairing_frequency__gte=5)&Q(ranked=ranked_bool)).order_by('-winrate')
 	opponents = OpponentWinrate.objects.filter(Q(pokemon=pokemon)&Q(tier=tier)&Q(opponent__in=common_pokemon)&Q(ranked=ranked_bool)).order_by('-winrate')
 	moves = MoveWinrate.objects.filter(Q(pokemon=pokemon)&Q(tier=tier)&Q(move_frequency__gte=5)&Q(ranked=ranked_bool)).order_by('-winrate')
