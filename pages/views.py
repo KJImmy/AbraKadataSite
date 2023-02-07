@@ -1,15 +1,27 @@
-import json
-
 from django.shortcuts import render
+from django.db.models import Count,When,Case,Q,F,PositiveIntegerField,FloatField,ExpressionWrapper
+from django.contrib.staticfiles import finders
 
-from pokemon.models import Pokemon,PokemonTypeRelation
-from tiers.models import Tier
+from tiers.models import Tier,IndividualWinrate,TeammateWinrate,OpponentWinrate,MoveWinrate,TeraWinrate
+from games.models import PokemonUsage,Game,GamePlayerRelation
+from pokemon.models import Pokemon,Move
+
 # Create your views here.
 def home_view(request):
-	pokemon = Pokemon.objects.get(pokemon_unique_name='skeledirge')
+	top_14 = IndividualWinrate.objects.filter(Q(tier=14)&Q(appearance_rate__gte=5)).order_by('-winrate_used').first()
+	top_3 = IndividualWinrate.objects.filter(Q(tier=3)&Q(appearance_rate__gte=5)).order_by('-winrate_used').first()
+
+	vgc_tier = Tier.objects.get(id=14)
+	singles_tier = Tier.objects.get(id=3)
+
 	context = {
-			'pokemon':pokemon
+			'top_vgc':top_14,
+			'vgc_tier':vgc_tier,
+			'top_singles':top_3,
+			'singles_tier':singles_tier,
+			'home_page':True
 		}
+
 	return render(request,'home.html',context)
 
 def about_view(request):

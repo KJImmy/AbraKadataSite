@@ -19,7 +19,7 @@
 			{% include 'pokemon.html' %}
 		</div>
 		<div class="row justify-content-center" style="margin-bottom: 50px;">
-			<div class="col-xs" style="margin-right: 20px;">
+			<div class="col" style="width: 50%;">
 				<div class="row justify-content-end">
 					<strong>Appearance Rate: </strong>						
 				</div>
@@ -32,8 +32,13 @@
 				<div class="row justify-content-end">
 					<strong>Lead Winrate: </strong>
 				</div>
+				{% if tier.has_tera %}
+				<div class="row justify-content-end">
+					<strong>Tera Frequency: </strong>
+				</div>
+				{% endif %}
 			</div>
-			<div class="col-xs" style="margin-left: 20px;">
+			<div class="col" style="margin-left: 20px; width: 50%;">
 				<div class="row justify-content-start">
 					{{ individual.appearance_rate|floatformat:2 }}%						
 				</div>
@@ -46,6 +51,11 @@
 				<div class="row justify-content-start">
 					{{ individual.winrate_lead|floatformat:2 }}%						
 				</div>
+				{% if tier.has_tera %}
+				<div class="row justify-content-start">
+					{{ individual.tera_frequency|floatformat:2 }}%						
+				</div>
+				{% endif %}
 			</div>
 		</div>
 		<div class="row justify-content-center" style="padding-bottom: 50px;">

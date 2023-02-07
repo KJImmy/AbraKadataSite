@@ -6,7 +6,13 @@
 	<div class="row align-items-center">
 		<div class="col-sm">
 			<div class="row justify-content-center">
-				<h2>{{ pokemon.pokemon_display_name }}</h2>
+				{% if home_page %}
+					<a href="{% url 'format_pokemon' tier.generation tier.tier_name pokemon.pokemon_unique_name %}">
+						<h2>{{ pokemon.pokemon_display_name }}</h2>
+					</a>
+				{% else %}
+					<h2>{{ pokemon.pokemon_display_name }}</h2>
+				{% endif %}
 			</div>
 			<div class="row justify-content-center">
 				<img src="{% static  img_file %}" style="height: 150px">				

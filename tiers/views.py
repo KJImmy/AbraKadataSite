@@ -32,7 +32,7 @@ def format_base_view(request,generation,tier_name):
 	# 		filter(appearance_rate__gte=5). \
 	# 		order_by('-winrate')
 
-	pokemon_winrates = IndividualWinrate.objects.filter(Q(tier=tier)&Q(appearance_rate__gte=5)).order_by('-winrate')
+	pokemon_winrates = IndividualWinrate.objects.filter(Q(tier=tier)&Q(appearance_rate__gte=5)).order_by('-winrate_used')
 	lead_winrates = TeammateWinrate.objects.filter(Q(tier=tier)&Q(appearance_rate_lead__gte=0.1)).order_by('-appearance_rate_lead')
 	lead_pairs = []
 	exclude_pks = []

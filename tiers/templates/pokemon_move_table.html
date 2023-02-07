@@ -6,8 +6,10 @@
 			<th onclick="sortTable(0,'2')" style="text-align: center;">Move <i id="arrow20" class="fa-solid fa-sort"></i></th>
 			<th onclick="sortTable(1,'2')" style="text-align: center;">Winrate <i id="arrow21" class="fa-solid fa-sort-down"></i></th>
 			<th onclick="sortTable(2,'2')" style="text-align: center;">
-				<i id="move-frequency-help" class="fa-solid fa-circle-question" data-toggle="tooltip" title data-original-title="How often this move is used by {{ pokemon.pokemon_display_name }} at least once in games where {{ pokemon.pokemon_display_name }} is used"></i> 
-				Move Frequency 
+				<!-- <i id="move-frequency-help" class="fa-solid fa-circle-question"></i>  -->
+				<!-- <i id="move-frequency-help" class="fa-solid fa-circle-question" data-toggle="tooltip" title data-original-title="How often this move is used by {{ pokemon.pokemon_display_name }} at least once in games where {{ pokemon.pokemon_display_name }} is used"></i>  -->
+				<div class="tooltipnew"><i id="move-frequency-help" class="fa-solid fa-circle-question"></i><span class="tooltiptext">How often this move is used by {{ pokemon.pokemon_display_name }} at least once in games where {{ pokemon.pokemon_display_name }} is used</span></div>
+				Move Frequency
 				<i id="arrow22" class="fa-solid fa-sort"></i></th>
 		</tr>
 	</thead>

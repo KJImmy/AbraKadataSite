@@ -153,7 +153,39 @@
 	.column-one {
 		position: sticky;
 		left: 0;
-	}	
+	}
+	/* Tooltip container */
+	.tooltipnew {
+		position: relative;
+		display: inline-block;
+	}
+	/* Tooltip text */
+	.tooltipnew .tooltiptext {
+		font-size: 14px;
+		font-weight: normal;
+		visibility: hidden;
+		max-width: 200px;
+		background-color: black;
+		color: #fff;
+		text-align: center;
+		padding: 5px 0;
+		border-radius: 6px;
+		white-space: normal;
+		padding-right: 5px;
+		padding-left: 5px;
+		position: absolute;
+		z-index: 1;
+
+		width: 200px;
+		top: 100%;
+		left: 50%;
+		margin-left: -100px; /* Use half of the width to center the tooltip */
+	}
+
+	/* Show the tooltip text when you mouse over the tooltip container */
+	.tooltipnew:hover .tooltiptext {
+		visibility: visible;
+	}
 	@media only screen and (max-width: 1500px) {
 		#sidebar-wrapper {
 			display: none;
@@ -215,9 +247,25 @@
 			    });
 
 			});
-			$(function () {
-			  $('[data-toggle="tooltip"]').tooltip()
-			})
 		</script>
+<!-- 		<script>
+			$(document).ready(function () {
+				$('[data-toggle="tooltip"]').tooltip({
+					trigger: "manual"
+			  	});
+
+			  	$('body').on('mouseleave','tooltip',function() {
+			  		$('[data-toggle="tooltip"]').tooltip('hide');
+			  	});
+
+			  	$('[data-toggle="tooltip"] > i').on('mouseenter', function() {
+			  		$('[data-toggle="tooltip"]').tooltip('show');
+			  	});
+
+			  	$('[data-toggle="tooltip"]').on('click', function() {
+			  		$(this).tooltip('show');
+			  	});
+			});
+		</script> -->
 	</body>
 </html>

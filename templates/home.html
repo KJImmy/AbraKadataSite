@@ -2,14 +2,109 @@
 
 {% block content %}
 <div class="container">
-	<p style="text-align: center;">This is the home page</p>
-
-	<h1 style="text-align: center; padding-top: 30px;">Featured Pok&eacute;mon</h1>
-	{% include 'pokemon.html' %}
-
-	<h1 style="text-align: center; padding-top: 30px;">Latest Report</h1>
+	<h1 style="text-align: center;">Top Pok&eacute;mon</h1>
+	
 	<div class="row justify-content-center">
-		<a href="#" style="text-align: center;">VGC Series 1 Report</a>
+		<div class="col-6">
+			<a href="{% url 'format_base' 9 'vgc2023series2' %}">
+				<h3 style="text-align: center;">Gen 9 VGC 2023 Series 2</h3>				
+			</a>
+			{% with top_vgc.pokemon as pokemon %}
+			{% with vgc_tier as tier %}
+			{% include 'pokemon.html' %}
+			{% endwith %}
+			{% endwith %}
+			<div class="row justify-content-center" style="margin-top:20px; margin-bottom: 50px;">
+				<div class="col" style="width: 50%;">
+					<div class="row justify-content-end">
+						<strong>Appearance Rate: </strong>
+					</div>
+					<div class="row justify-content-end">
+						<strong>Winrate: </strong>
+					</div>
+					<div class="row justify-content-end">
+						<strong>Used Winrate: </strong>
+					</div>
+					<div class="row justify-content-end">
+						<strong>Lead Winrate: </strong>
+					</div>
+					{% if vgc_tier.has_tera %}
+					<div class="row justify-content-end">
+						<strong>Tera Frequency: </strong>
+					</div>
+					{% endif %}
+				</div>
+				<div class="col" style="margin-left: 20px; width: 50%;">
+					<div class="row justify-content-start">
+						{{ top_vgc.appearance_rate|floatformat:2 }}%						
+					</div>
+					<div class="row justify-content-start">
+						{{ top_vgc.winrate|floatformat:2 }}%						
+					</div>
+					<div class="row justify-content-start">
+						{{ top_vgc.winrate_used|floatformat:2 }}%						
+					</div>
+					<div class="row justify-content-start">
+						{{ top_vgc.winrate_lead|floatformat:2 }}%						
+					</div>
+					{% if vgc_tier.has_tera %}
+					<div class="row justify-content-start">
+						{{ top_vgc.tera_frequency|floatformat:2 }}%
+					</div>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+		<div class="col-6">
+			<a href="{% url 'format_base' 9 'ou' %}">
+				<h3 style="text-align: center;">Gen 9 Singles OU</h3>
+			</a>
+			{% with top_singles.pokemon as pokemon %}
+			{% with singles_tier as tier %}
+			{% include 'pokemon.html' %}
+			{% endwith %}
+			{% endwith %}
+			<div class="row justify-content-center" style="margin-top:20px; margin-bottom: 50px;">
+				<div class="col" style="width: 50%;">
+					<div class="row justify-content-end">
+						<strong>Appearance Rate: </strong>						
+					</div>
+					<div class="row justify-content-end">
+						<strong>Winrate: </strong>
+					</div>
+					<div class="row justify-content-end">
+						<strong>Used Winrate: </strong>
+					</div>
+					<div class="row justify-content-end">
+						<strong>Lead Winrate: </strong>
+					</div>
+					{% if singles_tier.has_tera %}
+					<div class="row justify-content-end">
+						<strong>Tera Frequency: </strong>
+					</div>
+					{% endif %}
+				</div>
+				<div class="col" style="margin-left: 20px; width: 50%;">
+					<div class="row justify-content-start">
+						{{ top_singles.appearance_rate|floatformat:2 }}%						
+					</div>
+					<div class="row justify-content-start">
+						{{ top_singles.winrate|floatformat:2 }}%						
+					</div>
+					<div class="row justify-content-start">
+						{{ top_singles.winrate_used|floatformat:2 }}%						
+					</div>
+					<div class="row justify-content-start">
+						{{ top_singles.winrate_lead|floatformat:2 }}%						
+					</div>
+					{% if singles_tier.has_tera %}
+					<div class="row justify-content-start">
+						{{ top_singles.tera_frequency|floatformat:2 }}%
+					</div>
+					{% endif %}
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 
