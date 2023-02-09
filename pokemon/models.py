@@ -71,6 +71,6 @@ class Learnset(models.Model):
 		unique_together = ['pokemon','move','generation']
 
 class TypeEfficacy(models.Model):
-	damage_type_id = models.ForeignKey('Type',on_delete=models.PROTECT,related_name='damage_type')
-	target_type_id = models.ForeignKey('Type',on_delete=models.PROTECT,related_name='targe_type')
+	damage_type = models.ForeignKey('Type',on_delete=models.PROTECT,related_name='damage_type')
+	target_type = models.ForeignKey('Type',on_delete=models.PROTECT,related_name='targe_type')
 	damage_factor = models.PositiveIntegerField()
