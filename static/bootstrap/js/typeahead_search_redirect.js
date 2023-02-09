@@ -2,10 +2,21 @@
 
 // {% url 'format_pokemon' tier.generation tier.tier_name t.pokemon_unique_name %}
 
-const submitbtn = document.getElementById("submitbtn");
+// const submitbtn = document.getElementById("submitbtn");
+
+const search = document.getElementById("search_input");
+
+searching = async function(event) {
+    const submitbtn = document.getElementsByClassName("tt-selectable");
+    console.log(submitbtn.length)
+    for (var i = 0; i < submitbtn.length; i++) {
+        console.log("adding addEventListener")
+        submitbtn[i].addEventListener('click',searchRedirect);
+    }
+}
 
 searchRedirect = async function(event) {
-    console.log("running redirect");
+    console.log("doing something")
     event.preventDefault();
 	let response = await fetch('/static/bootstrap/js/search_dict.json');
 	const search_dict = await response.json();
@@ -26,4 +37,6 @@ searchRedirect = async function(event) {
     // return this.http.get(url,{responseType: 'text'});
 }
 
-submitbtn.addEventListener('click',searchRedirect);
+search.addEventListener('input',searching())
+
+// submitbtn.addEventListener('click',searchRedirect);
