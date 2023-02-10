@@ -6,7 +6,14 @@
 			<th onclick="sortTable(0,'')" style="text-align: center;">Pokemon <i id="arrow0" class="fa-solid fa-sort"></i></th>
 			<th onclick="sortTable(1,'',true)" style="text-align: center;">Winrate <i id="arrow1" class="fa-solid fa-sort-down"></i></th>
 			<th onclick="sortTable(2,'',true)" style="text-align: center;">
-				<div class="tooltipnew"><i id="move-frequency-help" class="fa-solid fa-circle-question"></i><span class="tooltiptext">How often the corresponding Pokémon appears on teams that {{ pokemon.pokemon_display_name }} is on</span></div>
+				<span class="tooltipwrapper">
+					<div class="tooltipnew">
+						<i id="pairing-frequency-help" class="fa-solid fa-circle-question"></i>
+					</div>
+					<span class="tooltiptext">
+						How often the corresponding Pokémon appears on teams that {{ pokemon.pokemon_display_name }} is on
+					</span>
+				</span>
 				Pairing Frequency <i id="arrow2" class="fa-solid fa-sort"></i></th>
 		</tr>
 	</thead>

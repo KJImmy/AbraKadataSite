@@ -5,7 +5,14 @@
 		<tr>
 			<th onclick="sortTable(0,'1')" style="text-align: center;">Pokemon <i id="arrow10" class="fa-solid fa-sort"></i></th>
 			<th onclick="sortTable(1,'1',true)" style="text-align: center;">
-				<div class="tooltipnew"><i id="move-frequency-help" class="fa-solid fa-circle-question"></i><span class="tooltiptext">{{ pokemon.pokemon_display_name }}'s winrate when it is used against the corresponding Pok&eacute;mon</span></div>
+				<span class="tooltipwrapper">
+					<div class="tooltipnew">
+						<i id="winrate-help" class="fa-solid fa-circle-question"></i>
+					</div>
+					<span class="tooltiptext">
+						{{ pokemon.pokemon_display_name }}'s winrate when it is used against the corresponding Pok&eacute;mon
+					</span>
+				</span>
 				Winrate <i id="arrow11" class="fa-solid fa-sort-down"></i></th>
 		</tr>
 	</thead>

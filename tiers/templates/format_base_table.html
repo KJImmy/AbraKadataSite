@@ -5,10 +5,24 @@
 		<tr>
 			<th onclick="sortTable(0,'')">Pok&eacute;mon <i id="arrow0" class="fa-solid fa-sort"></i></th>
 			<th onclick="sortTable(1,'',true)">
-				<i id="move-frequency-help" class="fa-solid fa-circle-question" data-toggle="tooltip" title data-original-title="How often a player wins when they use the corresponding Pokémon during the battle"></i> 
+				<span class="tooltipwrapper">
+					<div class="tooltipnew">
+						<i id="used-winrate-help" class="fa-solid fa-circle-question"></i>
+					</div>
+					<span class="tooltiptext">
+						How often a player wins when they use the corresponding Pokémon during the battle
+					</span>
+				</span>
 				Used Winrate <i id="arrow1" class="fa fa-circle-sort fa-sort-down"></i></th>
 			<th onclick="sortTable(2,'',true)">
-				<i id="move-frequency-help" class="fa-solid fa-circle-question" data-toggle="tooltip" title data-original-title="How often a Pokémon appears in team preview"></i> 
+				<span class="tooltipwrapper">
+					<div class="tooltipnew">
+						<i id="appearance-rate-help" class="fa-solid fa-circle-question"></i>
+					</div>
+					<span class="tooltiptext">
+						How often a Pokémon appears in team preview
+					</span>
+				</span>
 				Appearance Rate <i id="arrow2" class="fa-solid fa-sort"></i></th>
 		</tr>
 	</thead>
