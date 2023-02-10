@@ -1,5 +1,13 @@
 const search = document.getElementById("search_input");
 
+submitRedirect = async function(event) {
+    console.log("Checking")
+    if (event.keyCode == 13) {
+        console.log("is enter")
+        searchRedirect(event);
+    }
+}
+
 searching = async function(event) {
     const submitbtn = document.getElementsByClassName("tt-selectable");
     for (var i = 0; i < submitbtn.length; i++) {
@@ -23,4 +31,5 @@ searchRedirect = async function(event) {
     search.submit();
 }
 
-search.addEventListener('input',searching())
+// search.addEventListener('input',searching());
+// search.addEventListener('keydown',submitRedirect());
