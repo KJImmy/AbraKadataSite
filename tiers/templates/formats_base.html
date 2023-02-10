@@ -33,12 +33,14 @@
 				</div>
 			</div>
 		</div>
+		{% if tier.style != 'SS' %}
 		<div class="row justify-content-center" style="padding-bottom: 20px;">
-			<h3>Common Leads</h3>
+			<h3>Common Lead Pairs</h3>
 			<div class="table-responsive">
 				{% include 'common_leads_table.html' %}
 			</div>
 		</div>
+		{% endif %}
 		<!-- <div class="row justify-content-center" style="padding-top: 20px;">
 			<h3>Speed Tiers</h3>
 			<div class="table-responsive">
