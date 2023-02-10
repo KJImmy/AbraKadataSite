@@ -1,5 +1,5 @@
 {
-    "Venusaur - Gen 8 UU": [
+    "Venusaur - Gen 8 Underused": [
         "venusaur",
         8,
         "uu"
@@ -14,15 +14,10 @@
         8,
         "doublesou"
     ],
-    "Charmander - Gen 8 LC": [
+    "Charmander - Gen 8 Little Cup": [
         "charmander",
         8,
         "lc"
-    ],
-    "Charizard - Gen 8 Ubers": [
-        "charizard",
-        8,
-        "ubers"
     ],
     "Charizard - Gen 8 VGC 2022": [
         "charizard",
@@ -44,12 +39,12 @@
         8,
         "doublesou"
     ],
-    "Nidoking - Gen 8 OU": [
+    "Nidoking - Gen 8 Overused": [
         "nidoking",
         8,
         "ou"
     ],
-    "Nidoking - Gen 8 UU": [
+    "Nidoking - Gen 8 Underused": [
         "nidoking",
         8,
         "uu"
@@ -64,22 +59,22 @@
         8,
         "ubers"
     ],
-    "Clefable - Gen 8 OU": [
+    "Clefable - Gen 8 Overused": [
         "clefable",
         8,
         "ou"
     ],
-    "Vulpix - Gen 8 LC": [
+    "Vulpix - Gen 8 Little Cup": [
         "vulpix",
         8,
         "lc"
     ],
-    "Diglett - Gen 8 LC": [
+    "Diglett - Gen 8 Little Cup": [
         "diglett",
         8,
         "lc"
     ],
-    "Meowth - Gen 8 LC": [
+    "Meowth - Gen 8 Little Cup": [
         "meowth",
         8,
         "lc"
@@ -89,17 +84,12 @@
         9,
         "vgc2023series1"
     ],
-    "Arcanine - Gen 9 Battle Stadium Doubles": [
-        "arcanine",
-        9,
-        "battlestadiumdoubles"
-    ],
     "Arcanine - Gen 9 Doubles OU": [
         "arcanine",
         9,
         "doublesou"
     ],
-    "Arcanine - Gen 8 UU": [
+    "Arcanine - Gen 8 Underused": [
         "arcanine",
         8,
         "uu"
@@ -114,47 +104,42 @@
         9,
         "vgc2023series2"
     ],
-    "Abra - Gen 8 LC": [
+    "Abra - Gen 8 Little Cup": [
         "abra",
         8,
         "lc"
     ],
-    "Tentacruel - Gen 8 UU": [
+    "Tentacruel - Gen 8 Underused": [
         "tentacruel",
         8,
         "uu"
     ],
-    "Ponyta - Gen 8 LC": [
+    "Ponyta - Gen 8 Little Cup": [
         "ponyta",
         8,
         "lc"
     ],
-    "Slowpoke - Gen 8 LC": [
+    "Slowpoke - Gen 8 Little Cup": [
         "slowpoke",
         8,
         "lc"
     ],
-    "Slowbro - Gen 8 OU": [
+    "Slowbro - Gen 8 Overused": [
         "slowbro",
         8,
         "ou"
     ],
-    "Magnemite - Gen 8 LC": [
+    "Magnemite - Gen 8 Little Cup": [
         "magnemite",
         8,
         "lc"
-    ],
-    "Cloyster - Gen 9 Battle Stadium Singles": [
-        "cloyster",
-        9,
-        "battlestadiumsingles"
     ],
     "Cloyster - Gen 8 Ubers": [
         "cloyster",
         8,
         "ubers"
     ],
-    "Cloyster - Gen 8 OU": [
+    "Cloyster - Gen 8 Overused": [
         "cloyster",
         8,
         "ou"
@@ -169,7 +154,7 @@
         8,
         "ubers"
     ],
-    "Gengar - Gen 8 OU": [
+    "Gengar - Gen 8 Overused": [
         "gengar",
         8,
         "ou"
@@ -179,27 +164,22 @@
         8,
         "doublesou"
     ],
-    "Onix - Gen 8 LC": [
+    "Onix - Gen 8 Little Cup": [
         "onix",
         8,
         "lc"
     ],
-    "Koffing - Gen 8 LC": [
+    "Koffing - Gen 8 Little Cup": [
         "koffing",
         8,
         "lc"
     ],
-    "Chansey - Gen 9 Battle Stadium Singles": [
-        "chansey",
-        9,
-        "battlestadiumsingles"
-    ],
-    "Chansey - Gen 8 UU": [
+    "Chansey - Gen 8 Underused": [
         "chansey",
         8,
         "uu"
     ],
-    "Staryu - Gen 8 LC": [
+    "Staryu - Gen 8 Little Cup": [
         "staryu",
         8,
         "lc"
@@ -209,27 +189,17 @@
         9,
         "vgc2023series1"
     ],
-    "Gyarados - Gen 9 Battle Stadium Doubles": [
-        "gyarados",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Gyarados - Gen 9 Battle Stadium Singles": [
-        "gyarados",
-        9,
-        "battlestadiumsingles"
-    ],
     "Gyarados - Gen 9 Doubles OU": [
         "gyarados",
         9,
         "doublesou"
     ],
-    "Gyarados - Gen 8 OU": [
+    "Gyarados - Gen 8 Overused": [
         "gyarados",
         8,
         "ou"
     ],
-    "Gyarados - Gen 8 UU": [
+    "Gyarados - Gen 8 Underused": [
         "gyarados",
         8,
         "uu"
@@ -239,7 +209,7 @@
         8,
         "vgc2022"
     ],
-    "Ditto - Gen 9 OU": [
+    "Ditto - Gen 9 Overused": [
         "ditto",
         9,
         "ou"
@@ -249,27 +219,22 @@
         9,
         "ubers"
     ],
-    "Ditto - Gen 9 Battle Stadium Singles": [
-        "ditto",
-        9,
-        "battlestadiumsingles"
-    ],
     "Ditto - Gen 8 Ubers": [
         "ditto",
         8,
         "ubers"
     ],
-    "Porygon - Gen 8 LC": [
+    "Porygon - Gen 8 Little Cup": [
         "porygon",
         8,
         "lc"
     ],
-    "Omanyte - Gen 8 LC": [
+    "Omanyte - Gen 8 Little Cup": [
         "omanyte",
         8,
         "lc"
     ],
-    "Zapdos - Gen 8 OU": [
+    "Zapdos - Gen 8 Overused": [
         "zapdos",
         8,
         "ou"
@@ -289,7 +254,7 @@
         8,
         "doublesou"
     ],
-    "Moltres - Gen 8 UU": [
+    "Moltres - Gen 8 Underused": [
         "moltres",
         8,
         "uu"
@@ -299,12 +264,7 @@
         9,
         "vgc2023series1"
     ],
-    "Dragonite - Gen 9 Battle Stadium Doubles": [
-        "dragonite",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Dragonite - Gen 9 OU": [
+    "Dragonite - Gen 9 Overused": [
         "dragonite",
         9,
         "ou"
@@ -313,11 +273,6 @@
         "dragonite",
         9,
         "ubers"
-    ],
-    "Dragonite - Gen 9 Battle Stadium Singles": [
-        "dragonite",
-        9,
-        "battlestadiumsingles"
     ],
     "Dragonite - Gen 9 Doubles OU": [
         "dragonite",
@@ -329,7 +284,7 @@
         8,
         "ubers"
     ],
-    "Dragonite - Gen 8 OU": [
+    "Dragonite - Gen 8 Overused": [
         "dragonite",
         8,
         "ou"
@@ -349,7 +304,7 @@
         8,
         "ubers"
     ],
-    "Mew - Gen 8 OU": [
+    "Mew - Gen 8 Overused": [
         "mew",
         8,
         "ou"
@@ -359,17 +314,17 @@
         8,
         "doublesou"
     ],
-    "Crobat - Gen 8 UU": [
+    "Crobat - Gen 8 Underused": [
         "crobat",
         8,
         "uu"
     ],
-    "Chinchou - Gen 8 LC": [
+    "Chinchou - Gen 8 Little Cup": [
         "chinchou",
         8,
         "lc"
     ],
-    "Natu - Gen 8 LC": [
+    "Natu - Gen 8 Little Cup": [
         "natu",
         8,
         "lc"
@@ -379,27 +334,27 @@
         9,
         "vgc2023series1"
     ],
-    "Azumarill - Gen 9 Battle Stadium Doubles": [
-        "azumarill",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Azumarill - Gen 9 OU": [
+    "Azumarill - Gen 9 Overused": [
         "azumarill",
         9,
         "ou"
     ],
-    "Azumarill - Gen 9 Battle Stadium Singles": [
+    "Azumarill - Gen 9 Ubers": [
         "azumarill",
         9,
-        "battlestadiumsingles"
+        "ubers"
     ],
     "Azumarill - Gen 9 Doubles OU": [
         "azumarill",
         9,
         "doublesou"
     ],
-    "Azumarill - Gen 8 UU": [
+    "Azumarill - Gen 8 Overused": [
+        "azumarill",
+        8,
+        "ou"
+    ],
+    "Azumarill - Gen 8 Underused": [
         "azumarill",
         8,
         "uu"
@@ -409,7 +364,7 @@
         9,
         "vgc2023series2"
     ],
-    "Politoed - Gen 8 UU": [
+    "Politoed - Gen 8 Underused": [
         "politoed",
         8,
         "uu"
@@ -419,7 +374,7 @@
         8,
         "spikemuthcup"
     ],
-    "Umbreon - Gen 8 UU": [
+    "Umbreon - Gen 8 Underused": [
         "umbreon",
         8,
         "uu"
@@ -428,11 +383,6 @@
         "murkrow",
         9,
         "vgc2023series1"
-    ],
-    "Murkrow - Gen 9 Battle Stadium Doubles": [
-        "murkrow",
-        9,
-        "battlestadiumdoubles"
     ],
     "Murkrow - Gen 9 Doubles OU": [
         "murkrow",
@@ -444,7 +394,7 @@
         9,
         "vgc2023series2"
     ],
-    "Slowking - Gen 8 UU": [
+    "Slowking - Gen 8 Underused": [
         "slowking",
         8,
         "uu"
@@ -454,12 +404,7 @@
         9,
         "vgc2023series1"
     ],
-    "Scizor - Gen 9 Battle Stadium Doubles": [
-        "scizor",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Scizor - Gen 9 OU": [
+    "Scizor - Gen 9 Overused": [
         "scizor",
         9,
         "ou"
@@ -469,22 +414,17 @@
         9,
         "ubers"
     ],
-    "Scizor - Gen 9 Battle Stadium Singles": [
-        "scizor",
-        9,
-        "battlestadiumsingles"
-    ],
     "Scizor - Gen 9 Doubles OU": [
         "scizor",
         9,
         "doublesou"
     ],
-    "Scizor - Gen 8 OU": [
+    "Scizor - Gen 8 Overused": [
         "scizor",
         8,
         "ou"
     ],
-    "Scizor - Gen 8 UU": [
+    "Scizor - Gen 8 Underused": [
         "scizor",
         8,
         "uu"
@@ -499,7 +439,7 @@
         8,
         "ubers"
     ],
-    "Skarmory - Gen 8 UU": [
+    "Skarmory - Gen 8 Underused": [
         "skarmory",
         8,
         "uu"
@@ -509,12 +449,12 @@
         8,
         "spikemuthcup"
     ],
-    "Porygon2 - Gen 8 OU": [
+    "Porygon2 - Gen 8 Overused": [
         "porygon2",
         8,
         "ou"
     ],
-    "Porygon2 - Gen 8 UU": [
+    "Porygon2 - Gen 8 Underused": [
         "porygon2",
         8,
         "uu"
@@ -534,12 +474,17 @@
         8,
         "doublesou"
     ],
-    "Elekid - Gen 8 LC": [
+    "Hitmontop - Gen 8 VGC 2022": [
+        "hitmontop",
+        8,
+        "vgc2022"
+    ],
+    "Elekid - Gen 8 Little Cup": [
         "elekid",
         8,
         "lc"
     ],
-    "Magby - Gen 8 LC": [
+    "Magby - Gen 8 Little Cup": [
         "magby",
         8,
         "lc"
@@ -554,7 +499,7 @@
         8,
         "ubers"
     ],
-    "Blissey - Gen 8 OU": [
+    "Blissey - Gen 8 Overused": [
         "blissey",
         8,
         "ou"
@@ -574,12 +519,7 @@
         9,
         "vgc2023series1"
     ],
-    "Tyranitar - Gen 9 Battle Stadium Doubles": [
-        "tyranitar",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Tyranitar - Gen 9 OU": [
+    "Tyranitar - Gen 9 Overused": [
         "tyranitar",
         9,
         "ou"
@@ -599,7 +539,7 @@
         8,
         "ubers"
     ],
-    "Tyranitar - Gen 8 OU": [
+    "Tyranitar - Gen 8 Overused": [
         "tyranitar",
         8,
         "ou"
@@ -624,17 +564,17 @@
         8,
         "ubers"
     ],
-    "Blaziken - Gen 8 OU": [
+    "Blaziken - Gen 8 Overused": [
         "blaziken",
         8,
         "ou"
     ],
-    "Swampert - Gen 8 OU": [
+    "Swampert - Gen 8 Overused": [
         "swampert",
         8,
         "ou"
     ],
-    "Swampert - Gen 8 UU": [
+    "Swampert - Gen 8 Underused": [
         "swampert",
         8,
         "uu"
@@ -644,12 +584,7 @@
         9,
         "vgc2023series1"
     ],
-    "Pelipper - Gen 9 Battle Stadium Doubles": [
-        "pelipper",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Pelipper - Gen 9 OU": [
+    "Pelipper - Gen 9 Overused": [
         "pelipper",
         9,
         "ou"
@@ -664,7 +599,7 @@
         9,
         "doublesou"
     ],
-    "Pelipper - Gen 8 OU": [
+    "Pelipper - Gen 8 Overused": [
         "pelipper",
         8,
         "ou"
@@ -689,7 +624,7 @@
         9,
         "vgc2023series1"
     ],
-    "Breloom - Gen 9 OU": [
+    "Breloom - Gen 9 Overused": [
         "breloom",
         9,
         "ou"
@@ -698,11 +633,6 @@
         "breloom",
         9,
         "ubers"
-    ],
-    "Breloom - Gen 9 Battle Stadium Singles": [
-        "breloom",
-        9,
-        "battlestadiumsingles"
     ],
     "Slaking - Gen 9 Doubles OU": [
         "slaking",
@@ -724,17 +654,12 @@
         9,
         "vgc2023series1"
     ],
-    "Hariyama - Gen 9 Battle Stadium Doubles": [
-        "hariyama",
-        9,
-        "battlestadiumdoubles"
-    ],
     "Sableye - Gen 9 VGC 2023 Series 2": [
         "sableye",
         9,
         "vgc2023series2"
     ],
-    "Carvanha - Gen 8 LC": [
+    "Carvanha - Gen 8 Little Cup": [
         "carvanha",
         8,
         "lc"
@@ -744,12 +669,7 @@
         9,
         "vgc2023series1"
     ],
-    "Torkoal - Gen 9 Battle Stadium Doubles": [
-        "torkoal",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Torkoal - Gen 9 OU": [
+    "Torkoal - Gen 9 Overused": [
         "torkoal",
         9,
         "ou"
@@ -759,17 +679,12 @@
         9,
         "ubers"
     ],
-    "Torkoal - Gen 9 Battle Stadium Singles": [
-        "torkoal",
-        9,
-        "battlestadiumsingles"
-    ],
     "Torkoal - Gen 9 Doubles OU": [
         "torkoal",
         9,
         "doublesou"
     ],
-    "Torkoal - Gen 8 UU": [
+    "Torkoal - Gen 8 Underused": [
         "torkoal",
         8,
         "uu"
@@ -794,22 +709,22 @@
         9,
         "vgc2023series2"
     ],
-    "Trapinch - Gen 8 LC": [
+    "Trapinch - Gen 8 Little Cup": [
         "trapinch",
         8,
         "lc"
     ],
-    "Crawdaunt - Gen 8 OU": [
+    "Crawdaunt - Gen 8 Overused": [
         "crawdaunt",
         8,
         "ou"
     ],
-    "Crawdaunt - Gen 8 UU": [
+    "Crawdaunt - Gen 8 Underused": [
         "crawdaunt",
         8,
         "uu"
     ],
-    "Anorith - Gen 8 LC": [
+    "Anorith - Gen 8 Little Cup": [
         "anorith",
         8,
         "lc"
@@ -834,12 +749,7 @@
         9,
         "vgc2023series1"
     ],
-    "Salamence - Gen 9 Battle Stadium Doubles": [
-        "salamence",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Salamence - Gen 8 UU": [
+    "Salamence - Gen 8 Underused": [
         "salamence",
         8,
         "uu"
@@ -854,7 +764,7 @@
         8,
         "doublesou"
     ],
-    "Registeel - Gen 8 UU": [
+    "Registeel - Gen 8 Underused": [
         "registeel",
         8,
         "uu"
@@ -889,7 +799,7 @@
         8,
         "ubers"
     ],
-    "Jirachi - Gen 8 UU": [
+    "Jirachi - Gen 8 Underused": [
         "jirachi",
         8,
         "uu"
@@ -899,17 +809,12 @@
         9,
         "vgc2023series1"
     ],
-    "Gastrodon - Gen 9 Battle Stadium Doubles": [
-        "gastrodon",
-        9,
-        "battlestadiumdoubles"
-    ],
     "Gastrodon - Gen 9 Doubles OU": [
         "gastrodon",
         9,
         "doublesou"
     ],
-    "Gastrodon - Gen 8 OU": [
+    "Gastrodon - Gen 8 Overused": [
         "gastrodon",
         8,
         "ou"
@@ -929,11 +834,6 @@
         9,
         "vgc2023series2"
     ],
-    "Bronzong - Gen 9 Battle Stadium Doubles": [
-        "bronzong",
-        9,
-        "battlestadiumdoubles"
-    ],
     "Bronzong - Gen 9 Doubles OU": [
         "bronzong",
         9,
@@ -944,12 +844,7 @@
         9,
         "vgc2023series1"
     ],
-    "Garchomp - Gen 9 Battle Stadium Doubles": [
-        "garchomp",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Garchomp - Gen 9 OU": [
+    "Garchomp - Gen 9 Overused": [
         "garchomp",
         9,
         "ou"
@@ -958,11 +853,6 @@
         "garchomp",
         9,
         "ubers"
-    ],
-    "Garchomp - Gen 9 Battle Stadium Singles": [
-        "garchomp",
-        9,
-        "battlestadiumsingles"
     ],
     "Garchomp - Gen 9 Doubles OU": [
         "garchomp",
@@ -974,7 +864,7 @@
         8,
         "ubers"
     ],
-    "Garchomp - Gen 8 OU": [
+    "Garchomp - Gen 8 Overused": [
         "garchomp",
         8,
         "ou"
@@ -994,12 +884,12 @@
         9,
         "vgc2023series2"
     ],
-    "Munchlax - Gen 8 LC": [
+    "Munchlax - Gen 8 Little Cup": [
         "munchlax",
         8,
         "lc"
     ],
-    "Riolu - Gen 8 LC": [
+    "Riolu - Gen 8 Little Cup": [
         "riolu",
         8,
         "lc"
@@ -1014,28 +904,18 @@
         8,
         "doublesou"
     ],
-    "Hippowdon - Gen 9 Battle Stadium Singles": [
-        "hippowdon",
-        9,
-        "battlestadiumsingles"
-    ],
-    "Hippowdon - Gen 8 OU": [
+    "Hippowdon - Gen 8 Overused": [
         "hippowdon",
         8,
         "ou"
     ],
-    "Hippowdon - Gen 8 UU": [
+    "Hippowdon - Gen 8 Underused": [
         "hippowdon",
         8,
         "uu"
     ],
-    "Croagunk - Gen 8 LC": [
+    "Croagunk - Gen 8 Little Cup": [
         "croagunk",
-        8,
-        "lc"
-    ],
-    "Snover - Gen 8 LC": [
-        "snover",
         8,
         "lc"
     ],
@@ -1043,11 +923,6 @@
         "abomasnow",
         9,
         "vgc2023series1"
-    ],
-    "Abomasnow - Gen 9 Battle Stadium Doubles": [
-        "abomasnow",
-        9,
-        "battlestadiumdoubles"
     ],
     "Abomasnow - Gen 9 Doubles OU": [
         "abomasnow",
@@ -1064,7 +939,7 @@
         8,
         "ubers"
     ],
-    "Weavile - Gen 8 OU": [
+    "Weavile - Gen 8 Overused": [
         "weavile",
         8,
         "ou"
@@ -1074,32 +949,27 @@
         8,
         "doublesou"
     ],
-    "Magnezone - Gen 9 Battle Stadium Singles": [
-        "magnezone",
-        9,
-        "battlestadiumsingles"
-    ],
-    "Magnezone - Gen 8 OU": [
+    "Magnezone - Gen 8 Overused": [
         "magnezone",
         8,
         "ou"
     ],
-    "Tangrowth - Gen 8 OU": [
+    "Tangrowth - Gen 8 Overused": [
         "tangrowth",
         8,
         "ou"
     ],
-    "Tangrowth - Gen 8 UU": [
+    "Tangrowth - Gen 8 Underused": [
         "tangrowth",
         8,
         "uu"
     ],
-    "Togekiss - Gen 8 OU": [
+    "Togekiss - Gen 8 Overused": [
         "togekiss",
         8,
         "ou"
     ],
-    "Togekiss - Gen 8 UU": [
+    "Togekiss - Gen 8 Underused": [
         "togekiss",
         8,
         "uu"
@@ -1119,7 +989,7 @@
         8,
         "doublesou"
     ],
-    "Mamoswine - Gen 8 UU": [
+    "Mamoswine - Gen 8 Underused": [
         "mamoswine",
         8,
         "uu"
@@ -1134,7 +1004,7 @@
         9,
         "vgc2023series1"
     ],
-    "Azelf - Gen 8 UU": [
+    "Azelf - Gen 8 Underused": [
         "azelf",
         8,
         "uu"
@@ -1159,7 +1029,7 @@
         8,
         "vgc2022"
     ],
-    "Heatran - Gen 8 OU": [
+    "Heatran - Gen 8 Overused": [
         "heatran",
         8,
         "ou"
@@ -1174,7 +1044,7 @@
         8,
         "doublesou"
     ],
-    "Cresselia - Gen 8 UU": [
+    "Cresselia - Gen 8 Underused": [
         "cresselia",
         8,
         "uu"
@@ -1184,22 +1054,22 @@
         8,
         "spikemuthcup"
     ],
-    "Victini - Gen 8 OU": [
+    "Victini - Gen 8 Overused": [
         "victini",
         8,
         "ou"
     ],
-    "Drilbur - Gen 8 LC": [
+    "Drilbur - Gen 8 Little Cup": [
         "drilbur",
         8,
         "lc"
     ],
-    "Excadrill - Gen 8 OU": [
+    "Excadrill - Gen 8 Overused": [
         "excadrill",
         8,
         "ou"
     ],
-    "Excadrill - Gen 8 UU": [
+    "Excadrill - Gen 8 Underused": [
         "excadrill",
         8,
         "uu"
@@ -1209,22 +1079,22 @@
         8,
         "doublesou"
     ],
-    "Timburr - Gen 8 LC": [
+    "Timburr - Gen 8 Little Cup": [
         "timburr",
         8,
         "lc"
     ],
-    "Conkeldurr - Gen 8 UU": [
+    "Conkeldurr - Gen 8 Underused": [
         "conkeldurr",
         8,
         "uu"
     ],
-    "Seismitoad - Gen 8 OU": [
+    "Seismitoad - Gen 8 Overused": [
         "seismitoad",
         8,
         "ou"
     ],
-    "Cottonee - Gen 8 LC": [
+    "Cottonee - Gen 8 Little Cup": [
         "cottonee",
         8,
         "lc"
@@ -1249,32 +1119,27 @@
         9,
         "vgc2023series1"
     ],
-    "Lilligant - Gen 9 Battle Stadium Doubles": [
-        "lilligant",
-        9,
-        "battlestadiumdoubles"
-    ],
     "Lilligant - Gen 9 Doubles OU": [
         "lilligant",
         9,
         "doublesou"
     ],
-    "Krookodile - Gen 8 UU": [
+    "Krookodile - Gen 8 Underused": [
         "krookodile",
         8,
         "uu"
     ],
-    "Darmanitan - Gen 8 UU": [
+    "Darmanitan - Gen 8 Underused": [
         "darmanitan",
         8,
         "uu"
     ],
-    "Dwebble - Gen 8 LC": [
+    "Dwebble - Gen 8 Little Cup": [
         "dwebble",
         8,
         "lc"
     ],
-    "Archen - Gen 8 LC": [
+    "Archen - Gen 8 Little Cup": [
         "archen",
         8,
         "lc"
@@ -1283,11 +1148,6 @@
         "gothitelle",
         9,
         "vgc2023series1"
-    ],
-    "Gothitelle - Gen 9 Battle Stadium Doubles": [
-        "gothitelle",
-        9,
-        "battlestadiumdoubles"
     ],
     "Gothitelle - Gen 8 Spikemuth Cup": [
         "gothitelle",
@@ -1299,12 +1159,12 @@
         9,
         "vgc2023series2"
     ],
-    "Reuniclus - Gen 8 UU": [
+    "Reuniclus - Gen 8 Underused": [
         "reuniclus",
         8,
         "uu"
     ],
-    "Foongus - Gen 8 LC": [
+    "Foongus - Gen 8 Little Cup": [
         "foongus",
         8,
         "lc"
@@ -1314,12 +1174,7 @@
         9,
         "vgc2023series1"
     ],
-    "Amoonguss - Gen 9 Battle Stadium Doubles": [
-        "amoonguss",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Amoonguss - Gen 9 OU": [
+    "Amoonguss - Gen 9 Overused": [
         "amoonguss",
         9,
         "ou"
@@ -1329,17 +1184,12 @@
         9,
         "ubers"
     ],
-    "Amoonguss - Gen 9 Battle Stadium Singles": [
-        "amoonguss",
-        9,
-        "battlestadiumsingles"
-    ],
     "Amoonguss - Gen 9 Doubles OU": [
         "amoonguss",
         9,
         "doublesou"
     ],
-    "Amoonguss - Gen 8 UU": [
+    "Amoonguss - Gen 8 Underused": [
         "amoonguss",
         8,
         "uu"
@@ -1364,12 +1214,12 @@
         9,
         "vgc2023series2"
     ],
-    "Frillish - Gen 8 LC": [
+    "Frillish - Gen 8 Little Cup": [
         "frillish",
         8,
         "lc"
     ],
-    "Ferroseed - Gen 8 LC": [
+    "Ferroseed - Gen 8 Little Cup": [
         "ferroseed",
         8,
         "lc"
@@ -1379,7 +1229,7 @@
         8,
         "ubers"
     ],
-    "Ferrothorn - Gen 8 OU": [
+    "Ferrothorn - Gen 8 Overused": [
         "ferrothorn",
         8,
         "ou"
@@ -1399,32 +1249,32 @@
         8,
         "doublesou"
     ],
-    "Chandelure - Gen 8 UU": [
+    "Chandelure - Gen 8 Underused": [
         "chandelure",
         8,
         "uu"
     ],
-    "Mienfoo - Gen 8 LC": [
+    "Mienfoo - Gen 8 Little Cup": [
         "mienfoo",
         8,
         "lc"
     ],
-    "Golett - Gen 8 LC": [
+    "Golett - Gen 8 Little Cup": [
         "golett",
         8,
         "lc"
     ],
-    "Pawniard - Gen 8 LC": [
+    "Pawniard - Gen 8 Little Cup": [
         "pawniard",
         8,
         "lc"
     ],
-    "Bisharp - Gen 8 OU": [
+    "Bisharp - Gen 8 Overused": [
         "bisharp",
         8,
         "ou"
     ],
-    "Mandibuzz - Gen 8 UU": [
+    "Mandibuzz - Gen 8 Underused": [
         "mandibuzz",
         8,
         "uu"
@@ -1434,22 +1284,17 @@
         9,
         "vgc2023series1"
     ],
-    "Hydreigon - Gen 9 Battle Stadium Singles": [
-        "hydreigon",
-        9,
-        "battlestadiumsingles"
-    ],
     "Hydreigon - Gen 9 Doubles OU": [
         "hydreigon",
         9,
         "doublesou"
     ],
-    "Hydreigon - Gen 8 OU": [
+    "Hydreigon - Gen 8 Overused": [
         "hydreigon",
         8,
         "ou"
     ],
-    "Hydreigon - Gen 8 UU": [
+    "Hydreigon - Gen 8 Underused": [
         "hydreigon",
         8,
         "uu"
@@ -1459,7 +1304,7 @@
         9,
         "vgc2023series2"
     ],
-    "Larvesta - Gen 8 LC": [
+    "Larvesta - Gen 8 Little Cup": [
         "larvesta",
         8,
         "lc"
@@ -1469,12 +1314,7 @@
         9,
         "vgc2023series1"
     ],
-    "Volcarona - Gen 9 Battle Stadium Doubles": [
-        "volcarona",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Volcarona - Gen 9 OU": [
+    "Volcarona - Gen 9 Overused": [
         "volcarona",
         9,
         "ou"
@@ -1483,11 +1323,6 @@
         "volcarona",
         9,
         "ubers"
-    ],
-    "Volcarona - Gen 9 Battle Stadium Singles": [
-        "volcarona",
-        9,
-        "battlestadiumsingles"
     ],
     "Volcarona - Gen 9 Doubles OU": [
         "volcarona",
@@ -1499,7 +1334,7 @@
         8,
         "ubers"
     ],
-    "Volcarona - Gen 8 OU": [
+    "Volcarona - Gen 8 Overused": [
         "volcarona",
         8,
         "ou"
@@ -1514,7 +1349,7 @@
         9,
         "vgc2023series2"
     ],
-    "Cobalion - Gen 8 UU": [
+    "Cobalion - Gen 8 Underused": [
         "cobalion",
         8,
         "uu"
@@ -1569,7 +1404,7 @@
         8,
         "doublesou"
     ],
-    "Diggersby - Gen 8 UU": [
+    "Diggersby - Gen 8 Underused": [
         "diggersby",
         8,
         "uu"
@@ -1578,11 +1413,6 @@
         "talonflame",
         9,
         "vgc2023series1"
-    ],
-    "Talonflame - Gen 9 Battle Stadium Doubles": [
-        "talonflame",
-        9,
-        "battlestadiumdoubles"
     ],
     "Talonflame - Gen 9 Doubles OU": [
         "talonflame",
@@ -1594,12 +1424,12 @@
         9,
         "vgc2023series2"
     ],
-    "Honedge - Gen 8 LC": [
+    "Honedge - Gen 8 Little Cup": [
         "honedge",
         8,
         "lc"
     ],
-    "Spritzee - Gen 8 LC": [
+    "Spritzee - Gen 8 Little Cup": [
         "spritzee",
         8,
         "lc"
@@ -1609,8 +1439,13 @@
         8,
         "ubers"
     ],
-    "Tyrunt - Gen 8 LC": [
+    "Tyrunt - Gen 8 Little Cup": [
         "tyrunt",
+        8,
+        "lc"
+    ],
+    "Amaura - Gen 8 Little Cup": [
+        "amaura",
         8,
         "lc"
     ],
@@ -1618,16 +1453,6 @@
         "sylveon",
         9,
         "vgc2023series1"
-    ],
-    "Sylveon - Gen 9 Battle Stadium Doubles": [
-        "sylveon",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Sylveon - Gen 9 Battle Stadium Singles": [
-        "sylveon",
-        9,
-        "battlestadiumsingles"
     ],
     "Sylveon - Gen 9 Doubles OU": [
         "sylveon",
@@ -1649,7 +1474,7 @@
         9,
         "vgc2023series2"
     ],
-    "Hawlucha - Gen 8 OU": [
+    "Hawlucha - Gen 8 Overused": [
         "hawlucha",
         8,
         "ou"
@@ -1658,6 +1483,11 @@
         "xerneas",
         8,
         "ubers"
+    ],
+    "Xerneas - Gen 8 VGC 2022": [
+        "xerneas",
+        8,
+        "vgc2022"
     ],
     "Yveltal - Gen 8 Ubers": [
         "yveltal",
@@ -1684,7 +1514,7 @@
         8,
         "doublesou"
     ],
-    "Volcanion - Gen 8 OU": [
+    "Volcanion - Gen 8 Overused": [
         "volcanion",
         8,
         "ou"
@@ -1694,7 +1524,7 @@
         8,
         "doublesou"
     ],
-    "Incineroar - Gen 8 UU": [
+    "Incineroar - Gen 8 Underused": [
         "incineroar",
         8,
         "uu"
@@ -1714,17 +1544,17 @@
         8,
         "doublesou"
     ],
-    "Primarina - Gen 8 UU": [
+    "Primarina - Gen 8 Underused": [
         "primarina",
         8,
         "uu"
     ],
-    "Mareanie - Gen 8 LC": [
+    "Mareanie - Gen 8 Little Cup": [
         "mareanie",
         8,
         "lc"
     ],
-    "Toxapex - Gen 9 OU": [
+    "Toxapex - Gen 9 Overused": [
         "toxapex",
         9,
         "ou"
@@ -1734,27 +1564,22 @@
         9,
         "ubers"
     ],
-    "Toxapex - Gen 9 Battle Stadium Singles": [
-        "toxapex",
-        9,
-        "battlestadiumsingles"
-    ],
     "Toxapex - Gen 8 Ubers": [
         "toxapex",
         8,
         "ubers"
     ],
-    "Toxapex - Gen 8 OU": [
+    "Toxapex - Gen 8 Overused": [
         "toxapex",
         8,
         "ou"
     ],
-    "Mudbray - Gen 8 LC": [
+    "Mudbray - Gen 8 Little Cup": [
         "mudbray",
         8,
         "lc"
     ],
-    "Stufful - Gen 8 LC": [
+    "Stufful - Gen 8 Little Cup": [
         "stufful",
         8,
         "lc"
@@ -1774,11 +1599,6 @@
         9,
         "vgc2023series1"
     ],
-    "Oranguru - Gen 9 Battle Stadium Doubles": [
-        "oranguru",
-        9,
-        "battlestadiumdoubles"
-    ],
     "Oranguru - Gen 9 Doubles OU": [
         "oranguru",
         9,
@@ -1789,7 +1609,7 @@
         9,
         "vgc2023series2"
     ],
-    "Tapu-Koko - Gen 8 OU": [
+    "Tapu-Koko - Gen 8 Overused": [
         "tapu-koko",
         8,
         "ou"
@@ -1804,7 +1624,7 @@
         8,
         "doublesou"
     ],
-    "Tapu-Lele - Gen 8 OU": [
+    "Tapu-Lele - Gen 8 Overused": [
         "tapu-lele",
         8,
         "ou"
@@ -1819,12 +1639,12 @@
         8,
         "doublesou"
     ],
-    "Tapu-Bulu - Gen 8 UU": [
+    "Tapu-Bulu - Gen 8 Underused": [
         "tapu-bulu",
         8,
         "uu"
     ],
-    "Tapu-Fini - Gen 8 OU": [
+    "Tapu-Fini - Gen 8 Overused": [
         "tapu-fini",
         8,
         "ou"
@@ -1859,7 +1679,7 @@
         8,
         "vgc2022"
     ],
-    "Nihilego - Gen 8 UU": [
+    "Nihilego - Gen 8 Underused": [
         "nihilego",
         8,
         "uu"
@@ -1869,7 +1689,7 @@
         8,
         "spikemuthcup"
     ],
-    "Buzzwole - Gen 8 OU": [
+    "Buzzwole - Gen 8 Overused": [
         "buzzwole",
         8,
         "ou"
@@ -1879,12 +1699,12 @@
         8,
         "ubers"
     ],
-    "Celesteela - Gen 8 OU": [
+    "Celesteela - Gen 8 Overused": [
         "celesteela",
         8,
         "ou"
     ],
-    "Celesteela - Gen 8 UU": [
+    "Celesteela - Gen 8 Underused": [
         "celesteela",
         8,
         "uu"
@@ -1904,7 +1724,7 @@
         8,
         "ubers"
     ],
-    "Kartana - Gen 8 OU": [
+    "Kartana - Gen 8 Overused": [
         "kartana",
         8,
         "ou"
@@ -1918,6 +1738,11 @@
         "kartana",
         8,
         "spikemuthcup"
+    ],
+    "Necrozma - Gen 8 Underused": [
+        "necrozma",
+        8,
+        "uu"
     ],
     "Necrozma - Gen 8 Doubles OU": [
         "necrozma",
@@ -1954,7 +1779,7 @@
         8,
         "doublesou"
     ],
-    "Blacephalon - Gen 8 OU": [
+    "Blacephalon - Gen 8 Overused": [
         "blacephalon",
         8,
         "ou"
@@ -1964,7 +1789,7 @@
         8,
         "ubers"
     ],
-    "Zeraora - Gen 8 OU": [
+    "Zeraora - Gen 8 Overused": [
         "zeraora",
         8,
         "ou"
@@ -1979,12 +1804,12 @@
         8,
         "ubers"
     ],
-    "Melmetal - Gen 8 OU": [
+    "Melmetal - Gen 8 Overused": [
         "melmetal",
         8,
         "ou"
     ],
-    "Grookey - Gen 8 LC": [
+    "Grookey - Gen 8 Little Cup": [
         "grookey",
         8,
         "lc"
@@ -1994,7 +1819,7 @@
         8,
         "ubers"
     ],
-    "Rillaboom - Gen 8 OU": [
+    "Rillaboom - Gen 8 Overused": [
         "rillaboom",
         8,
         "ou"
@@ -2014,12 +1839,12 @@
         8,
         "doublesou"
     ],
-    "Scorbunny - Gen 8 LC": [
+    "Scorbunny - Gen 8 Little Cup": [
         "scorbunny",
         8,
         "lc"
     ],
-    "Cinderace - Gen 9 OU": [
+    "Cinderace - Gen 9 Overused": [
         "cinderace",
         9,
         "ou"
@@ -2039,7 +1864,7 @@
         9,
         "vgc2023series1"
     ],
-    "Corviknight - Gen 9 OU": [
+    "Corviknight - Gen 9 Overused": [
         "corviknight",
         9,
         "ou"
@@ -2048,11 +1873,6 @@
         "corviknight",
         9,
         "ubers"
-    ],
-    "Corviknight - Gen 9 Battle Stadium Singles": [
-        "corviknight",
-        9,
-        "battlestadiumsingles"
     ],
     "Corviknight - Gen 9 Doubles OU": [
         "corviknight",
@@ -2064,17 +1884,22 @@
         8,
         "ubers"
     ],
-    "Corviknight - Gen 8 OU": [
+    "Corviknight - Gen 8 Overused": [
         "corviknight",
         8,
         "ou"
     ],
-    "Barraskewda - Gen 8 OU": [
+    "Corviknight - Gen 9 VGC 2023 Series 2": [
+        "corviknight",
+        9,
+        "vgc2023series2"
+    ],
+    "Barraskewda - Gen 8 Overused": [
         "barraskewda",
         8,
         "ou"
     ],
-    "Polteageist - Gen 8 UU": [
+    "Polteageist - Gen 8 Underused": [
         "polteageist",
         8,
         "uu"
@@ -2084,22 +1909,27 @@
         9,
         "vgc2023series1"
     ],
-    "Hatterene - Gen 9 OU": [
+    "Hatterene - Gen 9 Overused": [
         "hatterene",
         9,
         "ou"
+    ],
+    "Hatterene - Gen 9 Ubers": [
+        "hatterene",
+        9,
+        "ubers"
     ],
     "Hatterene - Gen 9 Doubles OU": [
         "hatterene",
         9,
         "doublesou"
     ],
-    "Hatterene - Gen 8 OU": [
+    "Hatterene - Gen 8 Overused": [
         "hatterene",
         8,
         "ou"
     ],
-    "Hatterene - Gen 8 UU": [
+    "Hatterene - Gen 8 Underused": [
         "hatterene",
         8,
         "uu"
@@ -2119,17 +1949,17 @@
         8,
         "doublesou"
     ],
+    "Hatterene - Gen 9 VGC 2023 Series 2": [
+        "hatterene",
+        9,
+        "vgc2023series2"
+    ],
     "Grimmsnarl - Gen 9 VGC 2023 Series 1": [
         "grimmsnarl",
         9,
         "vgc2023series1"
     ],
-    "Grimmsnarl - Gen 9 Battle Stadium Doubles": [
-        "grimmsnarl",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Grimmsnarl - Gen 9 OU": [
+    "Grimmsnarl - Gen 9 Overused": [
         "grimmsnarl",
         9,
         "ou"
@@ -2138,11 +1968,6 @@
         "grimmsnarl",
         9,
         "ubers"
-    ],
-    "Grimmsnarl - Gen 9 Battle Stadium Singles": [
-        "grimmsnarl",
-        9,
-        "battlestadiumsingles"
     ],
     "Grimmsnarl - Gen 9 Doubles OU": [
         "grimmsnarl",
@@ -2166,16 +1991,6 @@
     ],
     "Grimmsnarl - Gen 9 VGC 2023 Series 2": [
         "grimmsnarl",
-        9,
-        "vgc2023series2"
-    ],
-    "Pincurchin - Gen 9 Doubles OU": [
-        "pincurchin",
-        9,
-        "doublesou"
-    ],
-    "Pincurchin - Gen 9 VGC 2023 Series 2": [
-        "pincurchin",
         9,
         "vgc2023series2"
     ],
@@ -2209,12 +2024,7 @@
         9,
         "vgc2023series1"
     ],
-    "Dragapult - Gen 9 Battle Stadium Doubles": [
-        "dragapult",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Dragapult - Gen 9 OU": [
+    "Dragapult - Gen 9 Overused": [
         "dragapult",
         9,
         "ou"
@@ -2223,11 +2033,6 @@
         "dragapult",
         9,
         "ubers"
-    ],
-    "Dragapult - Gen 9 Battle Stadium Singles": [
-        "dragapult",
-        9,
-        "battlestadiumsingles"
     ],
     "Dragapult - Gen 9 Doubles OU": [
         "dragapult",
@@ -2239,7 +2044,7 @@
         8,
         "ubers"
     ],
-    "Dragapult - Gen 8 OU": [
+    "Dragapult - Gen 8 Overused": [
         "dragapult",
         8,
         "ou"
@@ -2279,7 +2084,7 @@
         8,
         "spikemuthcup"
     ],
-    "Zarude - Gen 8 UU": [
+    "Zarude - Gen 8 Underused": [
         "zarude",
         8,
         "uu"
@@ -2289,12 +2094,12 @@
         8,
         "ubers"
     ],
-    "Regieleki - Gen 8 OU": [
+    "Regieleki - Gen 8 Overused": [
         "regieleki",
         8,
         "ou"
     ],
-    "Regieleki - Gen 8 UU": [
+    "Regieleki - Gen 8 Underused": [
         "regieleki",
         8,
         "uu"
@@ -2334,17 +2139,12 @@
         9,
         "vgc2023series1"
     ],
-    "Rotom-Heat - Gen 9 Battle Stadium Singles": [
-        "rotom-heat",
-        9,
-        "battlestadiumsingles"
-    ],
-    "Rotom-Heat - Gen 8 OU": [
+    "Rotom-Heat - Gen 8 Overused": [
         "rotom-heat",
         8,
         "ou"
     ],
-    "Rotom-Heat - Gen 8 UU": [
+    "Rotom-Heat - Gen 8 Underused": [
         "rotom-heat",
         8,
         "uu"
@@ -2354,32 +2154,22 @@
         9,
         "vgc2023series1"
     ],
-    "Rotom-Wash - Gen 9 Battle Stadium Doubles": [
-        "rotom-wash",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Rotom-Wash - Gen 9 OU": [
+    "Rotom-Wash - Gen 9 Overused": [
         "rotom-wash",
         9,
         "ou"
-    ],
-    "Rotom-Wash - Gen 9 Battle Stadium Singles": [
-        "rotom-wash",
-        9,
-        "battlestadiumsingles"
     ],
     "Rotom-Wash - Gen 9 Doubles OU": [
         "rotom-wash",
         9,
         "doublesou"
     ],
-    "Rotom-Wash - Gen 8 OU": [
+    "Rotom-Wash - Gen 8 Overused": [
         "rotom-wash",
         8,
         "ou"
     ],
-    "Rotom-Wash - Gen 8 UU": [
+    "Rotom-Wash - Gen 8 Underused": [
         "rotom-wash",
         8,
         "uu"
@@ -2389,12 +2179,12 @@
         9,
         "vgc2023series2"
     ],
-    "Tornadus-Therian - Gen 8 OU": [
+    "Tornadus-Therian - Gen 8 Overused": [
         "tornadus-therian",
         8,
         "ou"
     ],
-    "Thundurus-Therian - Gen 8 UU": [
+    "Thundurus-Therian - Gen 8 Underused": [
         "thundurus-therian",
         8,
         "uu"
@@ -2404,7 +2194,7 @@
         8,
         "ubers"
     ],
-    "Landorus-Therian - Gen 8 OU": [
+    "Landorus-Therian - Gen 8 Overused": [
         "landorus-therian",
         8,
         "ou"
@@ -2434,17 +2224,17 @@
         8,
         "doublesou"
     ],
-    "Keldeo-Resolute - Gen 8 UU": [
+    "Keldeo-Resolute - Gen 8 Underused": [
         "keldeo-resolute",
         8,
         "uu"
     ],
-    "Sandshrew-Alola - Gen 8 LC": [
+    "Sandshrew-Alola - Gen 8 Little Cup": [
         "sandshrew-alola",
         8,
         "lc"
     ],
-    "Ninetales-Alola - Gen 8 OU": [
+    "Ninetales-Alola - Gen 8 Overused": [
         "ninetales-alola",
         8,
         "ou"
@@ -2459,7 +2249,7 @@
         8,
         "doublesou"
     ],
-    "Marowak-Alola - Gen 8 UU": [
+    "Marowak-Alola - Gen 8 Underused": [
         "marowak-alola",
         8,
         "uu"
@@ -2469,7 +2259,7 @@
         9,
         "doublesou"
     ],
-    "Lycanroc-Dusk - Gen 8 UU": [
+    "Lycanroc-Dusk - Gen 8 Underused": [
         "lycanroc-dusk",
         8,
         "uu"
@@ -2479,12 +2269,17 @@
         8,
         "ubers"
     ],
-    "Slowbro-Galar - Gen 8 UU": [
+    "Ponyta-Galar - Gen 8 Little Cup": [
+        "ponyta-galar",
+        8,
+        "lc"
+    ],
+    "Slowbro-Galar - Gen 8 Underused": [
         "slowbro-galar",
         8,
         "uu"
     ],
-    "Farfetchd-Galar - Gen 8 LC": [
+    "Farfetchd-Galar - Gen 8 Little Cup": [
         "farfetchd-galar",
         8,
         "lc"
@@ -2499,7 +2294,7 @@
         8,
         "spikemuthcup"
     ],
-    "Slowking-Galar - Gen 8 OU": [
+    "Slowking-Galar - Gen 8 Overused": [
         "slowking-galar",
         8,
         "ou"
@@ -2509,7 +2304,7 @@
         8,
         "ubers"
     ],
-    "Zygarde-10% - Gen 8 UU": [
+    "Zygarde-10% - Gen 8 Underused": [
         "zygarde-10",
         8,
         "uu"
@@ -2518,11 +2313,6 @@
         "indeedee-female",
         9,
         "vgc2023series1"
-    ],
-    "Indeedee-Female - Gen 9 Battle Stadium Doubles": [
-        "indeedee-female",
-        9,
-        "battlestadiumdoubles"
     ],
     "Indeedee-Female - Gen 9 Doubles OU": [
         "indeedee-female",
@@ -2559,7 +2349,7 @@
         8,
         "ubers"
     ],
-    "Urshifu-Rapid-Strike - Gen 8 OU": [
+    "Urshifu-Rapid-Strike - Gen 8 Overused": [
         "urshifu-rapid-strike",
         8,
         "ou"
@@ -2574,7 +2364,7 @@
         8,
         "doublesou"
     ],
-    "Zarude-Dada - Gen 8 UU": [
+    "Zarude-Dada - Gen 8 Underused": [
         "zarude-dada",
         8,
         "uu"
@@ -2604,12 +2394,7 @@
         9,
         "vgc2023series1"
     ],
-    "Meowscarada - Gen 9 Battle Stadium Doubles": [
-        "meowscarada",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Meowscarada - Gen 9 OU": [
+    "Meowscarada - Gen 9 Overused": [
         "meowscarada",
         9,
         "ou"
@@ -2618,11 +2403,6 @@
         "meowscarada",
         9,
         "ubers"
-    ],
-    "Meowscarada - Gen 9 Battle Stadium Singles": [
-        "meowscarada",
-        9,
-        "battlestadiumsingles"
     ],
     "Meowscarada - Gen 9 Doubles OU": [
         "meowscarada",
@@ -2639,12 +2419,7 @@
         9,
         "vgc2023series1"
     ],
-    "Skeledirge - Gen 9 Battle Stadium Doubles": [
-        "skeledirge",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Skeledirge - Gen 9 OU": [
+    "Skeledirge - Gen 9 Overused": [
         "skeledirge",
         9,
         "ou"
@@ -2653,11 +2428,6 @@
         "skeledirge",
         9,
         "ubers"
-    ],
-    "Skeledirge - Gen 9 Battle Stadium Singles": [
-        "skeledirge",
-        9,
-        "battlestadiumsingles"
     ],
     "Skeledirge - Gen 9 Doubles OU": [
         "skeledirge",
@@ -2674,7 +2444,7 @@
         9,
         "vgc2023series1"
     ],
-    "Quaquaval - Gen 9 OU": [
+    "Quaquaval - Gen 9 Overused": [
         "quaquaval",
         9,
         "ou"
@@ -2684,17 +2454,12 @@
         9,
         "ubers"
     ],
-    "Quaquaval - Gen 9 Battle Stadium Singles": [
-        "quaquaval",
-        9,
-        "battlestadiumsingles"
-    ],
     "Quaquaval - Gen 9 Doubles OU": [
         "quaquaval",
         9,
         "doublesou"
     ],
-    "Lokix - Gen 9 OU": [
+    "Lokix - Gen 9 Overused": [
         "lokix",
         9,
         "ou"
@@ -2709,7 +2474,7 @@
         9,
         "doublesou"
     ],
-    "Espathra - Gen 9 OU": [
+    "Espathra - Gen 9 Overused": [
         "espathra",
         9,
         "ou"
@@ -2729,11 +2494,6 @@
         9,
         "vgc2023series1"
     ],
-    "Farigiraf - Gen 9 Battle Stadium Doubles": [
-        "farigiraf",
-        9,
-        "battlestadiumdoubles"
-    ],
     "Farigiraf - Gen 9 Doubles OU": [
         "farigiraf",
         9,
@@ -2749,12 +2509,7 @@
         9,
         "vgc2023series1"
     ],
-    "Dondozo - Gen 9 Battle Stadium Doubles": [
-        "dondozo",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Dondozo - Gen 9 OU": [
+    "Dondozo - Gen 9 Overused": [
         "dondozo",
         9,
         "ou"
@@ -2763,11 +2518,6 @@
         "dondozo",
         9,
         "ubers"
-    ],
-    "Dondozo - Gen 9 Battle Stadium Singles": [
-        "dondozo",
-        9,
-        "battlestadiumsingles"
     ],
     "Dondozo - Gen 9 Doubles OU": [
         "dondozo",
@@ -2804,15 +2554,10 @@
         9,
         "doublesou"
     ],
-    "Orthworm - Gen 9 OU": [
+    "Orthworm - Gen 9 Overused": [
         "orthworm",
         9,
         "ou"
-    ],
-    "Orthworm - Gen 9 Battle Stadium Singles": [
-        "orthworm",
-        9,
-        "battlestadiumsingles"
     ],
     "Orthworm - Gen 9 Doubles OU": [
         "orthworm",
@@ -2834,12 +2579,7 @@
         9,
         "vgc2023series1"
     ],
-    "Baxcalibur - Gen 9 Battle Stadium Doubles": [
-        "baxcalibur",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Baxcalibur - Gen 9 OU": [
+    "Baxcalibur - Gen 9 Overused": [
         "baxcalibur",
         9,
         "ou"
@@ -2848,11 +2588,6 @@
         "baxcalibur",
         9,
         "ubers"
-    ],
-    "Baxcalibur - Gen 9 Battle Stadium Singles": [
-        "baxcalibur",
-        9,
-        "battlestadiumsingles"
     ],
     "Baxcalibur - Gen 9 Doubles OU": [
         "baxcalibur",
@@ -2869,11 +2604,6 @@
         9,
         "vgc2023series1"
     ],
-    "Tatsugiri - Gen 9 Battle Stadium Doubles": [
-        "tatsugiri",
-        9,
-        "battlestadiumdoubles"
-    ],
     "Tatsugiri - Gen 9 Doubles OU": [
         "tatsugiri",
         9,
@@ -2884,7 +2614,7 @@
         9,
         "vgc2023series2"
     ],
-    "Cyclizar - Gen 9 OU": [
+    "Cyclizar - Gen 9 Overused": [
         "cyclizar",
         9,
         "ou"
@@ -2904,7 +2634,7 @@
         9,
         "vgc2023series1"
     ],
-    "Pawmot - Gen 9 OU": [
+    "Pawmot - Gen 9 Overused": [
         "pawmot",
         9,
         "ou"
@@ -2929,12 +2659,7 @@
         9,
         "vgc2023series1"
     ],
-    "Kilowattrel - Gen 9 Battle Stadium Doubles": [
-        "kilowattrel",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Kilowattrel - Gen 9 OU": [
+    "Kilowattrel - Gen 9 Overused": [
         "kilowattrel",
         9,
         "ou"
@@ -2954,11 +2679,6 @@
         9,
         "vgc2023series1"
     ],
-    "Flamigo - Gen 9 Battle Stadium Doubles": [
-        "flamigo",
-        9,
-        "battlestadiumdoubles"
-    ],
     "Flamigo - Gen 9 Doubles OU": [
         "flamigo",
         9,
@@ -2969,12 +2689,7 @@
         9,
         "vgc2023series1"
     ],
-    "Garganacl - Gen 9 Battle Stadium Doubles": [
-        "garganacl",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Garganacl - Gen 9 OU": [
+    "Garganacl - Gen 9 Overused": [
         "garganacl",
         9,
         "ou"
@@ -2983,11 +2698,6 @@
         "garganacl",
         9,
         "ubers"
-    ],
-    "Garganacl - Gen 9 Battle Stadium Singles": [
-        "garganacl",
-        9,
-        "battlestadiumsingles"
     ],
     "Garganacl - Gen 9 Doubles OU": [
         "garganacl",
@@ -3004,12 +2714,7 @@
         9,
         "vgc2023series1"
     ],
-    "Glimmora - Gen 9 Battle Stadium Doubles": [
-        "glimmora",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Glimmora - Gen 9 OU": [
+    "Glimmora - Gen 9 Overused": [
         "glimmora",
         9,
         "ou"
@@ -3018,11 +2723,6 @@
         "glimmora",
         9,
         "ubers"
-    ],
-    "Glimmora - Gen 9 Battle Stadium Singles": [
-        "glimmora",
-        9,
-        "battlestadiumsingles"
     ],
     "Glimmora - Gen 9 Doubles OU": [
         "glimmora",
@@ -3034,11 +2734,6 @@
         9,
         "vgc2023series2"
     ],
-    "Grafaiai - Gen 9 Battle Stadium Doubles": [
-        "grafaiai",
-        9,
-        "battlestadiumdoubles"
-    ],
     "Grafaiai - Gen 9 Doubles OU": [
         "grafaiai",
         9,
@@ -3049,12 +2744,7 @@
         9,
         "vgc2023series1"
     ],
-    "Gholdengo - Gen 9 Battle Stadium Doubles": [
-        "gholdengo",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Gholdengo - Gen 9 OU": [
+    "Gholdengo - Gen 9 Overused": [
         "gholdengo",
         9,
         "ou"
@@ -3063,11 +2753,6 @@
         "gholdengo",
         9,
         "ubers"
-    ],
-    "Gholdengo - Gen 9 Battle Stadium Singles": [
-        "gholdengo",
-        9,
-        "battlestadiumsingles"
     ],
     "Gholdengo - Gen 9 Doubles OU": [
         "gholdengo",
@@ -3079,12 +2764,7 @@
         9,
         "vgc2023series2"
     ],
-    "Great Tusk - Gen 9 Battle Stadium Doubles": [
-        "great-tusk",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Great Tusk - Gen 9 OU": [
+    "Great Tusk - Gen 9 Overused": [
         "great-tusk",
         9,
         "ou"
@@ -3093,11 +2773,6 @@
         "great-tusk",
         9,
         "ubers"
-    ],
-    "Great Tusk - Gen 9 Battle Stadium Singles": [
-        "great-tusk",
-        9,
-        "battlestadiumsingles"
     ],
     "Great Tusk - Gen 9 Doubles OU": [
         "great-tusk",
@@ -3108,11 +2783,6 @@
         "great-tusk",
         9,
         "vgc2023series2"
-    ],
-    "Brute Bonnet - Gen 9 Battle Stadium Doubles": [
-        "brute-bonnet",
-        9,
-        "battlestadiumdoubles"
     ],
     "Brute Bonnet - Gen 9 Doubles OU": [
         "brute-bonnet",
@@ -3129,12 +2799,7 @@
         9,
         "vgc2023series2"
     ],
-    "Scream Tail - Gen 9 Battle Stadium Doubles": [
-        "scream-tail",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Scream Tail - Gen 9 OU": [
+    "Scream Tail - Gen 9 Overused": [
         "scream-tail",
         9,
         "ou"
@@ -3149,20 +2814,10 @@
         9,
         "vgc2023series2"
     ],
-    "Flutter Mane - Gen 9 Battle Stadium Doubles": [
-        "flutter-mane",
-        9,
-        "battlestadiumdoubles"
-    ],
     "Flutter Mane - Gen 9 Ubers": [
         "flutter-mane",
         9,
         "ubers"
-    ],
-    "Flutter Mane - Gen 9 Battle Stadium Singles": [
-        "flutter-mane",
-        9,
-        "battlestadiumsingles"
     ],
     "Flutter Mane - Gen 9 Doubles OU": [
         "flutter-mane",
@@ -3174,22 +2829,12 @@
         9,
         "vgc2023series2"
     ],
-    "Slither Wing - Gen 9 OU": [
-        "slither-wing",
-        9,
-        "ou"
-    ],
     "Slither Wing - Gen 9 VGC 2023 Series 2": [
         "slither-wing",
         9,
         "vgc2023series2"
     ],
-    "Roaring Moon - Gen 9 Battle Stadium Doubles": [
-        "roaring-moon",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Roaring Moon - Gen 9 OU": [
+    "Roaring Moon - Gen 9 Overused": [
         "roaring-moon",
         9,
         "ou"
@@ -3198,11 +2843,6 @@
         "roaring-moon",
         9,
         "ubers"
-    ],
-    "Roaring Moon - Gen 9 Battle Stadium Singles": [
-        "roaring-moon",
-        9,
-        "battlestadiumsingles"
     ],
     "Roaring Moon - Gen 9 Doubles OU": [
         "roaring-moon",
@@ -3214,7 +2854,7 @@
         9,
         "vgc2023series2"
     ],
-    "Iron Treads - Gen 9 OU": [
+    "Iron Treads - Gen 9 Overused": [
         "iron-treads",
         9,
         "ou"
@@ -3224,17 +2864,7 @@
         9,
         "ubers"
     ],
-    "Iron Treads - Gen 9 Battle Stadium Singles": [
-        "iron-treads",
-        9,
-        "battlestadiumsingles"
-    ],
-    "Iron Moth - Gen 9 Battle Stadium Doubles": [
-        "iron-moth",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Iron Moth - Gen 9 OU": [
+    "Iron Moth - Gen 9 Overused": [
         "iron-moth",
         9,
         "ou"
@@ -3243,11 +2873,6 @@
         "iron-moth",
         9,
         "ubers"
-    ],
-    "Iron Moth - Gen 9 Battle Stadium Singles": [
-        "iron-moth",
-        9,
-        "battlestadiumsingles"
     ],
     "Iron Moth - Gen 9 Doubles OU": [
         "iron-moth",
@@ -3259,12 +2884,7 @@
         9,
         "vgc2023series2"
     ],
-    "Iron Hands - Gen 9 Battle Stadium Doubles": [
-        "iron-hands",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Iron Hands - Gen 9 OU": [
+    "Iron Hands - Gen 9 Overused": [
         "iron-hands",
         9,
         "ou"
@@ -3273,11 +2893,6 @@
         "iron-hands",
         9,
         "ubers"
-    ],
-    "Iron Hands - Gen 9 Battle Stadium Singles": [
-        "iron-hands",
-        9,
-        "battlestadiumsingles"
     ],
     "Iron Hands - Gen 9 Doubles OU": [
         "iron-hands",
@@ -3294,20 +2909,10 @@
         9,
         "vgc2023series2"
     ],
-    "Iron Bundle - Gen 9 Battle Stadium Doubles": [
-        "iron-bundle",
-        9,
-        "battlestadiumdoubles"
-    ],
     "Iron Bundle - Gen 9 Ubers": [
         "iron-bundle",
         9,
         "ubers"
-    ],
-    "Iron Bundle - Gen 9 Battle Stadium Singles": [
-        "iron-bundle",
-        9,
-        "battlestadiumsingles"
     ],
     "Iron Bundle - Gen 9 Doubles OU": [
         "iron-bundle",
@@ -3319,12 +2924,7 @@
         9,
         "vgc2023series2"
     ],
-    "Iron Valiant - Gen 9 Battle Stadium Doubles": [
-        "iron-valiant",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Iron Valiant - Gen 9 OU": [
+    "Iron Valiant - Gen 9 Overused": [
         "iron-valiant",
         9,
         "ou"
@@ -3333,11 +2933,6 @@
         "iron-valiant",
         9,
         "ubers"
-    ],
-    "Iron Valiant - Gen 9 Battle Stadium Singles": [
-        "iron-valiant",
-        9,
-        "battlestadiumsingles"
     ],
     "Iron Valiant - Gen 9 Doubles OU": [
         "iron-valiant",
@@ -3349,12 +2944,7 @@
         9,
         "vgc2023series2"
     ],
-    "Ting-Lu - Gen 9 Battle Stadium Doubles": [
-        "ting-lu",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Ting-Lu - Gen 9 OU": [
+    "Ting-Lu - Gen 9 Overused": [
         "ting-lu",
         9,
         "ou"
@@ -3364,22 +2954,12 @@
         9,
         "ubers"
     ],
-    "Ting-Lu - Gen 9 Battle Stadium Singles": [
-        "ting-lu",
-        9,
-        "battlestadiumsingles"
-    ],
     "Ting-Lu - Gen 9 Doubles OU": [
         "ting-lu",
         9,
         "doublesou"
     ],
-    "Chien-Pao - Gen 9 Battle Stadium Doubles": [
-        "chien-pao",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Chien-Pao - Gen 9 OU": [
+    "Chien-Pao - Gen 9 Overused": [
         "chien-pao",
         9,
         "ou"
@@ -3389,32 +2969,12 @@
         9,
         "ubers"
     ],
-    "Chien-Pao - Gen 9 Battle Stadium Singles": [
-        "chien-pao",
-        9,
-        "battlestadiumsingles"
-    ],
     "Chien-Pao - Gen 9 Doubles OU": [
         "chien-pao",
         9,
         "doublesou"
     ],
-    "Wo-Chien - Gen 9 Battle Stadium Doubles": [
-        "wo-chien",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Wo-Chien - Gen 9 Battle Stadium Singles": [
-        "wo-chien",
-        9,
-        "battlestadiumsingles"
-    ],
-    "Chi-Yu - Gen 9 Battle Stadium Doubles": [
-        "chi-yu",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Chi-Yu - Gen 9 OU": [
+    "Chi-Yu - Gen 9 Overused": [
         "chi-yu",
         9,
         "ou"
@@ -3423,11 +2983,6 @@
         "chi-yu",
         9,
         "ubers"
-    ],
-    "Chi-Yu - Gen 9 Battle Stadium Singles": [
-        "chi-yu",
-        9,
-        "battlestadiumsingles"
     ],
     "Chi-Yu - Gen 9 Doubles OU": [
         "chi-yu",
@@ -3449,12 +3004,7 @@
         9,
         "vgc2023series1"
     ],
-    "Tinkaton - Gen 9 Battle Stadium Doubles": [
-        "tinkaton",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Tinkaton - Gen 9 OU": [
+    "Tinkaton - Gen 9 Overused": [
         "tinkaton",
         9,
         "ou"
@@ -3463,11 +3013,6 @@
         "tinkaton",
         9,
         "ubers"
-    ],
-    "Tinkaton - Gen 9 Battle Stadium Singles": [
-        "tinkaton",
-        9,
-        "battlestadiumsingles"
     ],
     "Tinkaton - Gen 9 Doubles OU": [
         "tinkaton",
@@ -3484,12 +3029,7 @@
         9,
         "vgc2023series1"
     ],
-    "Armarouge - Gen 9 Battle Stadium Doubles": [
-        "armarouge",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Armarouge - Gen 9 OU": [
+    "Armarouge - Gen 9 Overused": [
         "armarouge",
         9,
         "ou"
@@ -3514,12 +3054,7 @@
         9,
         "vgc2023series1"
     ],
-    "Ceruledge - Gen 9 Battle Stadium Doubles": [
-        "ceruledge",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Ceruledge - Gen 9 OU": [
+    "Ceruledge - Gen 9 Overused": [
         "ceruledge",
         9,
         "ou"
@@ -3528,11 +3063,6 @@
         "ceruledge",
         9,
         "ubers"
-    ],
-    "Ceruledge - Gen 9 Battle Stadium Singles": [
-        "ceruledge",
-        9,
-        "battlestadiumsingles"
     ],
     "Ceruledge - Gen 9 Doubles OU": [
         "ceruledge",
@@ -3549,12 +3079,7 @@
         9,
         "vgc2023series1"
     ],
-    "Kingambit - Gen 9 Battle Stadium Doubles": [
-        "kingambit",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Kingambit - Gen 9 OU": [
+    "Kingambit - Gen 9 Overused": [
         "kingambit",
         9,
         "ou"
@@ -3563,11 +3088,6 @@
         "kingambit",
         9,
         "ubers"
-    ],
-    "Kingambit - Gen 9 Battle Stadium Singles": [
-        "kingambit",
-        9,
-        "battlestadiumsingles"
     ],
     "Kingambit - Gen 9 Doubles OU": [
         "kingambit",
@@ -3579,7 +3099,7 @@
         9,
         "vgc2023series2"
     ],
-    "Clodsire - Gen 9 OU": [
+    "Clodsire - Gen 9 Overused": [
         "clodsire",
         9,
         "ou"
@@ -3588,11 +3108,6 @@
         "clodsire",
         9,
         "ubers"
-    ],
-    "Clodsire - Gen 9 Battle Stadium Singles": [
-        "clodsire",
-        9,
-        "battlestadiumsingles"
     ],
     "Clodsire - Gen 9 Doubles OU": [
         "clodsire",
@@ -3604,12 +3119,7 @@
         9,
         "vgc2023series1"
     ],
-    "Annihilape - Gen 9 Battle Stadium Doubles": [
-        "annihilape",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Annihilape - Gen 9 OU": [
+    "Annihilape - Gen 9 Overused": [
         "annihilape",
         9,
         "ou"
@@ -3618,11 +3128,6 @@
         "annihilape",
         9,
         "ubers"
-    ],
-    "Annihilape - Gen 9 Battle Stadium Singles": [
-        "annihilape",
-        9,
-        "battlestadiumsingles"
     ],
     "Annihilape - Gen 9 Doubles OU": [
         "annihilape",
@@ -3639,16 +3144,6 @@
         9,
         "vgc2023series1"
     ],
-    "Mimikyu - Gen 9 Battle Stadium Doubles": [
-        "mimikyu",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Mimikyu - Gen 9 Battle Stadium Singles": [
-        "mimikyu",
-        9,
-        "battlestadiumsingles"
-    ],
     "Mimikyu - Gen 9 Doubles OU": [
         "mimikyu",
         9,
@@ -3659,7 +3154,7 @@
         8,
         "ubers"
     ],
-    "Mimikyu - Gen 8 UU": [
+    "Mimikyu - Gen 8 Underused": [
         "mimikyu",
         8,
         "uu"
@@ -3679,7 +3174,7 @@
         8,
         "ubers"
     ],
-    "Aegislash - Gen 8 OU": [
+    "Aegislash - Gen 8 Overused": [
         "aegislash",
         8,
         "ou"
@@ -3689,20 +3184,10 @@
         9,
         "vgc2023series1"
     ],
-    "Palafin - Gen 9 Battle Stadium Doubles": [
-        "palafin",
-        9,
-        "battlestadiumdoubles"
-    ],
     "Palafin - Gen 9 Ubers": [
         "palafin",
         9,
         "ubers"
-    ],
-    "Palafin - Gen 9 Battle Stadium Singles": [
-        "palafin",
-        9,
-        "battlestadiumsingles"
     ],
     "Palafin - Gen 9 Doubles OU": [
         "palafin",
@@ -3734,12 +3219,7 @@
         9,
         "vgc2023series1"
     ],
-    "Maushold - Gen 9 Battle Stadium Doubles": [
-        "maushold",
-        9,
-        "battlestadiumdoubles"
-    ],
-    "Maushold - Gen 9 OU": [
+    "Maushold - Gen 9 Overused": [
         "maushold",
         9,
         "ou"
@@ -3748,11 +3228,6 @@
         "maushold",
         9,
         "ubers"
-    ],
-    "Maushold - Gen 9 Battle Stadium Singles": [
-        "maushold",
-        9,
-        "battlestadiumsingles"
     ],
     "Maushold - Gen 9 Doubles OU": [
         "maushold",
