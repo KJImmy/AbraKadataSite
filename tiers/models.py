@@ -12,6 +12,7 @@ class Tier(models.Model):
 	has_zmoves = models.BooleanField(default=False)
 	has_dynamax = models.BooleanField(default=False)
 	has_tera = models.BooleanField(default=False)
+	valid = models.BooleanField(default=True)
 
 class IndividualWinrate(models.Model):
 	pokemon = models.ForeignKey(
