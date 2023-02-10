@@ -4,8 +4,8 @@
 	<thead style="position: sticky; top: 0; z-index: 1; background: white;">
 		<tr>
 			<th style="text-align: center; cursor: auto;">Lead Pair</th>
-			<th onclick="sortTable(1,'2',true)" style="text-align: center;">Winrate<i id="arrow21" class="fa-solid fa-sort"></th>
-			<th onclick="sortTable(2,'2',true)" style="text-align: center;">Appearance Rate<i id="arrow22" class="fa-solid fa-sort-down"></th>
+			<th onclick="sortTable(1,'2',true)" style="text-align: center;">Winrate <i id="arrow21" class="fa-solid fa-sort"></th>
+			<th onclick="sortTable(2,'2',true)" style="text-align: center;">Appearance Rate <i id="arrow22" class="fa-solid fa-sort-down"></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -17,10 +17,14 @@
 		<tr>
 			<td class="align-middle">
 				<div class="col">
-					<img src="{% static img_file_1 %}" class="img-fluid" style="max-height: 70px;"> {{ l.pokemon.pokemon_display_name }}
+					<a href="{% url 'format_pokemon' tier.generation tier.tier_name l.pokemon.pokemon_unique_name %}" style="font-size: 18px;">
+						<img src="{% static img_file_1 %}" class="img-fluid" style="max-height: 70px;">{{ l.pokemon.pokemon_display_name }}
+					</a>
 				</div>
 				<div class="col">
-					<img src="{% static img_file_2 %}" class="img-fluid" style="max-height: 70px;"> {{ l.teammate.pokemon_display_name }}
+					<a href="{% url 'format_pokemon' tier.generation tier.tier_name l.teammate.pokemon_unique_name %}" style="font-size: 18px;">
+						<img src="{% static img_file_2 %}" class="img-fluid" style="max-height: 70px;">{{ l.teammate.pokemon_display_name }}						
+					</a>
 				</div>
 			</td>
 			<td class="align-middle" style="text-align: center;">
