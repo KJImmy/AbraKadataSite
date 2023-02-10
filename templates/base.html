@@ -154,13 +154,16 @@
 		position: sticky;
 		left: 0;
 	}
+	.tooltipwrapper {
+		position: relative;
+	}
 	/* Tooltip container */
 	.tooltipnew {
 		position: relative;
 		display: inline-block;
 	}
 	/* Tooltip text */
-	.tooltipnew .tooltiptext {
+	.tooltiptext {
 		font-size: 14px;
 		font-weight: normal;
 		visibility: hidden;
@@ -174,7 +177,7 @@
 		padding-right: 5px;
 		padding-left: 5px;
 		position: absolute;
-		z-index: 1;
+		z-index: 5555;
 
 		width: 200px;
 		top: 100%;
@@ -183,7 +186,10 @@
 	}
 
 	/* Show the tooltip text when you mouse over the tooltip container */
-	.tooltipnew:hover .tooltiptext {
+	.tooltipnew:hover + .tooltiptext {
+		visibility: visible;
+	}
+	.tooltiptext:hover {
 		visibility: visible;
 	}
 	@media only screen and (max-width: 1500px) {
@@ -220,6 +226,7 @@
 		<!-- <script src="{% static 'bootstrap/js/require.js' %}"></script> -->
 		<script src="{% static 'bootstrap/js/typeahead_search_list.js' %}"></script>
 		<script src="{% static 'bootstrap/js/typeahead_search_redirect.js' %}"></script>
+		<!-- <script src="{% static 'bootstrap/js/home_format_toggle.js' %}"></script> -->
 		<script type="text/javascript">
 			$(document).ready(function () {
 
@@ -246,7 +253,26 @@
 			        $('#detailTable').toggleClass('collapse');
 			    });
 
+			    $('#top-vgc-label').on('click', function () {
+			        $('#topVGC').removeClass('collapse');
+			        $('#topSingles').addClass('collapse');
+			    });
+
+			    $('#top-singles-label').on('click', function () {
+			        $('#topSingles').removeClass('collapse');
+			        $('#topVGC').addClass('collapse');
+			    });
+
 			});
 		</script>
+<!-- 		<script type="text/javascript">
+			$('[name="home-formats"]').on('change', function(){  
+			  if($(this).val()  === "Gen 9 VGC 2023 Series 2"){
+			    $('#top-vgc').collapse('show')
+			  }else{
+			     $('#top-vgc').collapse('hide')
+			  }
+			});
+		</script> -->
 	</body>
 </html>

@@ -5,34 +5,97 @@
 		<tr>
 			<th class="column-one" 
 				onclick="sortTable(0,'1')" 
-				style="text-align: center; background: white;">
+				style="text-align: center; background: white; z-index: 1;">
 				Pok&eacute;mon <i id="arrow10" class="fa-solid fa-sort"></i></th>
 			<th onclick="sortTable(1,'1',true)" style="text-align: center;">
-				<i id="move-frequency-help" class="fa-solid fa-circle-question" data-toggle="tooltip" title data-original-title="How often a Pokémon appears in team preview"></i> 
+				<span class="tooltipwrapper">
+					<div class="tooltipnew">
+						<i id="appearance-rate-help" class="fa-solid fa-circle-question"></i>
+					</div>
+					<span class="tooltiptext">
+						How often a Pokémon appears in team preview
+					</span>
+				</span>
 				Appearance Rate <i id="arrow11" class="fa-solid fa-sort"></i></th>
 			<th onclick="sortTable(2,'1',true)" style="text-align: center;">
-				<i id="move-frequency-help" class="fa-solid fa-circle-question" data-toggle="tooltip" title data-original-title="How often a player wins when the corresponding Pokémon appears in their team preview"></i> 
+				<span class="tooltipwrapper">
+					<div class="tooltipnew">
+						<i id="winrate-help" class="fa-solid fa-circle-question"></i>
+					</div>
+					<span class="tooltiptext">
+						How often a player wins when the corresponding Pokémon appears in their team preview
+					</span>
+				</span>
 				Winrate <i id="arrow12" class="fa-solid fa-sort-down"></i></th>
 			<th onclick="sortTable(3,'1',true)" style="text-align: center;">
-				<i id="move-frequency-help" class="fa-solid fa-circle-question" data-toggle="tooltip" title data-original-title="How often a Pokémon is used by teams that it is on"></i> 
+				<span class="tooltipwrapper">
+					<div class="tooltipnew">
+						<i id="winrate-help" class="fa-solid fa-circle-question"></i>
+					</div>
+					<span class="tooltiptext">
+						How often a Pokémon is used by teams that it is on
+					</span>
+				</span>
 				Used Rate <i id="arrow13" class="fa-solid fa-sort"></i></th>
 			<th onclick="sortTable(4,'1',true)" style="text-align: center;">
-				<i id="move-frequency-help" class="fa-solid fa-circle-question" data-toggle="tooltip" title data-original-title="How often a player wins when they use the corresponding Pokémon during the battle"></i>
+				<span class="tooltipwrapper">
+					<div class="tooltipnew">
+						<i id="winrate-help" class="fa-solid fa-circle-question"></i>
+					</div>
+					<span class="tooltiptext">
+						How often a player wins when they use the corresponding Pokémon during the battle
+					</span>
+				</span>
 				Used Winrate <i id="arrow14" class="fa-solid fa-sort"></i></th>
 			<th onclick="sortTable(5,'1',true)" style="text-align: center;">
-				<i id="move-frequency-help" class="fa-solid fa-circle-question" data-toggle="tooltip" title data-original-title="How often a Pokémon is sent out first by teams that it is on"></i> 
+				<span class="tooltipwrapper">
+					<div class="tooltipnew">
+						<i id="lead-rate-help" class="fa-solid fa-circle-question"></i>
+					</div>
+					<span class="tooltiptext">
+						How often a Pokémon is sent out first by teams that it is on
+					</span>
+				</span>
 				Lead Rate <i id="arrow15" class="fa-solid fa-sort"></i></th>
 			<th onclick="sortTable(6,'1',true)" style="text-align: center;">
-				<i id="move-frequency-help" class="fa-solid fa-circle-question" data-toggle="tooltip" title data-original-title="How often a player wins when they send out the corresponding Pokémon at the very beginning of the battle"></i> 
+				<span class="tooltipwrapper">
+					<div class="tooltipnew">
+						<i id="lead-winrate-help" class="fa-solid fa-circle-question"></i>
+					</div>
+					<span class="tooltiptext">
+						How often a player wins when they send out the corresponding Pokémon at the very beginning of the battle
+					</span>
+				</span>
 				Lead Winrate <i id="arrow16" class="fa-solid fa-sort"></i></th>
 			<th {% if not tier.has_tera %} hidden {% endif %} onclick="sortTable(7,'1',true)" style="text-align: center;">
-				<i id="move-frequency-help" class="fa-solid fa-circle-question" data-toggle="tooltip" title data-original-title="How often a Pokémon terrastalizes in games where it is used"></i> 
+				<span class="tooltipwrapper">
+					<div class="tooltipnew">
+						<i id="tera-frequency-help" class="fa-solid fa-circle-question"></i>
+					</div>
+					<span class="tooltiptext">
+						How often a Pokémon terrastalizes in games where it is used
+					</span>
+				</span>
 				Tera Frequency <i id="arrow17" class="fa-solid fa-sort"></i></th>
 			<th {% if not tier.has_dynamax %} hidden {% endif %} onclick="sortTable(8,'1',true)" style="text-align: center;">
-				<i id="move-frequency-help" class="fa-solid fa-circle-question" data-toggle="tooltip" title data-original-title="How often a Pokémon dynamaxes in games where it is used"></i> 
+				<span class="tooltipwrapper">
+					<div class="tooltipnew">
+						<i id="dynamax-frequency-help" class="fa-solid fa-circle-question"></i>
+					</div>
+					<span class="tooltiptext">
+						How often a Pokémon dynamaxes in games where it is used
+					</span>
+				</span>
 				Dynamax Frequency <i id="arrow18" class="fa-solid fa-sort"></i></th>
 			<th {% if not tier.has_dynamax %} hidden {% endif %} onclick="sortTable(9,'1',true)" style="text-align: center;">
-				<i id="move-frequency-help" class="fa-solid fa-circle-question" data-toggle="tooltip" title data-original-title="How often a player wins when they choose to dynamax this Pokémon"></i> 
+				<span class="tooltipwrapper">
+					<div class="tooltipnew">
+						<i id="dynamax-winrate-help" class="fa-solid fa-circle-question"></i>
+					</div>
+					<span class="tooltiptext">
+						How often a player wins when they choose to dynamax this Pokémon
+					</span>
+				</span> 
 				Dynamax Winrate <i id="arrow19" class="fa-solid fa-sort"></i></th>
 		</tr>
 	</thead>

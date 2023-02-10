@@ -1,11 +1,30 @@
 {% extends 'base.html' %}
 
+<style type="text/css">
+	.collapsing {
+		-webkit-transition: none;
+		transition: none !important;
+		display: none;
+	}
+</style>
+
 {% block content %}
 <div class="container">
 	<h1 style="text-align: center;">Top Pok&eacute;mon</h1>
-	
+	<div class="row justify-content-center" style="margin-bottom: 10px;">
+		<div class="btn-group btn-group-toggle" data-toggle="buttons" id="home-format-buttons">
+			<label class="btn btn-primary active" style="width: 150px;" id="top-vgc-label" checked>
+				<input type="radio" name="home-formats" id="top-vgc-button">
+				Gen 9 VGC 2023 Series 2
+			</label>
+			<label class="btn btn-primary" style="width: 150px;" id="top-singles-label">
+				<input type="radio" name="home-formats" id="top-singles-button">
+				Gen 9 Overused
+			</label>
+		</div>
+	</div>
 	<div class="row justify-content-center">
-		<div class="col-6">
+		<div id="topVGC" style="width: 100%">
 			<a href="{% url 'format_base' 9 'vgc2023series2' %}">
 				<h3 style="text-align: center;">Gen 9 VGC 2023 Series 2</h3>				
 			</a>
@@ -55,7 +74,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-6">
+		<div id="topSingles" class="collapse" style="width: 100%">
 			<a href="{% url 'format_base' 9 'ou' %}">
 				<h3 style="text-align: center;">Gen 9 Singles OU</h3>
 			</a>
