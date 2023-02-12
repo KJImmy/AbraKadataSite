@@ -10,27 +10,29 @@
 	aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
-	<div class="collapse navbar-collapse" id="navbarSupportedContent">
-		<ul class="navbar-nav mr-auto">
-			<li class="nav-item active">
-				<a class="nav-link" href="{% url 'formats' %}">Formats</a>
-			</li>
-			<li class="nav-item disabled">
-				<a class="nav-link" href="#">Reports</a>
-			</li>
-			<li class="nav-item active">
-				<a class="nav-link" href="{% url 'about' %}">About</a>
-			</li>
-		</ul>
-		<a class="nav-item active" href="https://ko-fi.com/abrakadata" target="_blank" style="margin-right: 20px;">Support Abra Kadata</a>
-		<form id="search_form" class="form-inline my-2 my-lg-0">
-			<input class="form-control mr-sm-2 typeahead tt-query" 
-					id="search_input"
-					type="search" 
-					placeholder="Search"
-					aria-label="Search"
-					onkeyup="searching()"
-					onkeydown="submitRedirect(event)">
-		</form>
+	<div class="container-fluid bg-light navbar-container" style="width: 100%;">
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="{% url 'formats' %}">Formats</a>
+				</li>
+				<li class="nav-item disabled">
+					<a class="nav-link" href="#">Reports</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="{% url 'about' %}">About</a>
+				</li>
+			</ul>
+			<a class="nav-item active" href="https://ko-fi.com/abrakadata" target="_blank" style="margin-right: 20px;">Support Abra Kadata</a>
+			<form id="search_form" class="form-inline my-2 my-lg-0 nav-search">
+				<input class="form-control mr-sm-2 typeahead tt-query" 
+						id="search_input"
+						type="search" 
+						placeholder="Search"
+						aria-label="Search"
+						onkeyup="searching()"
+						onkeydown="submitRedirect(event)">
+			</form>
+		</div>
 	</div>
 </nav>
