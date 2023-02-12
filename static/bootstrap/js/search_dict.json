@@ -94,6 +94,11 @@
         8,
         "uu"
     ],
+    "Arcanine - Gen 8 VGC 2022": [
+        "arcanine",
+        8,
+        "vgc2022"
+    ],
     "Arcanine - Gen 8 Doubles OU": [
         "arcanine",
         8,
@@ -739,11 +744,6 @@
         8,
         "vgc2022"
     ],
-    "Dusclops - Gen 8 Doubles OU": [
-        "dusclops",
-        8,
-        "doublesou"
-    ],
     "Salamence - Gen 9 VGC 2023 Series 1": [
         "salamence",
         9,
@@ -943,11 +943,6 @@
         "weavile",
         8,
         "ou"
-    ],
-    "Weavile - Gen 8 Doubles OU": [
-        "weavile",
-        8,
-        "doublesou"
     ],
     "Magnezone - Gen 8 Overused": [
         "magnezone",
@@ -1893,6 +1888,11 @@
         "corviknight",
         9,
         "vgc2023series2"
+    ],
+    "Coalossal - Gen 8 VGC 2022": [
+        "coalossal",
+        8,
+        "vgc2022"
     ],
     "Barraskewda - Gen 8 Overused": [
         "barraskewda",
