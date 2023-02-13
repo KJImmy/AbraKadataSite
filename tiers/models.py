@@ -33,6 +33,7 @@ class IndividualWinrate(models.Model):
 	dynamax_winrate = models.DecimalField(max_digits=5,decimal_places=2,null=True)
 	tera_frequency = models.DecimalField(max_digits=5,decimal_places=2,null=True)
 	ranked = models.BooleanField(default=False)
+	game_count = models.PositiveIntegerField(default=1)
 
 class TeammateWinrate(models.Model):
 	pokemon = models.ForeignKey(
@@ -56,6 +57,7 @@ class TeammateWinrate(models.Model):
 	winrate_lead = models.DecimalField(max_digits=5,decimal_places=2,null=True)
 	pairing_frequency = models.DecimalField(max_digits=5,decimal_places=2)
 	ranked = models.BooleanField(default=False)
+	game_count = models.PositiveIntegerField(default=1)
 
 class OpponentWinrate(models.Model):
 	pokemon = models.ForeignKey(
@@ -76,6 +78,7 @@ class OpponentWinrate(models.Model):
 	faceoff_frequency = models.DecimalField(max_digits=5,decimal_places=2,null=True)
 	faceoff_frequency_lead = models.DecimalField(max_digits=5,decimal_places=2,null=True)
 	ranked = models.BooleanField(default=False)
+	game_count = models.PositiveIntegerField(default=1)
 
 
 class MoveWinrate(models.Model):
@@ -94,6 +97,7 @@ class MoveWinrate(models.Model):
 	move_frequency = models.DecimalField(max_digits=5,decimal_places=2)
 	average_percent_damage = models.DecimalField(max_digits=5,decimal_places=2,null=True)
 	ranked = models.BooleanField(default=False)
+	game_count = models.PositiveIntegerField(default=1)
 
 class TeraWinrate(models.Model):
 	pokemon = models.ForeignKey(
@@ -111,6 +115,7 @@ class TeraWinrate(models.Model):
 	winrate = models.DecimalField(max_digits=5,decimal_places=2)
 	type_frequency = models.DecimalField(max_digits=5,decimal_places=2)
 	ranked = models.BooleanField(default=False)
+	game_count = models.PositiveIntegerField(default=1)
 
 class SpeedTier(models.Model):
 	pokemon = models.ForeignKey(

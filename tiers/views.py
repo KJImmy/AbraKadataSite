@@ -54,15 +54,15 @@ def format_base_view(request,generation,tier_name):
 
 def format_pokemon_view(request,generation,tier_name,pokemon_unique_name):
 	tier = Tier.objects.get(generation=generation,tier_name=tier_name)
-	pokemon = Pokemon.objects.get(pokemon_unique_name=pokemon_unique_name)
+	pokemon = Pokemon.objects.filter(pokemon_unique_name=pokemon_unique_name).annotate(count=Count('game_where_pokemon_used',filter=Q(game_where_pokemon_used__game_player__game__tier=tier))).first()
 
 	ranked_bool = True
 
 	common_pokemon = Pokemon.objects.filter(Q(individual_winrates_of_pokemon__tier=tier)&Q(individual_winrates_of_pokemon__appearance_rate__gte=5)&Q(individual_winrates_of_pokemon__ranked=ranked_bool)).order_by('pokemon_display_name')
-	teammates = TeammateWinrate.objects.filter(Q(pokemon=pokemon)&Q(tier=tier)&Q(pairing_frequency__gte=5)&Q(ranked=ranked_bool)).order_by('-winrate')
+	teammates = TeammateWinrate.objects.filter(Q(pokemon=pokemon)&Q(tier=tier)&(Q(pairing_frequency__gte=5)|Q(game_count__gte=500))&Q(ranked=ranked_bool)).order_by('-winrate')
 	opponents = OpponentWinrate.objects.filter(Q(pokemon=pokemon)&Q(tier=tier)&Q(opponent__in=common_pokemon)&Q(ranked=ranked_bool)).order_by('-winrate')
-	moves = MoveWinrate.objects.filter(Q(pokemon=pokemon)&Q(tier=tier)&Q(move_frequency__gte=5)&Q(ranked=ranked_bool)).order_by('-winrate')
-	tera_types = TeraWinrate.objects.filter(Q(pokemon=pokemon)&Q(tier=tier)&Q(type_frequency__gte=5)&Q(ranked=ranked_bool)).order_by('-winrate')
+	moves = MoveWinrate.objects.filter(Q(pokemon=pokemon)&Q(tier=tier)&(Q(move_frequency__gte=5)|Q(game_count__gte=100))&Q(ranked=ranked_bool)).order_by('-winrate')
+	tera_types = TeraWinrate.objects.filter(Q(pokemon=pokemon)&Q(tier=tier)&(Q(type_frequency__gte=5)|Q(game_count__gte=100))&Q(ranked=ranked_bool)).order_by('-winrate')
 	individual = IndividualWinrate.objects.get(Q(pokemon=pokemon)&Q(tier=tier)&Q(ranked=ranked_bool))
 
 	context = {

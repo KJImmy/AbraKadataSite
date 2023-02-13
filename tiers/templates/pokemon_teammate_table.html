@@ -11,7 +11,7 @@
 						<i id="pairing-frequency-help" class="fa-solid fa-circle-question"></i>
 					</div>
 					<span class="tooltiptext">
-						How often the corresponding Pokémon appears on teams that {{ pokemon.pokemon_display_name }} is on
+						How often the corresponding Pokémon appears on teams that {{ pokemon.pokemon_display_name }} is on.<br>Only Pok&eacute;mon with a pairing frequency >5% or game count >500 are displayed.
 					</span>
 				</span>
 				Pairing Frequency <i id="arrow2" class="fa-solid fa-sort"></i></th>
@@ -25,18 +25,11 @@
 		<tr>
 			<td class="align-middle">
 				<span style="white-space: nowrap; display: inline-block;">
-					{% if t.teammate in common_pokemon %}
 					<a href="{% url 'format_pokemon' tier.generation tier.tier_name t.teammate.pokemon_unique_name %}">
 						<img src="{% static img_file %}" style="height: 70px;">{{ t.teammate.pokemon_display_name }}</a>
 						{% with t.teammate.types_of_pokemon.all as type %}
 						{% include 'pokemon_type_block.html' %}
 						{% endwith %}
-					{% else %}
-					<a><img src="{% static img_file %}" style="height: 70px;">{{ t.teammate.pokemon_display_name }}</a>
-						{% with t.teammate.types_of_pokemon.all as type %}
-						{% include 'pokemon_type_block.html' %}
-						{% endwith %}
-					{% endif %}
 				</span>
 			</td>
 			<td class="align-middle" style="text-align: center;">

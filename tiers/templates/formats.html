@@ -20,14 +20,14 @@
 						{% for t in tiers %}
 						{% if t.games_of_format.count > 1000 and t.generation == g.generation and t.style == 'VGC' and t.valid == True %}
 						<div class="row justify-content-start">	
-							<a href="{% url 'format_base' t.generation t.tier_name %}">{{t.tier_display_name}}</a>
+							<a href="{% url 'format_base' t.generation t.tier_name %}">{{t.tier_display_name}} </a>
+							 : {{ t.games_of_format.count }} Games
 						</div>
 						{% endif %}
-						{% endfor %}
-					</div>					
+						{% endfor %}						
+					</div>
 				</div>
 			</div>
-		
 		</div>
 		<div class="col-lg-4">
 			<div class="row justify-content-center">
@@ -39,10 +39,11 @@
 						{% for t in tiers %}
 						{% if t.games_of_format.count > 1000 and t.generation == g.generation and t.style == 'SS' and t.valid == True %}
 						<div class="row justify-content-start">	
-							<a href="{% url 'format_base' t.generation t.tier_name %}">{{t.tier_display_name}}</a>
+							<a href="{% url 'format_base' t.generation t.tier_name %}">{{t.tier_display_name}} </a>
+							 : {{ t.games_of_format.count }} Games
 						</div>
 						{% endif %}
-						{% endfor %}
+						{% endfor %}						
 					</div>
 				</div>
 			</div>		
@@ -57,11 +58,12 @@
 						{% for t in tiers %}
 						{% if t.games_of_format.count > 1000 and t.generation == g.generation and t.style == 'SD' and t.valid == True %}
 						<div class="row justify-content-start">	
-							<a href="{% url 'format_base' t.generation t.tier_name %}">{{t.tier_display_name}}</a>
+							<a href="{% url 'format_base' t.generation t.tier_name %}">{{t.tier_display_name}} </a>
+							 : {{ t.games_of_format.count }} Games
 						</div>
 						{% endif %}
-						{% endfor %}
-					</div>
+						{% endfor %}						
+					</div>	
 				</div>
 			</div>
 		</div>
