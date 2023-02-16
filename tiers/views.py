@@ -65,6 +65,8 @@ def format_pokemon_view(request,generation,tier_name,pokemon_unique_name):
 	tera_types = TeraWinrate.objects.filter(Q(pokemon=pokemon)&Q(tier=tier)&(Q(type_frequency__gte=5)|Q(game_count__gte=100))&Q(ranked=ranked_bool)).order_by('-winrate')
 	individual = IndividualWinrate.objects.get(Q(pokemon=pokemon)&Q(tier=tier)&Q(ranked=ranked_bool))
 
+	# Add player_count and max_times_used_by_player to guard against people messing with the stats
+
 	context = {
 		'tier':tier,
 		'pokemon':pokemon,

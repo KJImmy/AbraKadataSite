@@ -29,3 +29,6 @@ def about_view(request):
 
 def support_view(request):
 	return render(request,'support.html',{})
+
+def reports_view(request):
+	return render(request,'reports.html',{})
