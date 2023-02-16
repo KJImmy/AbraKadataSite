@@ -24,23 +24,15 @@
 		<tr>
 			<td class="align-middle">
 				<span style="white-space: nowrap; display: inline-block;">
-					{% if o.opponent in common_pokemon %}
 					<a href="{% url 'format_pokemon' tier.generation tier.tier_name o.opponent.pokemon_unique_name %}">
 						<img src="{% static img_file %}" style="height: 50px;">{{ o.opponent.pokemon_display_name }}</a>
 						{% with o.opponent.types_of_pokemon.all as type %}
 						{% include 'pokemon_type_block.html' %}
 						{% endwith %}
-					{% else %}
-						<img src="{% static img_file %}" style="height: 50px;">
-						{{ o.opponent.pokemon_display_name }}
-						{% with o.opponent.types_of_pokemon.all as type %}
-						{% include 'pokemon_type_block.html' %}
-						{% endwith %}
-					{% endif %}
 				</span>
 			</td>
 			<td class="align-middle" style="text-align: center;">
-				{{ o.winrate|stringformat:"05.2F" }}%
+				{{ o.winrate_used|stringformat:"05.2F" }}%
 			</td>
 		</tr>
 		{% endif %}
