@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.db.models import Count,When,Case,Q,F,PositiveIntegerField,FloatField,ExpressionWrapper
+from django.db.models import Count,When,Case,Q,F,PositiveIntegerField,FloatField,ExpressionWrapper,Prefetch
 from django.contrib.staticfiles import finders
 
 from .models import Tier,IndividualWinrate,TeammateWinrate,OpponentWinrate,MoveWinrate,TeraWinrate
@@ -7,6 +7,7 @@ from games.models import PokemonUsage,Game,GamePlayerRelation
 from pokemon.models import Pokemon,Move,Type
 
 from decimal import Decimal
+
 # Create your views here.
 def formats_view(request):
 	tier_list = Tier.objects.all().order_by('style')
@@ -18,15 +19,18 @@ def formats_view(request):
 	return render(request,'formats.html',context)
 
 def format_base_view(request,generation,tier_name):
-	tier_list = Tier.objects.all().order_by('style')
-	generation_list = Tier.objects.distinct('generation').order_by('-generation')
-	tier = Tier.objects.get(generation=generation,tier_name=tier_name)
+	tier_list = Tier.objects.all().order_by('-generation','style')
+	generation_list = tier_list.values('generation').distinct('generation')
+	tier = tier_list.get(generation=generation,tier_name=tier_name)
 	ranked_bool = True
 
-	games_in_tier = Game.objects.filter(tier=tier).count()
+	pokemon_winrates = tier.individual_winrates_of_tier.filter(Q(appearance_rate__gte=5)&Q(ranked=ranked_bool)).order_by('-winrate_used')
+	lead_winrates = tier.teammate_winrates_of_tier.filter(Q(ranked=ranked_bool)&Q(appearance_rate_lead__gte=0.1)).order_by('-appearance_rate_lead')
 
-	pokemon_winrates = IndividualWinrate.objects.filter(Q(tier=tier)&Q(appearance_rate__gte=5)&Q(ranked=ranked_bool)).order_by('-winrate_used')
-	lead_winrates = TeammateWinrate.objects.filter(Q(tier=tier)&Q(appearance_rate_lead__gte=0.1)&Q(ranked=ranked_bool)).order_by('-appearance_rate_lead')
+	# games_in_tier = Game.objects.filter(tier=tier).count()
+
+	# pokemon_winrates = IndividualWinrate.objects.filter(Q(tier=tier)&Q(appearance_rate__gte=5)&Q(ranked=ranked_bool)).order_by('-winrate_used')
+	# lead_winrates = TeammateWinrate.objects.filter(Q(tier=tier)&Q(appearance_rate_lead__gte=0.1)&Q(ranked=ranked_bool)).order_by('-appearance_rate_lead')
 	lead_pairs = []
 	exclude_pks = []
 	new_lead_set = []
