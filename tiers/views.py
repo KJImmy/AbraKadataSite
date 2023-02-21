@@ -24,13 +24,13 @@ def format_base_view(request,generation,tier_name):
 	tier = tier_list.get(generation=generation,tier_name=tier_name)
 	ranked_bool = True
 
-	pokemon_winrates = tier.individual_winrates_of_tier.filter(Q(appearance_rate__gte=5)&Q(ranked=ranked_bool)).order_by('-winrate_used')
-	lead_winrates = tier.teammate_winrates_of_tier.filter(Q(ranked=ranked_bool)&Q(appearance_rate_lead__gte=0.1)).order_by('-appearance_rate_lead')
+	# pokemon_winrates = tier.individual_winrates_of_tier.filter(Q(appearance_rate__gte=5)&Q(ranked=ranked_bool)).order_by('-winrate_used')
+	# lead_winrates = tier.teammate_winrates_of_tier.filter(Q(ranked=ranked_bool)&Q(appearance_rate_lead__gte=0.1)).order_by('-appearance_rate_lead')
 
 	# games_in_tier = Game.objects.filter(tier=tier).count()
 
-	# pokemon_winrates = IndividualWinrate.objects.filter(Q(tier=tier)&Q(appearance_rate__gte=5)&Q(ranked=ranked_bool)).order_by('-winrate_used')
-	# lead_winrates = TeammateWinrate.objects.filter(Q(tier=tier)&Q(appearance_rate_lead__gte=0.1)&Q(ranked=ranked_bool)).order_by('-appearance_rate_lead')
+	pokemon_winrates = IndividualWinrate.objects.filter(Q(tier=tier)&Q(appearance_rate__gte=5)&Q(ranked=ranked_bool)).order_by('-winrate_used')
+	lead_winrates = TeammateWinrate.objects.filter(Q(tier=tier)&Q(appearance_rate_lead__gte=0.1)&Q(ranked=ranked_bool)).order_by('-appearance_rate_lead')
 	lead_pairs = []
 	exclude_pks = []
 	new_lead_set = []
