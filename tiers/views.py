@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from django.db.models import Count,When,Case,Q,F,PositiveIntegerField,FloatField,ExpressionWrapper,Prefetch
+from django.db.models import Count,When,Case,Q,F,PositiveIntegerField,FloatField,ExpressionWrapper,Prefetch,Value,Exists,OuterRef
 from django.contrib.staticfiles import finders
 
-from .models import Tier,IndividualWinrate,TeammateWinrate,OpponentWinrate,MoveWinrate,TeraWinrate
+from .models import Tier,IndividualWinrate,TeammateWinrate,OpponentWinrate,MoveWinrate,TeraWinrate,TeamOrCore
 from games.models import PokemonUsage,Game,GamePlayerRelation
 from pokemon.models import Pokemon,Move,Type
 
@@ -27,10 +27,9 @@ def format_base_view(request,generation,tier_name):
 	# pokemon_winrates = tier.individual_winrates_of_tier.filter(Q(appearance_rate__gte=5)&Q(ranked=ranked_bool)).order_by('-winrate_used')
 	# lead_winrates = tier.teammate_winrates_of_tier.filter(Q(ranked=ranked_bool)&Q(appearance_rate_lead__gte=0.1)).order_by('-appearance_rate_lead')
 
-	# games_in_tier = Game.objects.filter(tier=tier).count()
-
 	pokemon_winrates = IndividualWinrate.objects.filter(Q(tier=tier)&Q(appearance_rate__gte=5)&Q(ranked=ranked_bool)).order_by('-winrate_used')
-	lead_winrates = TeammateWinrate.objects.filter(Q(tier=tier)&Q(appearance_rate_lead__gte=0.1)&Q(ranked=ranked_bool)).order_by('-appearance_rate_lead')
+	lead_winrates = TeammateWinrate.objects.filter(Q(tier=tier)&Q(appearance_rate_lead__gte=0.1)&Q(ranked=ranked_bool)).\
+						order_by('-appearance_rate_lead').select_related('pokemon')
 	lead_pairs = []
 	exclude_pks = []
 	new_lead_set = []
@@ -82,3 +81,196 @@ def format_pokemon_view(request,generation,tier_name,pokemon_unique_name):
 		'common_pokemon':common_pokemon
 	}
 	return render(request,'formats_pokemon.html',context)
+
+def format_teams_view(request,generation,tier_name):
+	tier = Tier.objects.get(generation=generation,tier_name=tier_name)
+
+	tcs = tier.teams_and_cores_of_tier.annotate(mon_count=Count('pokemon_of_team_or_core'))
+	full_teams = tcs.filter(Q(mon_count=6)&Q(game_count__gte=100))\
+					.annotate(winrate=ExpressionWrapper(F('wins') * Decimal('100.0') / F('game_count'),FloatField()))\
+					.filter(game_count__gte=100)\
+					.order_by('-game_count')
+
+	context = {
+		'teams':full_teams
+	}
+
+	return render(request,'format_teams.html',context)
+
+def format_team_breakdown_view(request,generation,tier_name,team_id):
+	raw_query = Pokemon.objects.raw('SELECT pokemon_id AS id,\
+										ROUND(CAST(COUNT(pokemon_id) FILTER (WHERE mon.used = true) AS DECIMAL) * 100 / CAST(COUNT(pokemon_id) AS DECIMAL),2) AS used_rate,\
+										ROUND(CAST(COUNT(pokemon_id) FILTER (WHERE mon.lead = true) AS DECIMAL) * 100 / CAST(COUNT(pokemon_id) AS DECIMAL),2) AS lead_rate,\
+										ROUND(CAST(COUNT(pokemon_id) FILTER (WHERE player.winner = true) AS DECIMAL) * 100 / CAST(COUNT(pokemon_id) AS DECIMAL),2) AS winrate,\
+										ROUND(CAST(COUNT(pokemon_id) FILTER (WHERE mon.used = true AND player.winner = true) AS DECIMAL) * 100 / NULLIF(CAST(COUNT(pokemon_id) FILTER (WHERE mon.used = true) AS DECIMAL),0),2) AS winrate_used,\
+										ROUND(CAST(COUNT(pokemon_id) FILTER (WHERE mon.lead = true AND player.winner = true) AS DECIMAL) * 100 / NULLIF(CAST(COUNT(pokemon_id) FILTER (WHERE mon.lead = true) AS DECIMAL),0),2) AS winrate_lead,\
+										ROUND(CAST(COUNT(pokemon_id) FILTER (WHERE mon.dynamaxed = true) AS DECIMAL) * 100 / CAST(COUNT(pokemon_id) AS DECIMAL),2) AS dynamax_frequency,\
+										ROUND(CAST(COUNT(pokemon_id) FILTER (WHERE mon.dynamaxed = true AND player.winner = true) AS DECIMAL) * 100 / NULLIF(CAST(COUNT(pokemon_id) FILTER (WHERE mon.dynamaxed = true) AS DECIMAL),0),2) AS dynamax_winrate,\
+										ROUND(CAST(COUNT(pokemon_id) FILTER (WHERE mon.tera_type_id IS NOT NULL) AS DECIMAL) * 100 / CAST(COUNT(pokemon_id) AS DECIMAL),2) AS tera_frequency \
+									FROM games_pokemonusage mon \
+									LEFT JOIN games_gameplayerrelation player ON mon.game_player_id = player.id \
+									LEFT JOIN games_game game ON game.id = player.game_id \
+									LEFT JOIN pokemon_pokemon poke ON poke.id = mon.pokemon_id \
+									LEFT JOIN tiers_playerwithteamorcore team ON team.player_id = player.id \
+									WHERE team.team_or_core_id = %s \
+									GROUP BY pokemon_id \
+									ORDER BY id',[team_id])
+
+	matchups = TeamOrCore.objects.raw('SELECT team.id AS used_team,opponent_team.id AS id,COUNT(*) \
+										FROM tiers_teamorcore team \
+										LEFT JOIN tiers_playerwithteamorcore player_link ON team.id = player_link.team_or_core_id \
+										LEFT JOIN games_gameplayerrelation player ON player.id = player_link.player_id \
+										LEFT JOIN games_gameplayerrelation opponent ON player.game_id = opponent.game_id AND opponent.id <> player.id \
+										LEFT JOIN tiers_playerwithteamorcore opponent_link ON opponent_link.player_id = opponent.id \
+										LEFT JOIN tiers_teamorcore opponent_team ON opponent_link.team_or_core_id = opponent_team.id \
+										WHERE team.id = %s \
+										GROUP BY team.id,opponent_team.id \
+										HAVING COUNT(*) > 10 \
+										ORDER BY count DESC',[team_id])
+
+	# Find how the whole team does against other pokemon (and cores?)
+	# Find out how each individual pokemon on the team does against other pokemon
+
+	context = {
+		'raw':raw_query,
+		'matchups':matchups
+	}
+
+	return render(request,'format_team_breakdown.html',context)
+
+
+def format_cores_view(request,generation,tier_name):
+	tier = Tier.objects.get(generation=generation,tier_name=tier_name)
+
+	tcs = tier.teams_and_cores_of_tier.annotate(mon_count=Count('pokemon_of_team_or_core'))
+	cores = tcs.filter(Q(mon_count__lt=6)&Q(game_count__gte=100))\
+					.annotate(winrate=ExpressionWrapper(F('wins') * Decimal('100.0') / F('game_count'),FloatField()))\
+					.filter(game_count__gte=100)\
+					.order_by('-game_count')
+
+	context = {
+		'cores':cores
+	}
+
+	return render(request,'format_cores.html',context)
+
+def format_core_breakdown_view(request,generation,tier_name,core_id):
+	common_pokemon = Pokemon.objects.filter(Q(individual_winrates_of_pokemon__tier__generation=generation)\
+											&Q(individual_winrates_of_pokemon__tier__tier_name=tier_name)\
+											&Q(individual_winrates_of_pokemon__appearance_rate__gte=5)\
+											&Q(individual_winrates_of_pokemon__ranked=True))\
+											.order_by('pokemon_display_name').values_list('id',flat=True)
+
+	raw_query = Pokemon.objects.raw('	SELECT pokemon_id AS id,\
+											ROUND(CAST(COUNT(pokemon_id) FILTER (WHERE mon.used = true) AS DECIMAL) * 100 / CAST(COUNT(pokemon_id) AS DECIMAL),2) AS used_rate,\
+											ROUND(CAST(COUNT(pokemon_id) FILTER (WHERE mon.lead = true) AS DECIMAL) * 100 / CAST(COUNT(pokemon_id) AS DECIMAL),2) AS lead_rate,\
+											ROUND(CAST(COUNT(pokemon_id) FILTER (WHERE player.winner = true) AS DECIMAL) * 100 / CAST(COUNT(pokemon_id) AS DECIMAL),2) AS winrate,\
+											ROUND(CAST(COUNT(pokemon_id) FILTER (WHERE mon.used = true AND player.winner = true) AS DECIMAL) * 100 / NULLIF(CAST(COUNT(pokemon_id) FILTER (WHERE mon.used = true) AS DECIMAL),0),2) AS winrate_used,\
+											ROUND(CAST(COUNT(pokemon_id) FILTER (WHERE mon.lead = true AND player.winner = true) AS DECIMAL) * 100 / NULLIF(CAST(COUNT(pokemon_id) FILTER (WHERE mon.lead = true) AS DECIMAL),0),2) AS winrate_lead,\
+											ROUND(CAST(COUNT(pokemon_id) FILTER (WHERE mon.dynamaxed = true) AS DECIMAL) * 100 / CAST(COUNT(pokemon_id) AS DECIMAL),2) AS dynamax_frequency,\
+											ROUND(CAST(COUNT(pokemon_id) FILTER (WHERE mon.dynamaxed = true AND player.winner = true) AS DECIMAL) * 100 / NULLIF(CAST(COUNT(pokemon_id) FILTER (WHERE mon.dynamaxed = true) AS DECIMAL),0),2) AS dynamax_winrate,\
+											ROUND(CAST(COUNT(pokemon_id) FILTER (WHERE mon.tera_type_id IS NOT NULL) AS DECIMAL) * 100 / CAST(COUNT(pokemon_id) AS DECIMAL),2) AS tera_frequency \
+										FROM games_pokemonusage mon \
+										LEFT JOIN games_gameplayerrelation player ON mon.game_player_id = player.id \
+										LEFT JOIN games_game game ON game.id = player.game_id \
+										LEFT JOIN pokemon_pokemon poke ON poke.id = mon.pokemon_id \
+										LEFT JOIN tiers_playerwithteamorcore team ON team.player_id = player.id \
+										WHERE team.team_or_core_id = %s \
+										AND pokemon_id IN (	SELECT pokemon_id \
+															FROM tiers_pokemononteamorcore \
+															WHERE team_or_core_id = %s) \
+										GROUP BY pokemon_id \
+										ORDER BY id',[core_id,core_id])
+
+	matchups = TeamOrCore.objects.raw('	SELECT team.id AS used_team,opponent_team.id AS id,COUNT(*), \
+											ROUND(CAST(COUNT(*) FILTER (WHERE player.winner = true) AS DECIMAL) * 100 / CAST(COUNT(*) AS DECIMAL),2) AS winrate\
+										FROM tiers_teamorcore team \
+										LEFT JOIN tiers_playerwithteamorcore player_link ON team.id = player_link.team_or_core_id \
+										LEFT JOIN games_gameplayerrelation player ON player.id = player_link.player_id \
+										LEFT JOIN games_gameplayerrelation opponent ON player.game_id = opponent.game_id AND opponent.id <> player.id \
+										LEFT JOIN tiers_playerwithteamorcore opponent_link ON opponent_link.player_id = opponent.id \
+										LEFT JOIN tiers_teamorcore opponent_team ON opponent_link.team_or_core_id = opponent_team.id \
+										WHERE team.id = %s \
+										GROUP BY team.id,opponent_team.id \
+										HAVING COUNT(*) > 500 \
+										ORDER BY count DESC',[core_id])
+
+	moves = Move.objects.raw('	SELECT move_id AS id,mon.pokemon_id,\
+									ROUND(CAST(COUNT(*) FILTER (WHERE player.winner = true) AS DECIMAL) * 100 / CAST(COUNT(*) AS DECIMAL),2) AS winrate,\
+									ROUND(CAST(COUNT(*) AS DECIMAL) * 100 / CAST(c.count AS DECIMAL),2) AS move_frequency \
+								FROM games_pokemonusage mon \
+								LEFT JOIN games_moveusage move ON move.pokemon_id = mon.id \
+								LEFT JOIN games_gameplayerrelation player ON player.id = mon.game_player_id \
+								LEFT JOIN tiers_playerwithteamorcore team ON player.id = team.player_id \
+								LEFT JOIN (	SELECT mon_c.pokemon_id,COUNT(*) FILTER (WHERE mon_c.used = true) \
+											FROM games_pokemonusage mon_c \
+											LEFT JOIN games_gameplayerrelation player_c ON player_c.id = mon_c.game_player_id \
+											LEFT JOIN tiers_playerwithteamorcore team_c ON team_c.player_id = player_c.id \
+											WHERE team_c.team_or_core_id = %s \
+											GROUP BY mon_c.pokemon_id \
+								) c ON c.pokemon_id = mon.pokemon_id \
+								WHERE team.team_or_core_id = %s \
+								AND mon.pokemon_id IN (	SELECT pokemon_id \
+														FROM tiers_pokemononteamorcore  \
+														WHERE team_or_core_id = %s) \
+								AND move_id IS NOT NULL \
+								GROUP BY move_id,mon.pokemon_id,c.count \
+								HAVING ROUND(CAST(COUNT(*) AS DECIMAL) * 100 / CAST(c.count AS DECIMAL),2) > 5 \
+								ORDER BY mon.pokemon_id',[core_id,core_id,core_id])
+
+	opponents = Pokemon.objects.raw('	SELECT mon2.pokemon_id AS id, mon1.pokemon_id AS cur_mon, \
+											ROUND(CAST(COUNT(mon1.pokemon_id) FILTER (WHERE player1.winner = true) AS DECIMAL) * 100 / CAST(COUNT(mon2.pokemon_id) AS DECIMAL),2) AS winrate,\
+											ROUND(CAST(COUNT(mon1.pokemon_id) FILTER (WHERE player1.winner = true AND mon1.used = true AND mon2.used = true) AS DECIMAL) * 100 / NULLIF(CAST(COUNT(mon1.pokemon_id) FILTER (WHERE mon1.used = true AND mon2.used = true) AS DECIMAL),0),2) AS winrate_used,\
+											ROUND(CAST(COUNT(mon1.pokemon_id) FILTER (WHERE player1.winner = true AND mon1.lead = true AND mon2.lead = true) AS DECIMAL) * 100 / NULLIF(CAST(COUNT(mon1.pokemon_id) FILTER (WHERE mon1.lead = true AND mon2.lead = true) AS DECIMAL),0),2) AS winrate_lead,\
+											ROUND(CAST(COUNT(mon1.pokemon_id) FILTER (WHERE mon1.used = true AND mon2.used = true) AS DECIMAL) * 100 / NULLIF(CAST(COUNT(mon1.pokemon_id) AS DECIMAL),0),2) AS faceoff_frequency,\
+											ROUND(CAST(COUNT(mon1.pokemon_id) FILTER (WHERE mon1.lead = true AND mon2.lead = true) AS DECIMAL) * 100 / NULLIF(CAST(COUNT(mon1.pokemon_id) AS DECIMAL),0),2) AS faceoff_frequency_lead \
+										FROM games_pokemonusage mon1 \
+										LEFT JOIN games_gameplayerrelation player1 \
+										ON mon1.game_player_id = player1.id \
+										LEFT JOIN games_gameplayerrelation player2 \
+										ON player1.game_id = player2.game_id AND player1.id <> player2.id \
+										LEFT JOIN games_pokemonusage mon2 \
+										ON player2.id = mon2.game_player_id \
+										LEFT JOIN tiers_playerwithteamorcore core1 \
+										ON core1.player_id = player1.id \
+										WHERE core1.team_or_core_id = %s \
+										AND mon1.pokemon_id IN (SELECT pokemon_id \
+																FROM tiers_pokemononteamorcore \
+																WHERE team_or_core_id = %s) \
+										AND mon2.pokemon_id IN %s \
+										GROUP BY mon2.pokemon_id,mon1.pokemon_id \
+										ORDER BY mon2.pokemon_id',[core_id,core_id,tuple(common_pokemon)])
+
+	teammates = Pokemon.objects.raw('	SELECT mon1.pokemon_id AS id, \
+											ROUND(CAST(COUNT(mon1.pokemon_id) FILTER (WHERE player.winner = true) AS DECIMAL) * 100 / CAST(COUNT(mon1.pokemon_id) AS DECIMAL),2) AS winrate,\
+											ROUND(CAST(COUNT(mon1.pokemon_id) AS DECIMAL) * 100 / CAST(core2.game_count AS DECIMAL),2) AS pairing_frequency \
+										FROM games_pokemonusage mon1 \
+										LEFT JOIN games_gameplayerrelation player \
+										ON player.id = mon1.game_player_id \
+										LEFT JOIN tiers_playerwithteamorcore core \
+										ON core.player_id = player.id \
+										LEFT JOIN tiers_teamorcore core2 \
+										ON core.team_or_core_id = core2.id \
+										WHERE core.team_or_core_id = %s \
+										AND mon1.pokemon_id NOT IN (SELECT pokemon_id \
+																FROM tiers_pokemononteamorcore \
+																WHERE team_or_core_id = %s) \
+										GROUP BY mon1.pokemon_id,core2.game_count \
+										HAVING ROUND(CAST(COUNT(mon1.pokemon_id) AS DECIMAL) * 100 / CAST(core2.game_count AS DECIMAL),2) > 5 \
+										OR COUNT(*) > 1000 \
+										ORDER BY mon1.pokemon_id',[core_id,core_id])
+
+	# make sure I'm not including mons already in the core
+
+	# Find how the whole team does against other pokemon (and cores?)
+	# Find out how each individual pokemon on the team does against other pokemon
+
+	context = {
+		'raw':raw_query,
+		'matchups':matchups,
+		'moves':moves,
+		'opponents':opponents,
+		'teammates':teammates
+	}
+
+	return render(request,'format_core_breakdown.html',context)

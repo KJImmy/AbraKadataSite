@@ -1,5 +1,7 @@
 from django.db import models
 
+from pokemon.models import Pokemon
+from games.models import GamePlayerRelation
 # Create your models here.
 class Tier(models.Model):
 	tier_name = models.CharField(max_length=100)
@@ -80,7 +82,6 @@ class OpponentWinrate(models.Model):
 	ranked = models.BooleanField(default=False)
 	game_count = models.PositiveIntegerField(default=1)
 
-
 class MoveWinrate(models.Model):
 	pokemon = models.ForeignKey(
 		'pokemon.Pokemon',
@@ -128,3 +129,38 @@ class SpeedTier(models.Model):
 		related_name='speed_tiers_of_tier')
 	speed = models.PositiveIntegerField()
 	speed_stage = models.IntegerField()
+
+class TeamOrCore(models.Model):
+	tier = models.ForeignKey(
+		'Tier',
+		on_delete=models.PROTECT,
+		related_name='teams_and_cores_of_tier')
+	pokemon = models.ManyToManyField(Pokemon,
+									related_name='pokemon_on_team_or_core',
+									through='PokemonOnTeamOrCore')
+	player = models.ManyToManyField(GamePlayerRelation,
+									related_name='game_player_with_team_or_core',
+									through='PlayerWithTeamOrCore')
+	game_count = models.PositiveIntegerField()
+	wins = models.PositiveIntegerField()
+	ranked = models.BooleanField()
+
+class PokemonOnTeamOrCore(models.Model):
+	pokemon = models.ForeignKey(
+		'pokemon.Pokemon',
+		on_delete=models.PROTECT,
+		related_name='teams_and_cores_of_pokemon')
+	team_or_core = models.ForeignKey(
+		'TeamOrCore',
+		on_delete=models.PROTECT,
+		related_name='pokemon_of_team_or_core')
+
+class PlayerWithTeamOrCore(models.Model):
+	player = models.ForeignKey(
+		'games.GamePlayerRelation',
+		on_delete=models.PROTECT,
+		related_name='teams_and_cores_of_player')
+	team_or_core = models.ForeignKey(
+		'TeamOrCore',
+		on_delete=models.PROTECT,
+		related_name='player_with_team_or_core')
