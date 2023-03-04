@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+Hello, {{ user.username|default:'Guest' }}!
+
+<div>
+    {% if user.is_authenticated %}
+        <div>
+	        <a href="{% url 'logout' %}">Logout</a>
+        </div>
+        <div>
+	        <a href="{% url 'password_change' %}">Change password</a>
+        </div>
+        <div>
+        	{{ player }}
+        </div>
+        {% for key, value in results.items %}
+        <div>
+            <div class="row justify-content-center">
+                <h3>Gen {{ key.generation }} {{ key.tier_display_name }}</h3>
+            </div>
+    		{% for team,results in value.items %}
+            <div class="row justify-content-start">
+                <div class="col-8">
+                {% for p in team %}
+                    {% with p.img_number|slugify as img_num %}
+                    {% with "sprites/pokemon/"|add:img_num|add:".png" as img_file %}
+                        <img src="{% static img_file %}" style="max-height: 70px;">
+                        {{ p.pokemon_display_name }}
+                    {% endwith %}
+                    {% endwith %}
+                {% endfor %}
+                    <a href="#">Team Breakdown</a>
+                </div>
+                <div class="col-2">
+                    Game Count: {{ results.Played }}                    
+                </div>
+                <div class="col-2">
+                    Winrate: {{ results.Winrate }}%                    
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+       	{% endfor %}
+
+    {% else %}
+        <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+</div>
+{% endblock %}

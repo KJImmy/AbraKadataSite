@@ -1,0 +1,12 @@
+{% for t in teams %}
+<div>
+	{% for p in t %}
+	{% with p.img_number|slugify as img_num %}
+	{% with "sprites/pokemon/"|add:img_num|add:".png" as img_file %}
+		<img src="{% static img_file %}" style="max-height: 70px;">
+		{{ p.pokemon_display_name }}
+	{% endwith %}
+	{% endwith %}
+	{% endfor %}
+</div>
+{% endfor %}
