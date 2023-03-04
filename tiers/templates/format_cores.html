@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+Cores table goes here
+
+<div class="container">
+	<div class="table-responsive">
+		<table class="table table-striped w-auto" id="sortable">
+			<thead class="thead-fix">
+				<tr>
+					<th onclick="sortTable(0,'')">Team</th>
+					<th onclick="sortTable(1,'',true)">Winrate</th>
+					<th onclick="sortTable(2,'',true)">Game Count</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for c in cores %}
+				<tr>
+					<td>
+						{% for mon in c.pokemon_of_team_or_core.all %}
+							{{ mon.pokemon.pokemon_display_name }}
+						{% endfor %}
+						<a href="{% url 'format_core_breakdown' c.tier.generation c.tier.tier_name c.id %}">Core Breakdown</a>
+					</td>
+					<td>{{ c.winrate|stringformat:"05.2F" }}</td>
+					<td>{{ c.game_count }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		
+	</div>
+</div>
+
+{% endblock %}

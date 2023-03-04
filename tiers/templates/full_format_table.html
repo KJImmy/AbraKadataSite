@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="wrapper">
+	<div class="container" style="width: calc(100%-300px);">
+		<div class="row justify-content-center">
+			<h1>[Gen {{ tier.generation}}] {{ tier.tier_display_name }}</h1>
+		</div>
+		<div class="row justify-content-center" style="padding-bottom: 20px;">
+			<div>
+				<h3>Common Pok&eacute;mon Winrates</h3>
+			</div>
+			<div id="baseTable" style="width: 100%; height: 100%;">
+				<div class="table-responsive" style="max-height: 650px;">
+					{% include 'format_base_table.html' %}
+				</div>
+			</div>
+		</div>
+
+		<!-- <div class="row justify-content-center" style="padding-top: 20px;">
+			<h3>Speed Tiers</h3>
+			<div class="table-responsive">
+				{% include 'speed_tier_table.html' %}
+			</div>
+		</div> -->
+	</div>
+</div>
+{% endblock %}
+
+<div class="table-responsive">
+	{% include 'format_base_table.html' %}	
+</div>

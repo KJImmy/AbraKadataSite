@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+	Team Breakdown
+	<div>
+		{% for r in raw %}
+		{% with r.img_number|slugify as img_num %}
+		{% with "sprites/pokemon/"|add:img_num|add:".png" as img_file %}
+		<img src="{% static img_file %}" style="max-height: 70px;">
+		{% endwith %}
+		{% endwith %}
+		{% endfor %}	
+	</div>
+	{% for r in raw %}
+	{% with r.img_number|slugify as img_num %}
+	{% with "sprites/pokemon/"|add:img_num|add:".png" as img_file %}
+	<div class="container">
+		<div class="align-middle">
+			{{ r.pokemon_display_name }}
+			<img src="{% static img_file %}" style="max-height: 70px;">
+		</div>
+		<div>
+			Used Rate: {{ r.used_rate|stringformat:"05.2F" }}%
+		</div>
+		<div>
+			Used Winrate: {{ r.winrate_used|stringformat:"05.2F" }}%
+		</div>
+		<div>
+			Lead Rate: {{ r.lead_rate|stringformat:"05.2F" }}%
+		</div>
+		<div>
+			Lead Winrate: {{ r.winrate_lead|stringformat:"05.2F" }}%
+		</div>
+		<div>
+			Tera Frequency: {{ r.tera_frequency|stringformat:"05.2F" }}%
+		</div>
+	</div>
+	{% endwith %}
+	{% endwith %}
+	{% endfor %}
+	<div class="table-responsive">
+		<table>
+			<thead>
+				<tr>
+					<th>
+						Core
+					</th>
+					<th>
+						Count
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for m in matchups %}
+				<tr>
+					<td>
+						{% for mon in m.pokemon_of_team_or_core.all %}
+						{% with mon.pokemon.img_number|slugify as img_num %}
+						{% with "sprites/pokemon/"|add:img_num|add:".png" as img_file %}
+						<img src="{% static img_file %}" style="max-height: 70px;">
+						{{ mon.pokemon.pokemon_display_name }}
+						{% endwith %}
+						{% endwith %}
+						{% endfor %}
+					</td>
+					<td>
+						{{ m.count }}
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+
+{% endblock %}

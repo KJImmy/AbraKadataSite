@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+Teams table goes here
+
+<div class="container">
+	<div class="table-responsive">
+		<table class="table table-striped w-auto" id="sortable">
+			<thead class="thead-fix">
+				<tr>
+					<th onclick="sortTable(0,'')">Team</th>
+					<th onclick="sortTable(1,'',true)">Winrate</th>
+					<th onclick="sortTable(2,'',true)">Game Count</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for t in teams %}
+				<tr>
+					<td>
+						{% for mon in t.pokemon_of_team_or_core.all %}
+							{{ mon.pokemon.pokemon_display_name }}
+						{% endfor %}
+						<a href="{% url 'format_team_breakdown' t.tier.generation t.tier.tier_name t.id %}">Team Breakdown</a>
+					</td>
+					<td>{{ t.winrate|stringformat:"05.2F" }}</td>
+					<td>{{ t.game_count }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		
+	</div>
+</div>
+
+{% endblock %}
