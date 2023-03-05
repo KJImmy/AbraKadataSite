@@ -145,7 +145,7 @@ def format_cores_view(request,generation,tier_name):
 	tcs = tier.teams_and_cores_of_tier.annotate(mon_count=Count('pokemon_of_team_or_core'))
 	cores = tcs.filter(Q(mon_count__lt=6)&Q(game_count__gte=100))\
 					.annotate(winrate=ExpressionWrapper(F('wins') * Decimal('100.0') / F('game_count'),FloatField()))\
-					.filter(game_count__gte=100)\
+					.filter(game_count__gte=800)\
 					.order_by('-game_count')
 
 	context = {
