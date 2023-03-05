@@ -15,38 +15,134 @@
 		{% endwith %}
 		{% endfor %}	
 	</div>
+	<div id="accordion">
 	{% for r in raw %}
 	{% with r.img_number|slugify as img_num %}
 	{% with "sprites/pokemon/"|add:img_num|add:".png" as img_file %}
-	<div class="container">
-		<div class="align-middle">
-			{{ r.pokemon_display_name }}
-			<img src="{% static img_file %}" style="max-height: 70px;">
+		<div class="card">
+			<div class="card-header" id="heading{{ r.id }}" style="display:inline-flex;">
+				<h5 class="mb-0">
+					<button class="btn btn-link" 
+							data-toggle="collapse" data-target="#collapse{{ r.id }}" aria-expanded="false" aria-controls="collapse{{ r.id }}"
+							style="white-space: nowrap;">
+						<strong>{{ r.pokemon_display_name }}</strong><img src="{% static img_file %}" style="max-height: 70px;">
+					</button>
+				</h5>
+				<div class="container">
+					<div>
+						Used Rate: {{ r.used_rate|stringformat:"05.2F" }}%
+					</div>
+					<div>
+						Used Winrate: {{ r.winrate_used|stringformat:"05.2F" }}%
+					</div>
+					<div>
+						Lead Rate: {{ r.lead_rate|stringformat:"05.2F" }}%
+					</div>
+					<div>
+						Lead Winrate: {{ r.winrate_lead|stringformat:"05.2F" }}%
+					</div>
+					<div>
+						Tera Frequency: {{ r.tera_frequency|stringformat:"05.2F" }}%
+					</div>
+				</div>
+			</div>
+			<div id="collapse{{ r.id }}" class="collapse" aria-labelledby="heading{{ r.id }}">
+				<div class="card-body">
+					<div class="row justify-content-center">
+						<div class="col-lg-6">
+							<h3 style="text-align: center;">Moves</h3>
+							<div class="table-responsive">
+								<table>
+									<thead>
+										<tr>
+											<th>
+												Move
+											</th>
+											<th>
+												Move Frequency
+											</th>
+											<th>
+												Winrate
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for m in moves %}
+										{% if m.pokemon_id == r.id %}
+										<tr>
+											<td>
+												{{ m.move_display_name }}
+											</td>
+											<td>
+												{{ m.move_frequency }}%
+											</td>
+											<td>
+												{{ m.winrate }}%
+											</td>
+										</tr>
+										{% endif %}
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<h3>Opponents</h3>
+							<div class="table-responsive">
+								<table>
+									<thead>
+										<tr>
+											<th>
+												Opponent
+											</th>
+											<th>
+												Used Winrate
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for o in opponents %}
+										{% if o.cur_mon == r.id %}
+										{% with o.img_number|slugify as img_num_o %}
+										{% with "sprites/pokemon/"|add:img_num_o|add:".png" as img_file_o %}
+										<tr>
+											<td>
+												<img src="{% static img_file_o %}" style="max-height: 70px;">{{ o.pokemon_display_name }}
+											</td>
+											<td>
+												{{ o.winrate_used }}
+											</td>
+										</tr>
+										{% endwith %}
+										{% endwith %}
+										{% endif %}
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
 		</div>
-		<div>
-			Used Rate: {{ r.used_rate|stringformat:"05.2F" }}%
-		</div>
-		<div>
-			Used Winrate: {{ r.winrate_used|stringformat:"05.2F" }}%
-		</div>
-		<div>
-			Lead Rate: {{ r.lead_rate|stringformat:"05.2F" }}%
-		</div>
-		<div>
-			Lead Winrate: {{ r.winrate_lead|stringformat:"05.2F" }}%
-		</div>
-		<div>
-			Tera Frequency: {{ r.tera_frequency|stringformat:"05.2F" }}%
-		</div>
+	{% endwith %}
+	{% endwith %}
+	{% endfor %}
+	</div>
+	<div class="row justify-content-center">
+		<h3>
+			Core Matchups
+		</h3>
 		<div class="table-responsive">
 			<table>
 				<thead>
 					<tr>
 						<th>
-							Move
+							Core
 						</th>
 						<th>
-							Move Frequency
+							Count
 						</th>
 						<th>
 							Winrate
@@ -54,120 +150,65 @@
 					</tr>
 				</thead>
 				<tbody>
-					{% for m in moves %}
-					{% if m.pokemon_id == r.id %}
+					{% for m in matchups %}
 					<tr>
 						<td>
-							{{ m.move_display_name }}
+							{% for mon in m.pokemon_of_team_or_core.all %}
+							{% with mon.pokemon.img_number|slugify as img_num %}
+							{% with "sprites/pokemon/"|add:img_num|add:".png" as img_file %}
+							<img src="{% static img_file %}" style="max-height: 70px;">
+							{{ mon.pokemon.pokemon_display_name }}
+							{% endwith %}
+							{% endwith %}
+							{% endfor %}
 						</td>
 						<td>
-							{{ m.move_frequency }}%
+							{{ m.count }}
 						</td>
 						<td>
 							{{ m.winrate }}%
 						</td>
 					</tr>
-					{% endif %}
 					{% endfor %}
 				</tbody>
 			</table>
-		</div>
+		</div>		
+	</div>
+	<div class="row justify-content-center">
+		<h3>
+			On Teams With
+		</h3>
 		<div class="table-responsive">
 			<table>
 				<thead>
 					<tr>
 						<th>
-							Opponent
+							Mon
 						</th>
 						<th>
-							Used Winrate
+							Winrate
 						</th>
 					</tr>
 				</thead>
 				<tbody>
-					{% for o in opponents %}
-					{% if o.cur_mon == r.id %}
+					{% for t in teammates %}
 					<tr>
 						<td>
-							{{ o.pokemon_display_name }}
+							{% with t.img_number|slugify as img_num %}
+							{% with "sprites/pokemon/"|add:img_num|add:".png" as img_file %}
+							<img src="{% static img_file %}" style="max-height: 70px;">
+							{{ t.pokemon_display_name }}
+							{% endwith %}
+							{% endwith %}
 						</td>
 						<td>
-							{{ o.winrate_used }}
+							{{ t.winrate }}
 						</td>
 					</tr>
-					{% endif %}
 					{% endfor %}
 				</tbody>
 			</table>
 		</div>
-	</div>
-	{% endwith %}
-	{% endwith %}
-	{% endfor %}
-	<div class="table-responsive">
-		<table>
-			<thead>
-				<tr>
-					<th>
-						Core
-					</th>
-					<th>
-						Count
-					</th>
-					<th>
-						Winrate
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for m in matchups %}
-				<tr>
-					<td>
-						{% for mon in m.pokemon_of_team_or_core.all %}
-						{% with mon.pokemon.img_number|slugify as img_num %}
-						{% with "sprites/pokemon/"|add:img_num|add:".png" as img_file %}
-						<img src="{% static img_file %}" style="max-height: 70px;">
-						{{ mon.pokemon.pokemon_display_name }}
-						{% endwith %}
-						{% endwith %}
-						{% endfor %}
-					</td>
-					<td>
-						{{ m.count }}
-					</td>
-					<td>
-						{{ m.winrate }}%
-					</td>
-				</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-	</div>
-	<div class="table-responsive">
-		<table>
-			<thead>
-				<tr>
-					<th>
-						Mon
-					</th>
-					<th>
-						Winrate
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for t in teammates %}
-				<tr>
-					<td>
-						{{ t.pokemon_display_name }}
-					</td>
-					<td>
-						{{ t.winrate }}
-					</td>
-				</tr>
-				{% endfor %}
-			</tbody>
-		</table>
 	</div>
 </div>
 
