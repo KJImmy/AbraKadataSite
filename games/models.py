@@ -5,6 +5,11 @@ from pokemon.models import Pokemon,Move
 # Create your models here.
 class Player(models.Model):
 	username = models.CharField(max_length=100,unique=True)
+	site_user = models.ForeignKey(
+		settings.AUTH_USER_MODEL,
+		on_delete=models.PROTECT,
+		related_name='username_of_user',
+		null=True)
 
 class Game(models.Model):
 	start_time = models.DateTimeField()
@@ -96,4 +101,5 @@ class UserSubmittedGame(models.Model):
 		on_delete=models.PROTECT)
 	user = models.ForeignKey(
 		settings.AUTH_USER_MODEL,
-		on_delete=models.PROTECT)
+		on_delete=models.PROTECT,
+		related_name='games_submitted')
