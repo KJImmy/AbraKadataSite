@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 
 from pokemon.models import Pokemon,Move
@@ -14,7 +15,7 @@ class Game(models.Model):
 		related_name='games_of_format',
 		on_delete=models.PROTECT)
 	ranked = models.BooleanField(default=True)
-	public = models.BooleanField()
+	public = models.BooleanField(default=True)
 
 class PokemonUsage(models.Model):
 	pokemon = models.ForeignKey(
@@ -87,3 +88,12 @@ class GamePlayerRelation(models.Model):
 
 	class Meta:
 		unique_together = ['game','player']
+
+class UserSubmittedGame(models.Model):
+	game = models.ForeignKey(
+		'Game',
+		related_name='submitted_by',
+		on_delete=models.PROTECT)
+	user = models.ForeignKey(
+		settings.AUTH_USER_MODEL,
+		on_delete=models.PROTECT)
