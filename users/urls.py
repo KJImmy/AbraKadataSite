@@ -10,5 +10,4 @@ urlpatterns = [
 	path('showdown-username/',submit_showdown_name_view,name='psusername'),
 	path('submit-game/',submit_game_view,name='uploadgame'),
 	path('stats/',stats_view,name='stats'),
-	path('stats/<int:team_id>',breakdown_view,name='breakdown'),
 ]
