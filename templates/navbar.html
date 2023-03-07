@@ -22,6 +22,11 @@
 				<li class="nav-item active">
 					<a class="nav-link" href="{% url 'about' %}">About</a>
 				</li>
+				{% if user.is_authenticated %}
+				<li>
+					<a class="nav-link active" href="{% url 'dashboard' %}">Dashboard</a>
+				</li>
+				{% endif %}
 			</ul>
 			<a class="nav-item active" href="https://ko-fi.com/abrakadata" target="_blank" style="margin-right: 20px;">Support Abra Kadata</a>
 			<form id="search_form" class="form-inline my-2 my-lg-0 nav-search">

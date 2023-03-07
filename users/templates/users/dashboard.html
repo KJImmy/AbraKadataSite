@@ -3,47 +3,25 @@
 {% load static %}
 
 {% block content %}
-Hello, {{ user.username|default:'Guest' }}!
 
-<div>
+<div class="container">
+    Hello, {{ user.username|default:'Guest' }}!
     {% if user.is_authenticated %}
         <div>
 	        <a href="{% url 'logout' %}">Logout</a>
         </div>
         <div>
-	        <a href="{% url 'password_change' %}">Change password</a>
+	        <a href="{% url 'password_change' %}">Change Password</a>
         </div>
         <div>
-        	{{ player }}
+            <a href="{% url 'stats' %}">See Stats</a>
         </div>
-        {% for key, value in results.items %}
         <div>
-            <div class="row justify-content-center">
-                <h3>Gen {{ key.generation }} {{ key.tier_display_name }}</h3>
-            </div>
-    		{% for team,results in value.items %}
-            <div class="row justify-content-start">
-                <div class="col-8">
-                {% for p in team %}
-                    {% with p.img_number|slugify as img_num %}
-                    {% with "sprites/pokemon/"|add:img_num|add:".png" as img_file %}
-                        <img src="{% static img_file %}" style="max-height: 70px;">
-                        {{ p.pokemon_display_name }}
-                    {% endwith %}
-                    {% endwith %}
-                {% endfor %}
-                    <a href="#">Team Breakdown</a>
-                </div>
-                <div class="col-2">
-                    Game Count: {{ results.Played }}                    
-                </div>
-                <div class="col-2">
-                    Winrate: {{ results.Winrate }}%                    
-                </div>
-            </div>
-            {% endfor %}
+            <a href="{% url 'psusername' %}">Connect Showdown Username</a>
         </div>
-       	{% endfor %}
+        <div>
+            <a href="{% url 'uploadgame' %}">Upload Replay</a>
+        </div>
 
     {% else %}
         <a href="{% url 'login' %}">Login</a>
