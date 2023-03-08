@@ -70,10 +70,13 @@ def register_view(request):
 			user = form.save()
 			login(request, user)
 			return redirect(reverse("dashboard"))
+		
+		cleaned = form.errors.as_data()
 
 		return render(
 			request, "users/register.html",
-			{"form": CustomUserCreationForm})
+			{"form": CustomUserCreationForm,
+			"cleaned":cleaned})
 
 def submit_showdown_name_view(request):
 	response = request.POST
