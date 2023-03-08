@@ -1,11 +1,13 @@
 import operator
 
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+from django.urls import reverse
 
-from .forms import ShowdownUsernameForm,SubmitGameForm
+from .forms import ShowdownUsernameForm,SubmitGameForm,CustomUserCreationForm
 from .utils import validate_username
 from games.utils import add_game_from_link
 from games.models import Player,GamePlayerRelation,PokemonUsage
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib.auth.middleware import get_user
 
@@ -68,6 +70,10 @@ def register_view(request):
 			user = form.save()
 			login(request, user)
 			return redirect(reverse("dashboard"))
+
+		return render(
+			request, "users/register.html",
+			{"form": CustomUserCreationForm})
 
 def submit_showdown_name_view(request):
 	response = request.POST
