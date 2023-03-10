@@ -34,6 +34,7 @@
 	        		{% csrf_token %}
 	        		<input type="hidden" id="games" name="games" value="{{ stats.game_list }}">
 	        		<input type="hidden" id="team" name="team" value="{{ stats.team_ids }}">
+	        		<input type="hidden" id="winrate" name="winrate" value="{{ stats.Winrate }}">
 	        		<input type="submit" name="breakdown" value="Team Breakdown">
 	        	</form>    	
 	        </div>

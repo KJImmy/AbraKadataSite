@@ -3,6 +3,7 @@ import json
 
 from django.shortcuts import render,redirect
 from django.urls import reverse
+from django.db import connection
 
 from .forms import ShowdownUsernameForm,SubmitGameForm,CustomUserCreationForm
 from .utils import validate_username
@@ -71,13 +72,24 @@ def breakdown_view(request):
 	game_objects = GamePlayerRelation.objects.filter(pk__in=game_list)
 	team_objects = Pokemon.objects.filter(pk__in=team_ids)
 
-	individual_usage = Pokemon.objects.raw('	SELECT pokemon_id AS id,COUNT(*) AS count, \
-													COUNT(*) FILTER (WHERE mon.lead = true) AS lead_count \
+	with connection.cursor() as cur:
+		cur.execute('	SELECT ROUND(CAST(COUNT(*) FILTER (WHERE player.winner = true) AS DECIMAL) * 100 / CAST(COUNT(*) AS DECIMAL),2) AS winrate \
+						FROM games_gameplayerrelation player \
+						WHERE player.id IN %s',[tuple(game_list)])
+		winrate = cur.fetchone()[0]
+		winrate = float(winrate)
+
+	individual_usage = Pokemon.objects.raw('	SELECT mon.pokemon_id AS id,\
+													ROUND(CAST(COUNT(*) FILTER (WHERE player.winner = true) AS DECIMAL) * 100 / CAST(COUNT(*) AS DECIMAL),2) AS winrate,\
+													ROUND(CAST(COUNT(*) FILTER (WHERE player.winner = true AND mon.used = true) AS DECIMAL) * 100 / CAST(COUNT(*) FILTER (WHERE mon.used = true) AS DECIMAL),2) AS winrate_used,\
+													ROUND(CAST(COUNT(*) FILTER (WHERE player.winner = true AND mon.lead = true) AS DECIMAL) * 100 / CAST(COUNT(*) FILTER (WHERE mon.lead = true) AS DECIMAL),2) AS winrate_lead,\
+													ROUND(CAST(COUNT(*) FILTER (WHERE mon.used = true) AS DECIMAL) * 100 / CAST(%s AS DECIMAL),2) AS frequency_used,\
+													ROUND(CAST(COUNT(*) FILTER (WHERE mon.lead = true) AS DECIMAL) * 100 / CAST(%s AS DECIMAL),2) AS frequency_lead\
 												FROM games_pokemonusage mon \
 												INNER JOIN games_gameplayerrelation player \
 												ON mon.game_player_id = player.id \
 												WHERE player.id IN %s \
-												GROUP BY pokemon_id',[tuple(game_list)])
+												GROUP BY mon.pokemon_id',[len(game_list),len(game_list),tuple(game_list)])
 
 	moves = Move.objects.raw('	SELECT move_id AS id,\
 									mon.pokemon_id AS pokemon,\
@@ -126,6 +138,7 @@ def breakdown_view(request):
 												GROUP BY mon.pokemon_id',[tuple(game_list)])
 
 	context = {
+		'winrate':winrate,
 		'response':response,
 		'games':game_list,
 		'team':team_objects,

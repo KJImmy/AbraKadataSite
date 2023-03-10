@@ -8,6 +8,9 @@
 	<h1 style="text-align: center;">
 		Team Breakdown
 	</h1>
+	<div style="text-align: center;">
+		Team Winrate: {{ winrate }}%
+	</div>
 	<div class="row justify-content-center">
 		{% for mon in team %}
 		{% with mon.img_number|slugify as img_num %}
@@ -30,16 +33,16 @@
 				</h5>
 				<div class="container">
 					<div>
-						Used Rate
+						Used Rate: {{ mon.frequency_used }}
 					</div>
 					<div>
-						Lead Rate
+						Lead Rate: {{ mon.frequency_lead }}
 					</div>
 					<div>
-						Used Winrate
+						Used Winrate: {{ mon.winrate_used }}
 					</div>
 					<div>
-						Lead Winrate
+						Lead Winrate: {{ mon.winrate_lead }}
 					</div>
 				</div>
 			</div>
