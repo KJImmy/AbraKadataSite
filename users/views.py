@@ -111,13 +111,28 @@ def breakdown_view(request):
 										WHERE player.id IN %s \
 										GROUP BY opp_mon.pokemon_id,mon.pokemon_id',[tuple(game_list)])
 
+	opponents_for_team = Pokemon.objects.raw('	SELECT mon.pokemon_id AS id,\
+													ROUND(CAST(COUNT(mon.pokemon_id) FILTER (WHERE player.winner = true) AS DECIMAL) * 100 / CAST(COUNT(mon.pokemon_id) AS DECIMAL),2) AS winrate_against,\
+													ROUND(CAST(COUNT(mon.pokemon_id) FILTER (WHERE player.winner = true AND mon.used = true) AS DECIMAL) * 100 / NULLIF(CAST(COUNT(mon.pokemon_id) FILTER (WHERE mon.used = true) AS DECIMAL),0),2) AS winrate_against_used,\
+													ROUND(CAST(COUNT(mon.pokemon_id) FILTER (WHERE player.winner = true AND mon.lead = true) AS DECIMAL) * 100 / NULLIF(CAST(COUNT(mon.pokemon_id) FILTER (WHERE mon.lead = true) AS DECIMAL),0),2) AS winrate_against_lead,\
+													ROUND(CAST(COUNT(mon.pokemon_id) FILTER (WHERE mon.used = true) AS DECIMAL) * 100 / NULLIF(CAST(COUNT(mon.pokemon_id) AS DECIMAL),0),2) AS frequency_used,\
+													ROUND(CAST(COUNT(mon.pokemon_id) FILTER (WHERE mon.lead = true) AS DECIMAL) * 100 / NULLIF(CAST(COUNT(mon.pokemon_id) AS DECIMAL),0),2) AS frequency_lead \
+												FROM games_pokemonusage mon \
+												INNER JOIN games_gameplayerrelation opponent \
+												ON opponent.id = mon.game_player_id \
+												INNER JOIN games_gameplayerrelation player \
+												ON player.game_id = opponent.game_id AND player.id <> opponent.id \
+												WHERE player.id IN %s \
+												GROUP BY mon.pokemon_id',[tuple(game_list)])
+
 	context = {
 		'response':response,
 		'games':game_list,
 		'team':team_objects,
 		'moves':moves,
 		'individual':individual_usage,
-		'opponents':opponents
+		'opponents':opponents,
+		'opponents_for_team':opponents_for_team
 	}
 	return render(request,"users/team_breakdown.html",context)
 

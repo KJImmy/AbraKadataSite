@@ -108,7 +108,7 @@
 									</thead>
 									<tbody>
 										{% for o in opponents %}
-										{% if o.team_mon == mon.id %}
+										{% if o.team_mon == mon.id and o.faceoff_frequency > 0 %}
 										<tr>
 											<td>
 												{{ o.pokemon_display_name }}
@@ -137,6 +137,58 @@
 			</div>
 		</div>
 	{% endfor %}
+	</div>
+	<div class="container">
+		<div class="table-responsive">
+			<table>
+				<thead>
+					<tr>
+						<th>
+							Pokemon
+						</th>
+						<th>
+							Winrate Against
+						</th>
+						<th>
+							Winrate Against - Used
+						</th>
+						<th>
+							Winrate Against - Lead
+						</th>
+						<th>
+							Used Frequency
+						</th>
+						<th>
+							Lead Frequency
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for o in opponents_for_team %}
+					<tr>
+						<td>
+							{{ o.pokemon_display_name }}
+						</td>
+						<td>
+							{{ o.winrate_against }}
+						</td>
+						<td>
+							{{ o.winrate_against_used }}
+						</td>
+						<td>
+							{{ o.winrate_against_lead }}
+						</td>
+						<td>
+							{{ o.frequency_used }}
+						</td>
+						<td>
+							{{ o.frequency_lead }}
+						</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>		
 	</div>
 </div>
 {% endblock %}
