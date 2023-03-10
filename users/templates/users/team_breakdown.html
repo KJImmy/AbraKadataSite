@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+	<h1 style="text-align: center;">
+		Team Breakdown
+	</h1>
+	<div class="row justify-content-center">
+		{% for mon in team %}
+		{% with mon.img_number|slugify as img_num %}
+		{% with "sprites/pokemon/"|add:img_num|add:".png" as img_file %}
+		<img src="{% static img_file %}" style="max-height: 70px;">
+		{% endwith %}
+		{% endwith %}
+		{% endfor %}
+	</div>
+	<div class="accordion">
+	{% for mon in individual %}
+		<div class="card">
+			<div class="card-header" id="heading{{ mon.id }}" style="display:inline-flex;">
+				<h5 class="mb-0">
+					<button class="btn btn-link" 
+							data-toggle="collapse" data-target="#collapse{{ mon.id }}" aria-expanded="false" aria-controls="collapse{{ mon.id }}"
+							style="white-space: nowrap;">
+						<strong>{{ mon.pokemon_display_name }}</strong>
+					</button>
+				</h5>
+				<div class="container">
+					<div>
+						Used Rate
+					</div>
+					<div>
+						Lead Rate
+					</div>
+					<div>
+						Used Winrate
+					</div>
+					<div>
+						Lead Winrate
+					</div>
+				</div>
+			</div>
+			<div id="collapse{{ mon.id }}" class="collapse" aria-labelledby="heading{{ mon.id }}">
+				<div class="card-body">
+					<div class="row justify-content-center">
+						<div class="col-lg-6">
+							<h3 style="text-align: center;">Moves</h3>
+							<div class="table-responsive">
+								<table>
+									<thead>
+										<tr>
+											<th>
+												Move
+											</th>
+											<th>
+												Winrate
+											</th>
+											<th>
+												Move Frequency
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for m in moves %}
+										{% if m.pokemon == mon.id %}
+										<tr>
+											<td>
+												{{ m.move_display_name }}
+											</td>
+											<td>
+												{{ m.winrate }}
+											</td>
+											<td>
+												{{ m.move_frequency }}
+											</td>
+										</tr>
+										{% endif %}
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<h3 style="text-align: center;">Opponents</h3>
+							<div class="table-responsive">
+								<table>
+									<thead>
+										<tr>
+											<th>
+												Opponent
+											</th>
+											<th>
+												Used Winrate
+											</th>
+											<th>
+												Faceoff Frequency
+											</th>
+											<th>
+												Lead Winrate
+											</th>
+											<th>
+												Lead Faceoff Frequency
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for o in opponents %}
+										{% if o.team_mon == mon.id %}
+										<tr>
+											<td>
+												{{ o.pokemon_display_name }}
+											</td>
+											<td>
+												{{ o.winrate_used }}
+											</td>
+											<td>
+												{{ o.faceoff_frequency }}
+											</td>
+											<td>
+												{{ o.winrate_lead }}
+											</td>
+											<td>
+												{{ o.faceoff_frequency_lead }}
+											</td>
+										</tr>
+										{% endif %}
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+	</div>
+</div>
+{% endblock %}

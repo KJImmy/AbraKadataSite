@@ -10,7 +10,7 @@
 	    <div class="row justify-content-center">
 	        <h3>Gen {{ key.generation }} {{ key.tier_display_name }}</h3>
 	    </div>
-		{% for team,results in value.items %}
+		{% for team,stats in value.items %}
 	    <div class="row justify-content-start">
 	        <div class="col-6">
 	        {% for p in team %}
@@ -20,15 +20,22 @@
 	            {% endwith %}
 	            {% endwith %}
 	        {% endfor %}
+	        {{ stats.team_ids }}
+	        {{ stats.game_list }}
 	        </div>
 	        <div class="col-2">
-	        	Winrate: {{ results.Winrate }}%
+	        	Winrate: {{ stats.Winrate }}%
 	        </div>
 	        <div class="col-2" style="align-content: center;">
-	            Game Count: {{ results.Played }}
+	            Game Count: {{ stats.Played }}
 	        </div>
 	        <div class="col-2">
-	            <a href="#">Team Breakdown</a>	        	
+	        	<form action="{% url 'breakdown' %}" method="post">
+	        		{% csrf_token %}
+	        		<input type="hidden" id="games" name="games" value="{{ stats.game_list }}">
+	        		<input type="hidden" id="team" name="team" value="{{ stats.team_ids }}">
+	        		<input type="submit" name="breakdown" value="Team Breakdown">
+	        	</form>    	
 	        </div>
 	    </div>
 	    {% endfor %}
