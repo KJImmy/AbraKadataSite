@@ -10,6 +10,7 @@ from .utils import validate_username
 from games.utils import add_game_from_link
 from games.models import Player,GamePlayerRelation,PokemonUsage,Game
 from pokemon.models import Pokemon,Move
+from tiers.models import Tier
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib.auth.middleware import get_user
@@ -20,14 +21,19 @@ def dashboard_view(request):
 	return render(request,"users/dashboard.html",context)
 
 def stats_view(request):
+	ranked_bool = True
+
 	user = get_user(request)
 	player = Player.objects.filter(site_user__isnull=False).filter(site_user=user.id)
+	player_ids = []
+	game_list = []
 
 	results = {}
 	for p in player:
+		player_ids.append(p.id)
 		# Go through all instances of player's games
 		for t in p.games_of_player.all():
-
+			game_list.append(t.id)
 			# Get formats in which games were played
 			cur_tier = t.game.tier
 			if cur_tier not in results.keys():
@@ -53,13 +59,54 @@ def stats_view(request):
 			if t.winner == True:
 				results[cur_tier][tt]["Won"] += 1
 
+	tiers_played = results.keys()
+
 	# Calc winrates
 	for tier in results.keys():
 		for team in results[tier].keys():
 			results[tier][team]["Winrate"] = round(results[tier][team]["Won"] * 100 / results[tier][team]["Played"],2)
 
+	general_stats = Pokemon.objects.raw('	SELECT mon.pokemon_id AS id,game.tier_id,\
+												c.count AS games_in_tier,\
+												ROUND(CAST(COUNT(*) AS DECIMAL) * 100 / CAST(c.count AS DECIMAL),2) AS appearance_rate,\
+												ROUND(CAST(COUNT(*) FILTER (WHERE mon.used = true) AS DECIMAL) * 100 / CAST(COUNT(*) AS DECIMAL),2) AS used_rate,\
+												ROUND(CAST(COUNT(*) FILTER (WHERE mon.lead = true) AS DECIMAL) * 100 / CAST(COUNT(*) AS DECIMAL),2) AS lead_rate,\
+												ROUND(CAST(COUNT(*) FILTER (WHERE player.winner = true) AS DECIMAL) * 100 / CAST(COUNT(*) AS DECIMAL),2) AS winrate,\
+												ROUND(CAST(COUNT(*) FILTER (WHERE mon.used = true AND player.winner = true) AS DECIMAL) * 100 / NULLIF(CAST(COUNT(*) FILTER (WHERE mon.used = true) AS DECIMAL),0),2) AS winrate_used,\
+												ROUND(CAST(COUNT(*) FILTER (WHERE mon.lead = true AND player.winner = true) AS DECIMAL) * 100 / NULLIF(CAST(COUNT(*) FILTER (WHERE mon.lead = true) AS DECIMAL),0),2) AS winrate_lead,\
+												ROUND(CAST(COUNT(*) FILTER (WHERE mon.dynamaxed = true) AS DECIMAL) * 100 / CAST(COUNT(*) AS DECIMAL),2) AS dynamax_frequency,\
+												ROUND(CAST(COUNT(*) FILTER (WHERE mon.dynamaxed = true AND player.winner = true) AS DECIMAL) * 100 / NULLIF(CAST(COUNT(*) FILTER (WHERE mon.dynamaxed = true) AS DECIMAL),0),2) AS dynamax_winrate,\
+												ROUND(CAST(COUNT(*) FILTER (WHERE mon.tera_type_id IS NOT NULL) AS DECIMAL) * 100 / CAST(COUNT(*) AS DECIMAL),2) AS tera_frequency \
+											FROM games_pokemonusage mon \
+											INNER JOIN games_gameplayerrelation player \
+											ON mon.game_player_id = player.id \
+											INNER JOIN games_game game \
+											ON game.id = player.game_id \
+											LEFT JOIN (	SELECT cg.tier_id,COUNT(*) \
+														FROM games_gameplayerrelation cp \
+														INNER JOIN games_game cg \
+														ON cg.id = cp.game_id \
+														WHERE cp.player_id IN %s \
+														GROUP BY cg.tier_id) c \
+											ON c.tier_id = game.tier_id \
+											WHERE player.player_id IN %s \
+											GROUP BY mon.pokemon_id,game.tier_id,c.count',[tuple(player_ids),tuple(player_ids)])
+
+	overall_tier_stats = Tier.objects.raw('	SELECT game.tier_id AS id,\
+												COUNT(*) AS game_count,\
+												ROUND(CAST(COUNT(*) FILTER (WHERE player.winner = true) AS DECIMAL) * 100 / CAST(COUNT(*) AS DECIMAL),2) AS winrate \
+											FROM games_gameplayerrelation player \
+											INNER JOIN games_game game \
+											ON game.id = player.game_id \
+											WHERE player.player_id IN %s \
+											GROUP BY game.tier_id \
+											ORDER BY game_count DESC',[tuple(player_ids)])
+
 	context = {
-		'results':results
+		'results':results,
+		'general':general_stats,
+		'tiers':tiers_played,
+		'tier_stats':overall_tier_stats
 	}
 	return render(request,"users/user_stats.html",context)
 

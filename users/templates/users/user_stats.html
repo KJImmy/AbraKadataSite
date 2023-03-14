@@ -4,41 +4,135 @@
 
 {% block content %}
 
+<!-- <div class="wrapper">
+	<div id="sidebar-wrapper">
+		<div id="sidebar">
+			<div class="sidebar-header">
+				<h3 style="text-align: center;">Formats Played</h3>
+				{% for t in tiers %}
+				<div>
+					Gen {{ t.generation }} {{ t.tier_display_name }}
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div> -->
 <div class="container">
-	{% for key, value in results.items %}
-	<div class="container" style="margin-bottom: 20px;">
-	    <div class="row justify-content-center">
-	        <h3>Gen {{ key.generation }} {{ key.tier_display_name }}</h3>
-	    </div>
-		{% for team,stats in value.items %}
-	    <div class="row justify-content-start">
-	        <div class="col-6">
-	        {% for p in team %}
-	            {% with p.img_number|slugify as img_num %}
-	            {% with "sprites/pokemon/"|add:img_num|add:".png" as img_file %}
-	                <img src="{% static img_file %}" style="max-height: 70px;">
-	            {% endwith %}
-	            {% endwith %}
-	        {% endfor %}
-	        </div>
-	        <div class="col-2">
-	        	Winrate: {{ stats.Winrate }}%
-	        </div>
-	        <div class="col-2" style="align-content: center;">
-	            Game Count: {{ stats.Played }}
-	        </div>
-	        <div class="col-2">
-	        	<form action="{% url 'breakdown' %}" method="post">
-	        		{% csrf_token %}
-	        		<input type="hidden" id="games" name="games" value="{{ stats.game_list }}">
-	        		<input type="hidden" id="team" name="team" value="{{ stats.team_ids }}">
-	        		<input type="submit" name="breakdown" value="Team Breakdown">
-	        	</form>    	
-	        </div>
-	    </div>
-	    {% endfor %}
-	</div>
+	<div class="accordion">
+	{% for t in tier_stats %}
+		<div class="card">
+			<div class="card-header" id="heading{{ t.id }}" style="display:inline-flex;">
+				<h5 class="mb-0">
+					<button class="btn btn-link" 
+							data-toggle="collapse" data-target="#collapse{{ t.id }}" aria-expanded="false" aria-controls="collapse{{ t.id }}"
+							style="white-space: nowrap;">
+						<strong>{{ t.generation }} {{ t.tier_display_name }}</strong>
+					</button>
+				</h5>
+				<div class="container">
+					Overall Winrate: {{ t.winrate }}%
+				</div>
+			</div>
+			<div id="collapse{{ t.id }}" class="collapse" aria-labelledby="heading{{ t.id }}">
+				<div class="card-body">
+					<div>
+						<div class="table-responsive">
+							<table>
+								<thead>
+									<tr>
+										<th>
+											Pokemon
+										</th>
+										<th>
+											Appearance Rate
+										</th>
+										<th>
+											Winrate
+										</th>
+										<th>
+											Used Rate
+										</th>
+										<th>
+											Used Winrate
+										</th>
+										<th>
+											Lead Rate
+										</th>
+										<th>
+											Lead Winrate
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for g in general %}
+									{% if g.tier_id == t.id %}
+									<tr>
+										<td>
+											{{ g.pokemon_display_name }}
+										</td>
+										<td>
+											{{ g.appearance_rate }}
+										</td>
+										<td>
+											{{ g.winrate }}
+										</td>
+										<td>
+											{{ g.used_rate }}
+										</td>
+										<td>
+											{{ g.winrate_used }}
+										</td>
+										<td>
+											{{ g.lead_rate }}
+										</td>
+										<td>
+											{{ g.winrate_lead }}
+										</td>
+									</tr>
+									{% endif %}
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+						<div>
+							{% for key,value in results.items %}
+							{% if key.id == t.id %}
+							{% for team,stats in value.items %}
+						    <div class="row justify-content-start">
+						        <div class="col-6">
+						        {% for p in team %}
+						            {% with p.img_number|slugify as img_num %}
+						            {% with "sprites/pokemon/"|add:img_num|add:".png" as img_file %}
+						                <img src="{% static img_file %}" style="max-height: 70px;">
+						            {% endwith %}
+						            {% endwith %}
+						        {% endfor %}
+						        </div>
+						        <div class="col-2">
+						        	Winrate: {{ stats.Winrate }}%
+						        </div>
+						        <div class="col-2" style="align-content: center;">
+						            Game Count: {{ stats.Played }}
+						        </div>
+						        <div class="col-2">
+						        	<form action="{% url 'breakdown' %}" method="post">
+						        		{% csrf_token %}
+						        		<input type="hidden" id="games" name="games" value="{{ stats.game_list }}">
+						        		<input type="hidden" id="team" name="team" value="{{ stats.team_ids }}">
+						        		<input type="submit" name="breakdown" value="Team Breakdown">
+						        	</form>    	
+						        </div>
+						    </div>
+						    {% endfor %}
+						    {% endif %}
+						    {% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	{% endfor %}
+	</div>
 </div>
 
 {% endblock %}
