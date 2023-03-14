@@ -81,8 +81,8 @@ def breakdown_view(request):
 
 	individual_usage = Pokemon.objects.raw('	SELECT mon.pokemon_id AS id,\
 													ROUND(CAST(COUNT(*) FILTER (WHERE player.winner = true) AS DECIMAL) * 100 / CAST(COUNT(*) AS DECIMAL),2) AS winrate,\
-													ROUND(CAST(COUNT(*) FILTER (WHERE player.winner = true AND mon.used = true) AS DECIMAL) * 100 / CAST(COUNT(*) FILTER (WHERE mon.used = true) AS DECIMAL),2) AS winrate_used,\
-													ROUND(CAST(COUNT(*) FILTER (WHERE player.winner = true AND mon.lead = true) AS DECIMAL) * 100 / CAST(COUNT(*) FILTER (WHERE mon.lead = true) AS DECIMAL),2) AS winrate_lead,\
+													ROUND(CAST(COUNT(*) FILTER (WHERE player.winner = true AND mon.used = true) AS DECIMAL) * 100 / NULLIF(CAST(COUNT(*) FILTER (WHERE mon.used = true) AS DECIMAL),0),2) AS winrate_used,\
+													ROUND(CAST(COUNT(*) FILTER (WHERE player.winner = true AND mon.lead = true) AS DECIMAL) * 100 / NULLIF(CAST(COUNT(*) FILTER (WHERE mon.lead = true) AS DECIMAL),0),2) AS winrate_lead,\
 													ROUND(CAST(COUNT(*) FILTER (WHERE mon.used = true) AS DECIMAL) * 100 / CAST(%s AS DECIMAL),2) AS frequency_used,\
 													ROUND(CAST(COUNT(*) FILTER (WHERE mon.lead = true) AS DECIMAL) * 100 / CAST(%s AS DECIMAL),2) AS frequency_lead\
 												FROM games_pokemonusage mon \
