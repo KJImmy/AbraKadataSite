@@ -21,6 +21,7 @@ class Game(models.Model):
 		on_delete=models.PROTECT)
 	ranked = models.BooleanField(default=True)
 	public = models.BooleanField(default=True)
+	rating = models.PositiveIntegerField(null=True)
 
 class PokemonUsage(models.Model):
 	pokemon = models.ForeignKey(

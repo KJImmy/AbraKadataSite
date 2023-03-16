@@ -3,10 +3,12 @@ from django.db.models import Count,When,Case,Q,F,PositiveIntegerField,FloatField
 from django.contrib.staticfiles import finders
 
 from .models import Tier,IndividualWinrate,TeammateWinrate,OpponentWinrate,MoveWinrate,TeraWinrate,TeamOrCore
+from .forms import FilterForm
 from games.models import PokemonUsage,Game,GamePlayerRelation
 from pokemon.models import Pokemon,Move,Type
 
 from decimal import Decimal
+import datetime
 
 # Create your views here.
 def formats_view(request):
@@ -19,6 +21,8 @@ def formats_view(request):
 	return render(request,'formats.html',context)
 
 def format_base_view(request,generation,tier_name):
+	stats_filter = request.GET
+
 	tier_list = Tier.objects.all().order_by('-generation','style')
 	generation_list = tier_list.values('generation').distinct('generation')
 	tier = tier_list.get(generation=generation,tier_name=tier_name)
@@ -27,7 +31,8 @@ def format_base_view(request,generation,tier_name):
 	# pokemon_winrates = tier.individual_winrates_of_tier.filter(Q(appearance_rate__gte=5)&Q(ranked=ranked_bool)).order_by('-winrate_used')
 	# lead_winrates = tier.teammate_winrates_of_tier.filter(Q(ranked=ranked_bool)&Q(appearance_rate_lead__gte=0.1)).order_by('-appearance_rate_lead')
 
-	pokemon_winrates = IndividualWinrate.objects.filter(Q(tier=tier)&Q(appearance_rate__gte=5)&Q(ranked=ranked_bool)).order_by('-winrate_used')
+	pokemon_winrates = IndividualWinrate.objects.filter(Q(tier=tier)&Q(appearance_rate__gte=5)&Q(ranked=ranked_bool)).order_by('-winrate_used')	
+
 	lead_winrates = TeammateWinrate.objects.filter(Q(tier=tier)&Q(appearance_rate_lead__gte=0.1)&Q(ranked=ranked_bool)).\
 						order_by('-appearance_rate_lead').select_related('pokemon')
 	lead_pairs = []
@@ -50,10 +55,278 @@ def format_base_view(request,generation,tier_name):
 		'winrates':pokemon_winrates,
 		'leads':new_lead_queryset,
 		'tiers':tier_list,
-		'gens':generation_list
+		'gens':generation_list,
+		'filtered':False,
+		'form':FilterForm
 	}
 
+	if stats_filter:
+		begin = '2010-01-01 00:00:00'
+		end = datetime.datetime.now()
+		min_rating = 1000
+		max_rating = 10000
+
+		response_begin = stats_filter['start_date_year'] + " " + stats_filter['start_date_month'] + " " + stats_filter['start_date_day']
+		response_end = stats_filter['end_date_year'] + " " + stats_filter['end_date_month'] + " " + stats_filter['end_date_day']
+		response_min_rating = stats_filter['minimum_rating']
+		response_max_rating = stats_filter['maximum_rating']
+
+		if response_begin != '  ':
+			begin = response_begin + ' 00:00:00'
+		if response_end != '  ':
+			end = response_end + ' 00:00:00'
+		if response_min_rating != '':
+			min_rating = response_min_rating
+		if response_max_rating != '':
+			max_rating = response_max_rating
+
+		filtered_winrates_query = '	SELECT \
+										pokemon_id AS id,\
+										game.tier_id,\
+										ROUND(CAST(COUNT(pokemon_id) AS DECIMAL) * 100 / CAST(c.count AS DECIMAL),2) AS appearance_rate,\
+										ROUND(CAST(COUNT(pokemon_id) FILTER (WHERE mon.used = true) AS DECIMAL) * 100 / CAST(COUNT(pokemon_id) AS DECIMAL),2) AS used_rate,\
+										ROUND(CAST(COUNT(pokemon_id) FILTER (WHERE mon.lead = true) AS DECIMAL) * 100 / CAST(COUNT(pokemon_id) AS DECIMAL),2) AS lead_rate,\
+										ROUND(CAST(COUNT(pokemon_id) FILTER (WHERE player.winner = true AND pokemon_id NOT IN (\
+											SELECT pokemon_id \
+											FROM games_pokemonusage mon_sw1 \
+											LEFT JOIN games_gameplayerrelation player_sw1 \
+											ON player_sw1.id = mon_sw1.game_player_id \
+											WHERE player_sw1.game_id = player.game_id \
+											AND player_sw1.id <> player.id \
+											)) AS DECIMAL) * 100 / NULLIF(CAST(COUNT(pokemon_id) FILTER (WHERE pokemon_id NOT IN ( \
+											SELECT pokemon_id \
+											FROM games_pokemonusage mon_sw2 \
+											LEFT JOIN games_gameplayerrelation player_sw2 \
+											ON player_sw2.id = mon_sw2.game_player_id \
+											WHERE player_sw2.game_id = player.game_id \
+											AND player_sw2.id <> player.id \
+											)) AS DECIMAL),0),2) AS winrate,\
+										ROUND(CAST(COUNT(pokemon_id) FILTER (WHERE mon.used = true AND player.winner = true AND pokemon_id NOT IN (\
+											SELECT pokemon_id \
+											FROM games_pokemonusage mon_su1 \
+											LEFT JOIN games_gameplayerrelation player_su1 \
+											ON player_su1.id = mon_su1.game_player_id \
+											WHERE player_su1.game_id = player.game_id \
+											AND player_su1.id <> player.id \
+											AND mon_su1.used = true \
+											)) AS DECIMAL) * 100 / NULLIF(CAST(COUNT(pokemon_id) FILTER (WHERE mon.used = true AND pokemon_id NOT IN ( \
+											SELECT pokemon_id \
+											FROM games_pokemonusage mon_su2 \
+											LEFT JOIN games_gameplayerrelation player_su2 \
+											ON player_su2.id = mon_su2.game_player_id \
+											WHERE player_su2.game_id = player.game_id \
+											AND player_su2.id <> player.id \
+											AND mon_su2.used = true \
+											)) AS DECIMAL),0),2) AS winrate_used,\
+										ROUND(CAST(COUNT(pokemon_id) FILTER (WHERE mon.lead = true AND player.winner = true AND pokemon_id NOT IN ( \
+											SELECT pokemon_id \
+											FROM games_pokemonusage mon_sl1 \
+											LEFT JOIN games_gameplayerrelation player_sl1 \
+											ON player_sl1.id = mon_sl1.game_player_id \
+											WHERE player_sl1.game_id = player.game_id \
+											AND player_sl1.id <> player.id \
+											AND mon_sl1.used = lead \
+											)) AS DECIMAL) * 100 / NULLIF(CAST(COUNT(pokemon_id) FILTER (WHERE mon.lead = true AND pokemon_id NOT IN ( \
+											SELECT pokemon_id \
+											FROM games_pokemonusage mon_sl2 \
+											LEFT JOIN games_gameplayerrelation player_sl2 \
+											ON player_sl2.id = mon_sl2.game_player_id \
+											WHERE player_sl2.game_id = player.game_id \
+											AND player_sl2.id <> player.id \
+											AND mon_sl2.used = lead \
+											)) AS DECIMAL),0),2) AS winrate_lead, \
+										ROUND(CAST(COUNT(pokemon_id) FILTER (WHERE mon.dynamaxed = true) AS DECIMAL) * 100 / CAST(COUNT(pokemon_id) AS DECIMAL),2) AS dynamax_frequency, \
+										ROUND(CAST(COUNT(pokemon_id) FILTER (WHERE mon.dynamaxed = true AND player.winner = true) AS DECIMAL) * 100 / NULLIF(CAST(COUNT(pokemon_id) FILTER (WHERE mon.dynamaxed = true) AS DECIMAL),0),2) AS dynamax_winrate, \
+										ROUND(CAST(COUNT(pokemon_id) FILTER (WHERE mon.tera_type_id IS NOT NULL) AS DECIMAL) * 100 / CAST(COUNT(pokemon_id) AS DECIMAL),2) AS tera_frequency \
+									FROM games_pokemonusage mon \
+									LEFT JOIN games_gameplayerrelation player \
+									ON mon.game_player_id = player.id \
+									LEFT JOIN games_game game \
+									ON game.id = player.game_id \
+									LEFT JOIN pokemon_pokemon poke \
+									ON mon.pokemon_id = poke.id \
+									LEFT JOIN ( \
+										SELECT game1.tier_id, COUNT(player1.id) \
+										FROM games_gameplayerrelation player1 \
+										LEFT JOIN games_game game1 \
+										ON game1.id = player1.game_id \
+										WHERE game1.start_time >= %s \
+										AND game1.start_time <= %s \
+										AND game1.rating >= %s \
+										AND game1.rating <= %s \
+										GROUP BY game1.tier_id \
+									) c ON c.tier_id = game.tier_id \
+									WHERE game.tier_id = %s \
+									AND start_time >= %s \
+									AND start_time <= %s \
+									AND game.rating >= %s \
+									AND game.rating <= %s \
+									GROUP BY pokemon_id,game.tier_id,c.count \
+									HAVING ROUND(CAST(COUNT(pokemon_id) AS DECIMAL) * 100 / CAST(c.count AS DECIMAL),2) > 5 \
+									ORDER BY appearance_rate DESC'
+
+		query_input = [begin,end,min_rating,max_rating,tier.id,begin,end,min_rating,max_rating]
+
+		filtered_winrates = Pokemon.objects.raw(filtered_winrates_query,query_input)
+		context['winrates'] = filtered_winrates
+		context['filtered'] = True
+		context['response'] = stats_filter
+
 	return render(request,'formats_base.html',context)
+
+def format_base_view_test(request,generation,tier_name):
+	stats_filter = request.GET
+
+	tier_list = Tier.objects.all().order_by('-generation','style')
+	generation_list = tier_list.values('generation').distinct('generation')
+	tier = tier_list.get(generation=generation,tier_name=tier_name)
+	ranked_bool = True
+
+	# pokemon_winrates = tier.individual_winrates_of_tier.filter(Q(appearance_rate__gte=5)&Q(ranked=ranked_bool)).order_by('-winrate_used')
+	# lead_winrates = tier.teammate_winrates_of_tier.filter(Q(ranked=ranked_bool)&Q(appearance_rate_lead__gte=0.1)).order_by('-appearance_rate_lead')
+
+	pokemon_winrates = IndividualWinrate.objects.filter(Q(tier=tier)&Q(appearance_rate__gte=5)&Q(ranked=ranked_bool)).order_by('-winrate_used')	
+
+	lead_winrates = TeammateWinrate.objects.filter(Q(tier=tier)&Q(appearance_rate_lead__gte=0.1)&Q(ranked=ranked_bool)).\
+						order_by('-appearance_rate_lead').select_related('pokemon')
+	lead_pairs = []
+	exclude_pks = []
+	new_lead_set = []
+	for l in lead_winrates.iterator():
+		pair_list = []
+		pair_list.append(l.pokemon.pokemon_display_name)
+		pair_list.append(l.teammate.pokemon_display_name)
+		pair_list.sort()
+		if pair_list not in lead_pairs:
+			lead_pairs.append(pair_list)
+			new_lead_set.append(l)
+		else:
+			exclude_pks.append(l.id)
+	new_lead_queryset = new_lead_set[:10]
+
+	context = {
+		'tier':tier,
+		'winrates':pokemon_winrates,
+		'leads':new_lead_queryset,
+		'tiers':tier_list,
+		'gens':generation_list,
+		'filtered':False,
+		'form':FilterForm
+	}
+
+	if stats_filter:
+		begin = '2010-01-01 00:00:00'
+		end = datetime.datetime.now()
+		min_rating = 1000
+		max_rating = 10000
+
+		response_begin = stats_filter['start_date_year'] + " " + stats_filter['start_date_month'] + " " + stats_filter['start_date_day']
+		response_end = stats_filter['end_date_year'] + " " + stats_filter['end_date_month'] + " " + stats_filter['end_date_day']
+		response_min_rating = stats_filter['minimum_rating']
+		response_max_rating = stats_filter['maximum_rating']
+
+		if response_begin != '  ':
+			begin = response_begin + ' 00:00:00'
+		if response_end != '  ':
+			end = response_end + ' 00:00:00'
+		if response_min_rating != '':
+			min_rating = response_min_rating
+		if response_max_rating != '':
+			max_rating = response_max_rating
+
+		filtered_winrates_query = '	SELECT \
+										pokemon_id AS id,\
+										game.tier_id,\
+										ROUND(CAST(COUNT(pokemon_id) AS DECIMAL) * 100 / CAST(c.count AS DECIMAL),2) AS appearance_rate,\
+										ROUND(CAST(COUNT(pokemon_id) FILTER (WHERE mon.used = true) AS DECIMAL) * 100 / CAST(COUNT(pokemon_id) AS DECIMAL),2) AS used_rate,\
+										ROUND(CAST(COUNT(pokemon_id) FILTER (WHERE mon.lead = true) AS DECIMAL) * 100 / CAST(COUNT(pokemon_id) AS DECIMAL),2) AS lead_rate,\
+										ROUND(CAST(COUNT(pokemon_id) FILTER (WHERE player.winner = true AND pokemon_id NOT IN (\
+											SELECT pokemon_id \
+											FROM games_pokemonusage mon_sw1 \
+											LEFT JOIN games_gameplayerrelation player_sw1 \
+											ON player_sw1.id = mon_sw1.game_player_id \
+											WHERE player_sw1.game_id = player.game_id \
+											AND player_sw1.id <> player.id \
+											)) AS DECIMAL) * 100 / NULLIF(CAST(COUNT(pokemon_id) FILTER (WHERE pokemon_id NOT IN ( \
+											SELECT pokemon_id \
+											FROM games_pokemonusage mon_sw2 \
+											LEFT JOIN games_gameplayerrelation player_sw2 \
+											ON player_sw2.id = mon_sw2.game_player_id \
+											WHERE player_sw2.game_id = player.game_id \
+											AND player_sw2.id <> player.id \
+											)) AS DECIMAL),0),2) AS winrate,\
+										ROUND(CAST(COUNT(pokemon_id) FILTER (WHERE mon.used = true AND player.winner = true AND pokemon_id NOT IN (\
+											SELECT pokemon_id \
+											FROM games_pokemonusage mon_su1 \
+											LEFT JOIN games_gameplayerrelation player_su1 \
+											ON player_su1.id = mon_su1.game_player_id \
+											WHERE player_su1.game_id = player.game_id \
+											AND player_su1.id <> player.id \
+											AND mon_su1.used = true \
+											)) AS DECIMAL) * 100 / NULLIF(CAST(COUNT(pokemon_id) FILTER (WHERE mon.used = true AND pokemon_id NOT IN ( \
+											SELECT pokemon_id \
+											FROM games_pokemonusage mon_su2 \
+											LEFT JOIN games_gameplayerrelation player_su2 \
+											ON player_su2.id = mon_su2.game_player_id \
+											WHERE player_su2.game_id = player.game_id \
+											AND player_su2.id <> player.id \
+											AND mon_su2.used = true \
+											)) AS DECIMAL),0),2) AS winrate_used,\
+										ROUND(CAST(COUNT(pokemon_id) FILTER (WHERE mon.lead = true AND player.winner = true AND pokemon_id NOT IN ( \
+											SELECT pokemon_id \
+											FROM games_pokemonusage mon_sl1 \
+											LEFT JOIN games_gameplayerrelation player_sl1 \
+											ON player_sl1.id = mon_sl1.game_player_id \
+											WHERE player_sl1.game_id = player.game_id \
+											AND player_sl1.id <> player.id \
+											AND mon_sl1.used = lead \
+											)) AS DECIMAL) * 100 / NULLIF(CAST(COUNT(pokemon_id) FILTER (WHERE mon.lead = true AND pokemon_id NOT IN ( \
+											SELECT pokemon_id \
+											FROM games_pokemonusage mon_sl2 \
+											LEFT JOIN games_gameplayerrelation player_sl2 \
+											ON player_sl2.id = mon_sl2.game_player_id \
+											WHERE player_sl2.game_id = player.game_id \
+											AND player_sl2.id <> player.id \
+											AND mon_sl2.used = lead \
+											)) AS DECIMAL),0),2) AS winrate_lead, \
+										ROUND(CAST(COUNT(pokemon_id) FILTER (WHERE mon.dynamaxed = true) AS DECIMAL) * 100 / CAST(COUNT(pokemon_id) AS DECIMAL),2) AS dynamax_frequency, \
+										ROUND(CAST(COUNT(pokemon_id) FILTER (WHERE mon.dynamaxed = true AND player.winner = true) AS DECIMAL) * 100 / NULLIF(CAST(COUNT(pokemon_id) FILTER (WHERE mon.dynamaxed = true) AS DECIMAL),0),2) AS dynamax_winrate, \
+										ROUND(CAST(COUNT(pokemon_id) FILTER (WHERE mon.tera_type_id IS NOT NULL) AS DECIMAL) * 100 / CAST(COUNT(pokemon_id) AS DECIMAL),2) AS tera_frequency \
+									FROM games_pokemonusage mon \
+									LEFT JOIN games_gameplayerrelation player \
+									ON mon.game_player_id = player.id \
+									LEFT JOIN games_game game \
+									ON game.id = player.game_id \
+									LEFT JOIN pokemon_pokemon poke \
+									ON mon.pokemon_id = poke.id \
+									LEFT JOIN ( \
+										SELECT game1.tier_id, COUNT(player1.id) \
+										FROM games_gameplayerrelation player1 \
+										LEFT JOIN games_game game1 \
+										ON game1.id = player1.game_id \
+										WHERE game1.start_time >= %s \
+										AND game1.start_time <= %s \
+										AND game1.rating >= %s \
+										AND game1.rating <= %s \
+										GROUP BY game1.tier_id \
+									) c ON c.tier_id = game.tier_id \
+									WHERE game.tier_id = %s \
+									AND start_time >= %s \
+									AND start_time <= %s \
+									AND game.rating >= %s \
+									AND game.rating <= %s \
+									GROUP BY pokemon_id,game.tier_id,c.count \
+									HAVING ROUND(CAST(COUNT(pokemon_id) AS DECIMAL) * 100 / CAST(c.count AS DECIMAL),2) > 5 \
+									ORDER BY appearance_rate DESC'
+
+		query_input = [begin,end,min_rating,max_rating,tier.id,begin,end,min_rating,max_rating]
+
+		filtered_winrates = Pokemon.objects.raw(filtered_winrates_query,query_input)
+		context['winrates'] = filtered_winrates
+		context['filtered'] = True
+		context['response'] = stats_filter
+
+	return render(request,'filter_test.html',context)
 
 def format_pokemon_view(request,generation,tier_name,pokemon_unique_name):
 	tier = Tier.objects.get(generation=generation,tier_name=tier_name)

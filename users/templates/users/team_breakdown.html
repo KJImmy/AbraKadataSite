@@ -191,7 +191,41 @@
 					{% endfor %}
 				</tbody>
 			</table>
-		</div>		
+		</div>
+	</div>
+	<div class="container">
+		<div class="table-responsive">
+			<table>
+				<thead>
+					<tr>
+						<th>
+							Type
+						</th>
+						<th>
+							Winrate Against
+						</th>
+						<th>
+							Winrate Against When Used
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for t in types %}
+					<tr>
+						<td>
+							{{ t.type_name }}
+						</td>
+						<td>
+							{{ t.winrate_against }}
+						</td>
+						<td>
+							{{ t.winrate_against_used }}
+						</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
 	</div>
 </div>
 {% endblock %}

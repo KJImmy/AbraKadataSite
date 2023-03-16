@@ -9,7 +9,7 @@ from .forms import ShowdownUsernameForm,SubmitGameForm,CustomUserCreationForm
 from .utils import validate_username
 from games.utils import add_game_from_link
 from games.models import Player,GamePlayerRelation,PokemonUsage,Game
-from pokemon.models import Pokemon,Move
+from pokemon.models import Pokemon,Move,Type
 from tiers.models import Tier
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
@@ -184,6 +184,23 @@ def breakdown_view(request):
 												WHERE player.id IN %s \
 												GROUP BY mon.pokemon_id',[tuple(game_list)])
 
+	opponent_types = Type.objects.raw('	SELECT type.id AS id, \
+											ROUND(CAST(COUNT(*) FILTER (WHERE player.winner = true) AS DECIMAL) * 100 / CAST(COUNT(*) AS DECIMAL),2) AS winrate_against, \
+											ROUND(CAST(COUNT(*) FILTER (WHERE player.winner = true AND mon.used = true) AS DECIMAL) * 100 / NULLIF(CAST(COUNT(*) FILTER (WHERE mon.used = true) AS DECIMAL),0),2) AS winrate_against_used \
+										FROM games_pokemonusage mon \
+										INNER JOIN games_gameplayerrelation opponent \
+										ON opponent.id = mon.game_player_id \
+										INNER JOIN games_gameplayerrelation player \
+										ON player.id <> opponent.id AND player.game_id = opponent.game_id \
+										LEFT JOIN pokemon_pokemon details \
+										ON details.id = mon.pokemon_id \
+										LEFT JOIN pokemon_pokemontyperelation relation \
+										ON relation.pokemon_id = details.id \
+										LEFT JOIN pokemon_type type \
+										ON type.id = relation.pokemon_type_id \
+										WHERE player.id IN %s \
+										GROUP BY type.id',[tuple(game_list)])
+
 	context = {
 		'winrate':winrate,
 		'response':response,
@@ -192,7 +209,8 @@ def breakdown_view(request):
 		'moves':moves,
 		'individual':individual_usage,
 		'opponents':opponents,
-		'opponents_for_team':opponents_for_team
+		'opponents_for_team':opponents_for_team,
+		'types':opponent_types
 	}
 	return render(request,"users/team_breakdown.html",context)
 
