@@ -237,6 +237,7 @@ def format_base_view_test(request,generation,tier_name):
 		filtered_winrates_query = '	SELECT \
 										pokemon_id AS id,\
 										game.tier_id,\
+										c.count AS player_count,\
 										ROUND(CAST(COUNT(pokemon_id) AS DECIMAL) * 100 / CAST(c.count AS DECIMAL),2) AS appearance_rate,\
 										ROUND(CAST(COUNT(pokemon_id) FILTER (WHERE mon.used = true) AS DECIMAL) * 100 / CAST(COUNT(pokemon_id) AS DECIMAL),2) AS used_rate,\
 										ROUND(CAST(COUNT(pokemon_id) FILTER (WHERE mon.lead = true) AS DECIMAL) * 100 / CAST(COUNT(pokemon_id) AS DECIMAL),2) AS lead_rate,\

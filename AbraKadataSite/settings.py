@@ -91,17 +91,6 @@ WSGI_APPLICATION = 'AbraKadataSite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'abrakadata_test2',
-#         'USER': 'postgres',
-#         'PASSWORD': '4N64L1f3',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
-
 if DEVELOPMENT_MODE is True:
     DATABASES = {
         "default": {
