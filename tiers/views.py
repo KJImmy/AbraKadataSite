@@ -317,7 +317,7 @@ def format_base_view_test(request,generation,tier_name):
 									AND game.rating >= %s \
 									AND game.rating <= %s \
 									GROUP BY pokemon_id,game.tier_id,c.count \
-									HAVING ROUND(CAST(COUNT(pokemon_id) AS DECIMAL) * 100 / CAST(c.count AS DECIMAL),2) > 5 \
+									HAVING ROUND(CAST(COUNT(pokemon_id) AS DECIMAL) * 100 / CAST(c.count AS DECIMAL),2) > 1 \
 									ORDER BY appearance_rate DESC'
 
 		query_input = [begin,end,min_rating,max_rating,tier.id,begin,end,min_rating,max_rating]

@@ -19,8 +19,10 @@ from django.urls import path,include
 from pages.views import home_view,about_view,support_view,reports_view
 
 urlpatterns = [
+    path('games/',include('games.urls')),
     path('user/',include('users.urls')),
     path('formats/',include('tiers.urls')),
+    path('api-auth/',include('rest_framework.urls')),
     path('admin/',admin.site.urls),
     path('',home_view,name='home'),
     path('about/',about_view,name='about'),
