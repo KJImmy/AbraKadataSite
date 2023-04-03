@@ -14,14 +14,14 @@ from pokemon.models import Pokemon,Move
 
 # Create your views here.
 def home_view(request):
-	top_14 = IndividualWinrate.objects.filter(Q(tier=14)&Q(appearance_rate__gte=5)&Q(ranked=True)).order_by('-winrate_used').first()
+	top_15 = IndividualWinrate.objects.filter(Q(tier=15)&Q(appearance_rate__gte=5)&Q(ranked=True)).order_by('-winrate_used').first()
 	top_3 = IndividualWinrate.objects.filter(Q(tier=3)&Q(appearance_rate__gte=5)&Q(ranked=True)).order_by('-winrate_used').first()
 
-	vgc_tier = Tier.objects.get(id=14)
+	vgc_tier = Tier.objects.get(id=15)
 	singles_tier = Tier.objects.get(id=3)
 
 	context = {
-			'top_vgc':top_14,
+			'top_vgc':top_15,
 			'vgc_tier':vgc_tier,
 			'top_singles':top_3,
 			'singles_tier':singles_tier,

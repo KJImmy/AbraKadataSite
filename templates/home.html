@@ -15,7 +15,7 @@
 		<div class="btn-group btn-group-toggle" data-toggle="buttons" id="home-format-buttons">
 			<label class="btn btn-primary active" style="width: 150px;" id="top-vgc-label" checked>
 				<input type="radio" name="home-formats" id="top-vgc-button">
-				Gen 9 VGC 2023 Series 2
+				Gen 9 VGC 2023 Regulation C
 			</label>
 			<label class="btn btn-primary" style="width: 150px;" id="top-singles-label">
 				<input type="radio" name="home-formats" id="top-singles-button">
@@ -25,8 +25,8 @@
 	</div>
 	<div class="row justify-content-center">
 		<div id="topVGC" style="width: 100%">
-			<a href="{% url 'format_base' 9 'vgc2023series2' %}">
-				<h3 style="text-align: center;">Gen 9 VGC 2023 Series 2</h3>				
+			<a href="{% url 'format_base' 9 'vgc2023regulationc' %}">
+				<h3 style="text-align: center;">Gen 9 VGC 2023 Regulation C</h3>				
 			</a>
 			{% with top_vgc.pokemon as pokemon %}
 			{% with vgc_tier as tier %}
