@@ -9,12 +9,13 @@ class Tier(models.Model):
 	generation = models.PositiveIntegerField()
 	style = models.CharField(
 		max_length=3,
-		choices=[('VGC','Videogame Championship'),('SS','Smogon Singles'),('SD','Smogon Doubles')])
+		choices=[('VGC','Videogame Championship'),('SS','Smogon Singles'),('SD','Smogon Doubles'),('U','Uncategorized')],
+		default='U')
 	has_megas = models.BooleanField(default=False)
 	has_zmoves = models.BooleanField(default=False)
 	has_dynamax = models.BooleanField(default=False)
 	has_tera = models.BooleanField(default=False)
-	valid = models.BooleanField(default=True)
+	valid = models.BooleanField(default=False)
 
 class IndividualWinrate(models.Model):
 	pokemon = models.ForeignKey(
