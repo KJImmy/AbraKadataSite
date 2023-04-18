@@ -74,14 +74,12 @@ CORS_ALLOWED_ORIGINS = [
     'https://abra-kadata.com',
     'http://127.0.0.1:8000',
     'https://play.pokemonshowdown.com',
+    'https://replay.pokemonshowdown.com',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://play.pokemonshowdown.com',
-]
-
-CORS_ALLOWED_METHODS = [
-    'POST'
+    'https://abra-kadata.com',
+    'https://*.pokemonshowdown.com',
 ]
 
 ROOT_URLCONF = 'AbraKadataSite.urls'
@@ -161,6 +159,8 @@ STATIC_ROOT = os.path.join(BASE_DIR,"staticfiles")
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static'),
 ]
+
+REST_FRAMEWORK = { 'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema' }
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

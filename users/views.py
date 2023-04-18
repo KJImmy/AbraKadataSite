@@ -61,54 +61,57 @@ def stats_view(request):
 
 	tiers_played = results.keys()
 
-	# Calc winrates
-	for tier in results.keys():
-		for team in results[tier].keys():
-			results[tier][team]["Winrate"] = round(results[tier][team]["Won"] * 100 / results[tier][team]["Played"],2)
+	if player_ids == []:
+		return redirect(reverse("psusername"))
+	else:
+		# Calc winrates
+		for tier in results.keys():
+			for team in results[tier].keys():
+				results[tier][team]["Winrate"] = round(results[tier][team]["Won"] * 100 / results[tier][team]["Played"],2)
 
-	general_stats = Pokemon.objects.raw('	SELECT mon.pokemon_id AS id,game.tier_id,\
-												c.count AS games_in_tier,\
-												ROUND(CAST(COUNT(*) AS DECIMAL) * 100 / CAST(c.count AS DECIMAL),2) AS appearance_rate,\
-												ROUND(CAST(COUNT(*) FILTER (WHERE mon.used = true) AS DECIMAL) * 100 / CAST(COUNT(*) AS DECIMAL),2) AS used_rate,\
-												ROUND(CAST(COUNT(*) FILTER (WHERE mon.lead = true) AS DECIMAL) * 100 / CAST(COUNT(*) AS DECIMAL),2) AS lead_rate,\
-												ROUND(CAST(COUNT(*) FILTER (WHERE player.winner = true) AS DECIMAL) * 100 / CAST(COUNT(*) AS DECIMAL),2) AS winrate,\
-												ROUND(CAST(COUNT(*) FILTER (WHERE mon.used = true AND player.winner = true) AS DECIMAL) * 100 / NULLIF(CAST(COUNT(*) FILTER (WHERE mon.used = true) AS DECIMAL),0),2) AS winrate_used,\
-												ROUND(CAST(COUNT(*) FILTER (WHERE mon.lead = true AND player.winner = true) AS DECIMAL) * 100 / NULLIF(CAST(COUNT(*) FILTER (WHERE mon.lead = true) AS DECIMAL),0),2) AS winrate_lead,\
-												ROUND(CAST(COUNT(*) FILTER (WHERE mon.dynamaxed = true) AS DECIMAL) * 100 / CAST(COUNT(*) AS DECIMAL),2) AS dynamax_frequency,\
-												ROUND(CAST(COUNT(*) FILTER (WHERE mon.dynamaxed = true AND player.winner = true) AS DECIMAL) * 100 / NULLIF(CAST(COUNT(*) FILTER (WHERE mon.dynamaxed = true) AS DECIMAL),0),2) AS dynamax_winrate,\
-												ROUND(CAST(COUNT(*) FILTER (WHERE mon.tera_type_id IS NOT NULL) AS DECIMAL) * 100 / CAST(COUNT(*) AS DECIMAL),2) AS tera_frequency \
-											FROM games_pokemonusage mon \
-											INNER JOIN games_gameplayerrelation player \
-											ON mon.game_player_id = player.id \
-											INNER JOIN games_game game \
-											ON game.id = player.game_id \
-											LEFT JOIN (	SELECT cg.tier_id,COUNT(*) \
-														FROM games_gameplayerrelation cp \
-														INNER JOIN games_game cg \
-														ON cg.id = cp.game_id \
-														WHERE cp.player_id IN %s \
-														GROUP BY cg.tier_id) c \
-											ON c.tier_id = game.tier_id \
-											WHERE player.player_id IN %s \
-											GROUP BY mon.pokemon_id,game.tier_id,c.count',[tuple(player_ids),tuple(player_ids)])
+		general_stats = Pokemon.objects.raw('	SELECT mon.pokemon_id AS id,game.tier_id,\
+													c.count AS games_in_tier,\
+													ROUND(CAST(COUNT(*) AS DECIMAL) * 100 / CAST(c.count AS DECIMAL),2) AS appearance_rate,\
+													ROUND(CAST(COUNT(*) FILTER (WHERE mon.used = true) AS DECIMAL) * 100 / CAST(COUNT(*) AS DECIMAL),2) AS used_rate,\
+													ROUND(CAST(COUNT(*) FILTER (WHERE mon.lead = true) AS DECIMAL) * 100 / CAST(COUNT(*) AS DECIMAL),2) AS lead_rate,\
+													ROUND(CAST(COUNT(*) FILTER (WHERE player.winner = true) AS DECIMAL) * 100 / CAST(COUNT(*) AS DECIMAL),2) AS winrate,\
+													ROUND(CAST(COUNT(*) FILTER (WHERE mon.used = true AND player.winner = true) AS DECIMAL) * 100 / NULLIF(CAST(COUNT(*) FILTER (WHERE mon.used = true) AS DECIMAL),0),2) AS winrate_used,\
+													ROUND(CAST(COUNT(*) FILTER (WHERE mon.lead = true AND player.winner = true) AS DECIMAL) * 100 / NULLIF(CAST(COUNT(*) FILTER (WHERE mon.lead = true) AS DECIMAL),0),2) AS winrate_lead,\
+													ROUND(CAST(COUNT(*) FILTER (WHERE mon.dynamaxed = true) AS DECIMAL) * 100 / CAST(COUNT(*) AS DECIMAL),2) AS dynamax_frequency,\
+													ROUND(CAST(COUNT(*) FILTER (WHERE mon.dynamaxed = true AND player.winner = true) AS DECIMAL) * 100 / NULLIF(CAST(COUNT(*) FILTER (WHERE mon.dynamaxed = true) AS DECIMAL),0),2) AS dynamax_winrate,\
+													ROUND(CAST(COUNT(*) FILTER (WHERE mon.tera_type_id IS NOT NULL) AS DECIMAL) * 100 / CAST(COUNT(*) AS DECIMAL),2) AS tera_frequency \
+												FROM games_pokemonusage mon \
+												INNER JOIN games_gameplayerrelation player \
+												ON mon.game_player_id = player.id \
+												INNER JOIN games_game game \
+												ON game.id = player.game_id \
+												LEFT JOIN (	SELECT cg.tier_id,COUNT(*) \
+															FROM games_gameplayerrelation cp \
+															INNER JOIN games_game cg \
+															ON cg.id = cp.game_id \
+															WHERE cp.player_id IN %s \
+															GROUP BY cg.tier_id) c \
+												ON c.tier_id = game.tier_id \
+												WHERE player.player_id IN %s \
+												GROUP BY mon.pokemon_id,game.tier_id,c.count',[tuple(player_ids),tuple(player_ids)])
 
-	overall_tier_stats = Tier.objects.raw('	SELECT game.tier_id AS id,\
-												COUNT(*) AS game_count,\
-												ROUND(CAST(COUNT(*) FILTER (WHERE player.winner = true) AS DECIMAL) * 100 / CAST(COUNT(*) AS DECIMAL),2) AS winrate \
-											FROM games_gameplayerrelation player \
-											INNER JOIN games_game game \
-											ON game.id = player.game_id \
-											WHERE player.player_id IN %s \
-											GROUP BY game.tier_id \
-											ORDER BY game_count DESC',[tuple(player_ids)])
+		overall_tier_stats = Tier.objects.raw('	SELECT game.tier_id AS id,\
+													COUNT(*) AS game_count,\
+													ROUND(CAST(COUNT(*) FILTER (WHERE player.winner = true) AS DECIMAL) * 100 / CAST(COUNT(*) AS DECIMAL),2) AS winrate \
+												FROM games_gameplayerrelation player \
+												INNER JOIN games_game game \
+												ON game.id = player.game_id \
+												WHERE player.player_id IN %s \
+												GROUP BY game.tier_id \
+												ORDER BY game_count DESC',[tuple(player_ids)])
 
-	context = {
-		'results':results,
-		'general':general_stats,
-		'tiers':tiers_played,
-		'tier_stats':overall_tier_stats
-	}
-	return render(request,"users/user_stats.html",context)
+		context = {
+			'results':results,
+			'general':general_stats,
+			'tiers':tiers_played,
+			'tier_stats':overall_tier_stats
+		}
+		return render(request,"users/user_stats.html",context)
 
 def breakdown_view(request):
 	response = request.POST

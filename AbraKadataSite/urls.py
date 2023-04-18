@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from rest_framework.documentation import include_docs_urls
 
 from pages.views import home_view,about_view,support_view,reports_view
 
 urlpatterns = [
+    path('docs/', include_docs_urls(title='My API service'), name='api-docs'),
     path('games/',include('games.urls')),
     path('user/',include('users.urls')),
     path('formats/',include('tiers.urls')),

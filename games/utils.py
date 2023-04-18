@@ -54,8 +54,18 @@ def add_game_from_link(game):
 	game_obj = parse_game(game_log)
 
 	# Add game
-	print(game_obj.generation,game_obj.tier)
-	tier = Tier.objects.get(generation=game_obj.generation,tier_name=game_obj.tier)
+
+	# Get game format
+	tier_check = Tier.objects.filter(generation=game_obj.generation,tier_name=game_obj.tier).exists()
+
+	# Make format if missing
+	if tier_check:
+		tier = Tier.objects.get(generation=game_obj.generation,tier_name=game_obj.tier)
+	else:
+		# UPDATE MODEL TO ACCEPT UNCATEGORIZED STYLE FOR NEW FORMAT, also change valid default to False
+		tier = Tier(generation=game_obj.generation,tier_name=game_obj.tier,tier_display_name=game_obj.tier,
+							style='VGC',valid=False)
+		tier.save()
 
 	time = dt.datetime.fromtimestamp(game_obj.start_time)
 	added_game = Game(start_time=time,link=game,tier=tier,
