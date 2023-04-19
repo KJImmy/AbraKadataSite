@@ -6,7 +6,7 @@
 			<th class="column-one" 
 				onclick="sortTable(0,'1')" 
 				style="text-align: center; background: white; z-index: 1;">
-				Pok&eacute;mon <i id="arrow10" class="fa-solid fa-sort"></i></th>
+				Pok&eacute;mon <i id="arrow10" class="fa-solid fa-sort arrow"></i></th>
 			<th onclick="sortTable(1,'1',true)" style="text-align: center;">
 				<span class="tooltipwrapper">
 					<div class="tooltipnew">
@@ -16,7 +16,7 @@
 						How often a Pokémon appears in team preview. Only Pok&eacute;mon with an Appearance Rate > 5% are displayed.
 					</span>
 				</span>
-				Appearance Rate <i id="arrow11" class="fa-solid fa-sort"></i></th>
+				Appearance Rate <i id="arrow11" class="fa-solid fa-sort arrow"></i></th>
 			<th onclick="sortTable(2,'1',true)" style="text-align: center;">
 				<span class="tooltipwrapper">
 					<div class="tooltipnew">
@@ -26,7 +26,7 @@
 						How often a player wins when the corresponding Pokémon appears in their team preview
 					</span>
 				</span>
-				Winrate <i id="arrow12" class="fa-solid fa-sort"></i></th>
+				Winrate <i id="arrow12" class="fa-solid fa-sort arrow"></i></th>
 			<th onclick="sortTable(3,'1',true)" style="text-align: center;">
 				<span class="tooltipwrapper">
 					<div class="tooltipnew">
@@ -36,7 +36,7 @@
 						How often a Pokémon is used by teams that it is on
 					</span>
 				</span>
-				Used Rate <i id="arrow13" class="fa-solid fa-sort"></i></th>
+				Used Rate <i id="arrow13" class="fa-solid fa-sort arrow"></i></th>
 			<th onclick="sortTable(4,'1',true)" style="text-align: center;">
 				<span class="tooltipwrapper">
 					<div class="tooltipnew">
@@ -46,7 +46,7 @@
 						How often a player wins when they use the corresponding Pokémon during the battle
 					</span>
 				</span>
-				Used Winrate <i id="arrow14" class="fa-solid fa-sort-down"></i></th>
+				Used Winrate <i id="arrow14" class="fa-solid fa-sort-down arrow"></i></th>
 			<th onclick="sortTable(5,'1',true)" style="text-align: center;">
 				<span class="tooltipwrapper">
 					<div class="tooltipnew">
@@ -56,7 +56,7 @@
 						How often a Pokémon is sent out first by teams that it is on
 					</span>
 				</span>
-				Lead Rate <i id="arrow15" class="fa-solid fa-sort"></i></th>
+				Lead Rate <i id="arrow15" class="fa-solid fa-sort arrow"></i></th>
 			<th onclick="sortTable(6,'1',true)" style="text-align: center;">
 				<span class="tooltipwrapper">
 					<div class="tooltipnew">
@@ -66,7 +66,7 @@
 						How often a player wins when they send out the corresponding Pokémon at the very beginning of the battle
 					</span>
 				</span>
-				Lead Winrate <i id="arrow16" class="fa-solid fa-sort"></i></th>
+				Lead Winrate <i id="arrow16" class="fa-solid fa-sort arrow"></i></th>
 			<th {% if not tier.has_tera %} hidden {% endif %} onclick="sortTable(7,'1',true)" style="text-align: center;">
 				<span class="tooltipwrapper">
 					<div class="tooltipnew">
@@ -76,7 +76,7 @@
 						How often a Pokémon terrastalizes in games where it is used
 					</span>
 				</span>
-				Tera Frequency <i id="arrow17" class="fa-solid fa-sort"></i></th>
+				Tera Frequency <i id="arrow17" class="fa-solid fa-sort arrow"></i></th>
 			<th {% if not tier.has_dynamax %} hidden {% endif %} onclick="sortTable(8,'1',true)" style="text-align: center;">
 				<span class="tooltipwrapper">
 					<div class="tooltipnew">
@@ -86,7 +86,7 @@
 						How often a Pokémon dynamaxes in games where it is used
 					</span>
 				</span>
-				Dynamax Frequency <i id="arrow18" class="fa-solid fa-sort"></i></th>
+				Dynamax Frequency <i id="arrow18" class="fa-solid fa-sort arrow"></i></th>
 			<th {% if not tier.has_dynamax %} hidden {% endif %} onclick="sortTable(9,'1',true)" style="text-align: center;">
 				<span class="tooltipwrapper">
 					<div class="tooltipnew">
@@ -96,7 +96,7 @@
 						How often a player wins when they choose to dynamax this Pokémon
 					</span>
 				</span> 
-				Dynamax Winrate <i id="arrow19" class="fa-solid fa-sort"></i></th>
+				Dynamax Winrate <i id="arrow19" class="fa-solid fa-sort arrow"></i></th>
 		</tr>
 	</thead>
 	<tbody>
