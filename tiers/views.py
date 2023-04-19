@@ -177,7 +177,7 @@ def format_base_view(request,generation,tier_name):
 def format_base_view_test(request,generation,tier_name):
 	stats_filter = request.GET
 
-	tier_list = Tier.objects.all().order_by('-generation','style')
+	tier_list = Tier.objects.filter(valid=True).order_by('-generation','style')
 	generation_list = tier_list.values('generation').distinct('generation')
 	tier = tier_list.get(generation=generation,tier_name=tier_name)
 	ranked_bool = True
