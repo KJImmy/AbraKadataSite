@@ -91,6 +91,7 @@ class GamePlayerRelation(models.Model):
 	winner = models.BooleanField()
 	rating_pre = models.PositiveIntegerField(null=True)
 	rating_post = models.PositiveIntegerField(null=True)
+	personal_include = models.BooleanField(default=True)
 
 	class Meta:
 		unique_together = ['game','player']

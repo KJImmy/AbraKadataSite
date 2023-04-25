@@ -9,12 +9,12 @@
 	p {
 		font-size: 18px;
 	}
-    label, input {
-        display: block;
-    }
-    span.helptext {
-        display: none;
-    }
+	label, input {
+		display: block;
+	}
+	span.helptext {
+		display: none;
+	}
 	.stat-bar {
 		height: 33px;
 		border-style: solid;
@@ -252,10 +252,10 @@
 		<script type="text/javascript">
 			$(document).ready(function () {
 
-			    $('#sidebarCollapse').on('click', function () {
-			        $('#sidebar').toggleClass('active');
-			        $('#sidebar-wrapper').toggleClass('active');
-			    });
+				$('#sidebarCollapse').on('click', function () {
+					$('#sidebar').toggleClass('active');
+					$('#sidebar-wrapper').toggleClass('active');
+				});
 
 			});
 			$(function () {
@@ -265,36 +265,45 @@
 		<script type="text/javascript">
 			$(document).ready(function () {
 
-			    $('#formatTableSwitch1').on('click', function () {
-			        $('#baseTable').toggleClass('collapse');
-			        $('#detailTable').toggleClass('collapse');
-			    });
+				$('#formatTableSwitch1').on('click', function () {
+					$('#baseTable').toggleClass('collapse');
+					$('#detailTable').toggleClass('collapse');
+				});
 
-			    $('#formatTableSwitch2').on('click', function () {
-			        $('#baseTable').toggleClass('collapse');
-			        $('#detailTable').toggleClass('collapse');
-			    });
+				$('#formatTableSwitch2').on('click', function () {
+					$('#baseTable').toggleClass('collapse');
+					$('#detailTable').toggleClass('collapse');
+				});
 
-			    $('#top-vgc-label').on('click', function () {
-			        $('#topVGC').removeClass('collapse');
-			        $('#topSingles').addClass('collapse');
-			    });
+				$('#top-vgc-label').on('click', function () {
+					$('#topVGC').removeClass('collapse');
+					$('#topSingles').addClass('collapse');
+				});
 
-			    $('#top-singles-label').on('click', function () {
-			        $('#topSingles').removeClass('collapse');
-			        $('#topVGC').addClass('collapse');
-			    });
+				$('#top-singles-label').on('click', function () {
+					$('#topSingles').removeClass('collapse');
+					$('#topVGC').addClass('collapse');
+				});
 
 			});
 		</script>
-<!-- 		<script type="text/javascript">
-			$('[name="home-formats"]').on('change', function(){  
-			  if($(this).val()  === "Gen 9 VGC 2023 Series 2"){
-			    $('#top-vgc').collapse('show')
-			  }else{
-			     $('#top-vgc').collapse('hide')
-			  }
-			});
-		</script> -->
+		<script>
+		document.addEventListener("DOMContentLoaded", function(event) { 
+			var scrollpos = localStorage.getItem('scrollpos');
+			var tablescroll = localStorage.getItem('tablescroll');
+			if (scrollpos) window.scrollTo(0, scrollpos);
+			if (tablescroll) {
+				console.log(tablescroll);
+				$('#personal-game-list').scrollTop(tablescroll);
+			};
+		});
+
+		window.onbeforeunload = function(e) {
+			localStorage.setItem('scrollpos', window.scrollY);
+			var table  = $('#personal-game-list');
+			var tablescrollpos = table.scrollTop();
+			localStorage.setItem('tablescroll', tablescrollpos);
+		};
+		</script>
 	</body>
 </html>

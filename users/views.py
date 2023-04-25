@@ -114,18 +114,32 @@ def stats_view(request):
 		return render(request,"users/user_stats.html",context)
 
 def breakdown_view(request):
-	response = request.POST
+	included_game_ids = []
+	if request.method == "POST":
+		response = request.POST
 
-	game_list = [int(s) for s in response['games'].replace('[','').replace(']','').split(',')]
-	team_ids  =	[int(s) for s in response['team'].replace('[','').replace(']','').split(',')]
+		game_ids = response['games']
+		game_list = [int(s) for s in game_ids.replace('[','').replace(']','').split(',')]
+		team_ids  =	[int(s) for s in response['team'].replace('[','').replace(']','').split(',')]
 
-	game_objects = GamePlayerRelation.objects.filter(pk__in=game_list)
-	team_objects = Pokemon.objects.filter(pk__in=team_ids)
+		player_objects = GamePlayerRelation.objects.filter(id__in=game_list)
+		team_objects = Pokemon.objects.filter(pk__in=team_ids)
+
+		if 'include_game' in response.keys():
+			included_game_ids = [int(s) for s in response.getlist('include_game')]
+			for game in player_objects:
+				if game.id in included_game_ids:
+					game.personal_include = True
+				elif game.id not in included_game_ids:
+					game.personal_include = False
+				game.save()
+
 
 	with connection.cursor() as cur:
 		cur.execute('	SELECT ROUND(CAST(COUNT(*) FILTER (WHERE player.winner = true) AS DECIMAL) * 100 / CAST(COUNT(*) AS DECIMAL),2) AS winrate \
 						FROM games_gameplayerrelation player \
-						WHERE player.id IN %s',[tuple(game_list)])
+						WHERE player.id IN %s \
+						AND player.personal_include = true',[tuple(game_list)])
 		winrate = cur.fetchone()[0]
 		winrate = float(winrate)
 
@@ -139,6 +153,7 @@ def breakdown_view(request):
 												INNER JOIN games_gameplayerrelation player \
 												ON mon.game_player_id = player.id \
 												WHERE player.id IN %s \
+												AND player.personal_include = true \
 												GROUP BY mon.pokemon_id',[len(game_list),len(game_list),tuple(game_list)])
 
 	moves = Move.objects.raw('	SELECT move_id AS id,\
@@ -154,9 +169,11 @@ def breakdown_view(request):
 											INNER JOIN games_gameplayerrelation player_c \
 											ON mon_c.game_player_id = player_c.id \
 											WHERE player_c.id IN %s \
+											AND player_c.personal_include = true \
 											GROUP BY mon_c.pokemon_id \
 											) c ON c.pokemon_id = mon.pokemon_id \
 								WHERE player.id IN %s \
+								AND player.personal_include = true \
 								GROUP BY move_id,mon.pokemon_id,c.count',[tuple(game_list),tuple(game_list)])
 
 	opponents = Pokemon.objects.raw('	SELECT opp_mon.pokemon_id AS id, mon.pokemon_id AS team_mon,\
@@ -171,6 +188,7 @@ def breakdown_view(request):
 										ON opponent.game_id = player.game_id AND opponent.id <> player.id \
 										INNER JOIN games_pokemonusage opp_mon ON opp_mon.game_player_id = opponent.id \
 										WHERE player.id IN %s \
+										AND player.personal_include = true \
 										GROUP BY opp_mon.pokemon_id,mon.pokemon_id',[tuple(game_list)])
 
 	opponents_for_team = Pokemon.objects.raw('	SELECT mon.pokemon_id AS id,\
@@ -185,6 +203,7 @@ def breakdown_view(request):
 												INNER JOIN games_gameplayerrelation player \
 												ON player.game_id = opponent.game_id AND player.id <> opponent.id \
 												WHERE player.id IN %s \
+												AND player.personal_include = true \
 												GROUP BY mon.pokemon_id',[tuple(game_list)])
 
 	opponent_types = Type.objects.raw('	SELECT type.id AS id, \
@@ -202,19 +221,34 @@ def breakdown_view(request):
 										LEFT JOIN pokemon_type type \
 										ON type.id = relation.pokemon_type_id \
 										WHERE player.id IN %s \
+										AND player.personal_include = true \
 										GROUP BY type.id',[tuple(game_list)])
 
 	context = {
 		'winrate':winrate,
 		'response':response,
 		'games':game_list,
+		'game_ids':game_ids,
 		'team':team_objects,
 		'moves':moves,
 		'individual':individual_usage,
 		'opponents':opponents,
 		'opponents_for_team':opponents_for_team,
-		'types':opponent_types
+		'types':opponent_types,
+		'game_list':player_objects,
+		'request':response,
+		'included':included_game_ids
 	}
+
+			# if game not in included_games:
+			# 	game.personal_include = False
+			# 	game.save()
+
+	# Make a post request to get include checkboxes mark true/false to personal include accordingly
+	# if request.POST:
+	# 	inclusions = request.POST.getlist('include_game')
+	# 	context['inclusions'] = inclusions
+
 	return render(request,"users/team_breakdown.html",context)
 
 def register_view(request):

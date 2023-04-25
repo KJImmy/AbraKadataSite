@@ -227,5 +227,108 @@
 			</table>
 		</div>
 	</div>
+	<div>
+		<div style="text-align: center;">
+			Games
+		</div>
+		<form method="POST">
+			{% csrf_token %}
+			<div class="table-responsive" id="personal-game-list">
+				<table>
+					<thead>
+						<tr>
+							<th>
+								Opponent's Team
+							</th>
+							<th>
+								Opponent
+							</th>
+							<th>
+								Date
+							</th>
+							<th>
+								Rating
+							</th>
+							<th>
+								Link
+							</th>
+							<th>
+								W/L
+							</th>
+							<th>
+								Include?
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for obj in game_list %}
+						{% with obj.game.players_in_game.all as players %}
+						{% for opp in players %}
+						{% if opp != obj %}
+						<tr>
+							<td>
+								{% for mon in opp.pokemon_of_player.all %}
+								{% with mon.pokemon.img_number|slugify as img_num %}
+								{% with "sprites/pokemon/"|add:img_num|add:".png" as img_file %}
+								<img src="{% static img_file %}" style="max-height: 70px;">
+								{% endwith %}
+								{% endwith %}
+								{% endfor %}
+							</td>
+							<td>
+								{{ opp.player.username }}
+							</td>
+							<td>
+								{{ obj.game.start_time }}
+							</td>
+							<td>
+								{% if obj.game.ranked %}
+								{{ obj.game.rating }}
+								{% else %}
+								Unrated
+								{% endif %}
+							</td>
+							<td>
+								<a href="{{ obj.game.link }}" target="_blank">
+									Replay
+								</a>
+							</td>
+							<td>
+								{% if obj.winner %}
+									Win
+								{% else %}
+									Loss
+								{% endif %}
+							</td>
+							<td>
+								{% if not obj.game.ranked %}
+								{% if obj.personal_include %}
+								<input 	onChange="this.form.submit()" 
+										type="checkbox" 
+										name="include_game" 
+										value="{{ obj.id }}" 
+										id="include{{ obj.id }}" 
+										checked>
+								{% elif not obj.personal_include %}
+								<input 	onChange="this.form.submit()" 
+										type="checkbox" 
+										name="include_game" 
+										value="{{ obj.id }}" 
+										id="include{{ obj.id }}">
+								{% endif %}
+								{% endif %}
+							</td>
+						</tr>
+						{% endif %}
+						{% endfor %}
+						{% endwith %}
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+    		<input type="hidden" id="games" name="games" value="{{ request.games }}">
+       		<input type="hidden" id="team" name="team" value="{{ request.team }}">
+		</form>
+	</div>
 </div>
 {% endblock %}
