@@ -83,6 +83,9 @@
 	tr:nth-child(even) td {
 		background: white
 	}
+	button:hover, button:focus {
+		text-decoration: none !important;
+	}
 	.wrapper {
 		display: flex;
 		width: 100%;
@@ -201,6 +204,11 @@
 	.tooltiptext:hover {
 		visibility: visible;
 	}
+	.center-text {
+		position: relative;
+		top: 50%;
+		transform: translateY(-50%);
+	}
 	@media only screen and (max-width: 1500px) {
 		#sidebar-wrapper {
 			display: none;
@@ -293,7 +301,6 @@
 			var tablescroll = localStorage.getItem('tablescroll');
 			if (scrollpos) window.scrollTo(0, scrollpos);
 			if (tablescroll) {
-				console.log(tablescroll);
 				$('#personal-game-list').scrollTop(tablescroll);
 			};
 		});
@@ -304,6 +311,13 @@
 			var tablescrollpos = table.scrollTop();
 			localStorage.setItem('tablescroll', tablescrollpos);
 		};
+		</script>
+		<script type="text/javascript">
+			function changeCaretDirection(item) {
+				var caret = item.getElementsByTagName('i')[0];
+				caret.classList.toggle('fa-caret-left');
+				caret.classList.toggle('fa-caret-down');
+			};
 		</script>
 	</body>
 </html>

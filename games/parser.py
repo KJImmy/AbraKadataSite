@@ -415,5 +415,8 @@ def parse_game(game_log):
 		#Stop parsing invalid games
 		if game.valid == False:
 			return game
-			
+	
+	if game.current_turn == 0 or game.current_turn == 1:
+		game.valid = False
+
 	return game

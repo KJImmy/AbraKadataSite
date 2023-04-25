@@ -53,6 +53,10 @@ def add_game_from_link(game):
 	game_log = log.split('\n')
 	game_obj = parse_game(game_log)
 
+	if not game_obj.valid:
+		print("Game is invalid")
+		return 0
+
 	# Add game
 
 	# Get game format
