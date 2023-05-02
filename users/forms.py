@@ -12,3 +12,6 @@ class ShowdownUsernameForm(forms.Form):
 
 class SubmitGameForm(forms.Form):
 	game_link = forms.URLField(label='Replay Link',max_length=1000)
+
+class ChangeEmailForm(forms.Form):
+	email = forms.EmailField(label='New Email Address')

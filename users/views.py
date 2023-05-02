@@ -5,7 +5,7 @@ from django.shortcuts import render,redirect
 from django.urls import reverse
 from django.db import connection
 
-from .forms import ShowdownUsernameForm,SubmitGameForm,CustomUserCreationForm
+from .forms import ShowdownUsernameForm,SubmitGameForm,CustomUserCreationForm,ChangeEmailForm
 from .utils import validate_username
 from games.utils import add_game_from_link
 from games.models import Player,GamePlayerRelation,PokemonUsage,Game
@@ -278,33 +278,37 @@ def submit_showdown_name_view(request):
 		'form': ShowdownUsernameForm,
 		'response':response
 	}
+	if request.user.is_authenticated:
+		user = get_user(request)
+		username_list = Player.objects.filter(site_user=user)
+		context['usernames'] = username_list
 
-	if response and request.user.is_authenticated:
-		name = response['username']
-		g1 = response['game1']
-		g2 = response['game2']
+		if response:
+			name = response['username']
+			g1 = response['game1']
+			g2 = response['game2']
 
-		username_check = Player.objects.filter(username=name).exists()
-		if not username_check:
-			player = Player(username=name)
-			player.save()
-		else:
-			player = Player.objects.get(username=name)
+			username_check = Player.objects.filter(username=name).exists()
+			if not username_check:
+				player = Player(username=name)
+				player.save()
+			else:
+				player = Player.objects.get(username=name)
 
-		if player.site_user:
-			context['validation'] = (False,"This PS Username is already connected to an AK account")
-			return render(request,'users/showdown_username.html',context)
+			if player.site_user:
+				context['validation'] = (False,"This PS Username is already connected to an AK account")
+				return render(request,'users/showdown_username.html',context)
 
-		validation = validate_username(name,g1,g2)
-		context['validation'] = validation
+			validation = validate_username(name,g1,g2)
+			context['validation'] = validation
 
-		if validation[0]:
-			user = get_user(request)
-			player.site_user = user
-			player.save()
+			if validation[0]:
+				user = get_user(request)
+				player.site_user = user
+				player.save()
 
-			add_game_from_link(g1)
-			add_game_from_link(g2)
+				add_game_from_link(g1)
+				add_game_from_link(g2)
 
 	return render(request,'users/showdown_username.html',context)
 
@@ -323,3 +327,22 @@ def submit_game_view(request):
 		context['submit'] = submit
 
 	return render(request,'users/submit_game.html',context)
+
+def change_email_view(request):
+	response = request.POST
+	user = get_user(request)
+
+	context = {
+		'form':ChangeEmailForm
+	}
+
+	if response and request.user.is_authenticated:
+		new_email = response['email']
+		context['new_email'] = new_email
+		user.email = new_email
+		user.save()
+
+
+	context['cur_email'] = user.email
+
+	return render(request,'registration/email_reset.html',context)

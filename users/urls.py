@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path,include
 
 from .views import dashboard_view,register_view,submit_showdown_name_view,submit_game_view,\
-					stats_view,breakdown_view
+					stats_view,breakdown_view,change_email_view
 urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
 	path('dashboard/',dashboard_view,name='dashboard'),
@@ -11,4 +11,5 @@ urlpatterns = [
 	path('submit-game/',submit_game_view,name='uploadgame'),
 	path('stats/',stats_view,name='stats'),
 	path('stats/breakdown/',breakdown_view,name='breakdown'),
+	path('accounts/email-reset/',change_email_view,name='emailreset'),
 ]

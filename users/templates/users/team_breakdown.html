@@ -30,7 +30,7 @@
 				<div class="card-header d-flex" id="heading{{ mon.id }}" style="width: 100%;">
 					<h5 class="mb-0">
 						<strong>
-							<div class="center-text">
+							<div class="centerit">
 								{{ mon.pokemon_display_name }}
 							</div>	
 						</strong>
@@ -41,21 +41,49 @@
 					{% endwith %}
 					{% endwith %}
 					<div class="container" style="color: black; text-decoration: none;">
-						<div>
-							Used Rate: {{ mon.frequency_used }}%
-						</div>
-						<div>
-							Lead Rate: {{ mon.frequency_lead }}%
-						</div>
-						<div>
-							Used Winrate: {{ mon.winrate_used }}%
-						</div>
-						<div>
-							Lead Winrate: {{ mon.winrate_lead }}%
+						<div class="row justify-content-center" style="margin-bottom: 20px;">
+							<div class="col" style="width: 50%;">
+								<div class="row justify-content-end">
+									<strong>Used Rate: </strong>						
+								</div>
+								<div class="row justify-content-end">
+									<strong>Used Winrate: </strong>
+								</div>
+								<div class="row justify-content-end">
+									<strong>Lead Rate: </strong>
+								</div>
+								<div class="row justify-content-end">
+									<strong>Lead Winrate: </strong>
+								</div>
+								{% if tier.has_tera %}
+								<div class="row justify-content-end">
+									<strong>Tera Frequency: </strong>
+								</div>
+								{% endif %}
+							</div>
+							<div class="col" style="margin-left: 20px; width: 50%;">
+								<div class="row justify-content-start">
+									{{ mon.frequency_used }}%						
+								</div>
+								<div class="row justify-content-start">
+									{{ mon.winrate_used }}%						
+								</div>
+								<div class="row justify-content-start">
+									{{ mon.frequency_lead }}%						
+								</div>
+								<div class="row justify-content-start">
+									{{ mon.winrate_lead }}%						
+								</div>
+								{% if tier.has_tera %}
+								<div class="row justify-content-start">
+									{{ mon.tera_frequency|stringformat:"05.2F" }}%						
+								</div>
+								{% endif %}
+							</div>
 						</div>
 					</div>
 					<div>
-						<i class="fa fa-caret-left" style="vertical-align: middle;"></i>						
+						<i class="fa fa-caret-left centerit" style="vertical-align: middle;"></i>						
 					</div>
 				</div>
 			</button>

@@ -5,26 +5,51 @@
 {% block content %}
 
 <div class="container">
-    Hello, {{ user.username|default:'Guest' }}!
-    {% if user.is_authenticated %}
-        <div>
-	        <a href="{% url 'logout' %}">Logout</a>
-        </div>
-        <div>
-	        <a href="{% url 'password_change' %}">Change Password</a>
-        </div>
-        <div>
-            <a href="{% url 'stats' %}">See Stats</a>
-        </div>
-        <div>
-            <a href="{% url 'psusername' %}">Validate Showdown Username</a>
-        </div>
-        <div>
-            <a href="{% url 'uploadgame' %}">Upload Replay</a>
-        </div>
+	<div class="row justify-content-center">
+		<h3>
+			Welcome, {{ user.username|default:'Guest' }}!            
+		</h3>     
+	</div>
+	{% if user.is_authenticated %}
+	<div class="row justify-content-center">
+		<div class="col">
+			<div class="row justify-content-center">
+				<h5>Stats</h5>
+			</div>
+			<div class="row justify-content-center">
+				<a href="{% url 'stats' %}">See Stats</a>
+			</div>
+			<div class="row justify-content-center">
+				<a href="{% url 'psusername' %}">Showdown Usernames</a>
+			</div>
+			<div class="row justify-content-center">
+				<a href="{% url 'uploadgame' %}">Upload Replay</a>
+			</div>
+		</div>
+		<div class="col">
+			<div class="row justify-content-center">
+				<h5>Account</h5>
+			</div>
+			<div class="row justify-content-center">
+				<a href="{% url 'emailreset' %}">Change Email Address</a>
+			</div>
+			<div class="row justify-content-center">
+				<a href="{% url 'password_change' %}">Change Password</a>
+			</div>
+			<div class="row justify-content-center">
+				<a href="{% url 'logout' %}">Logout</a>
+			</div>
+		</div>
+	</div>
 
-    {% else %}
-        <a href="{% url 'login' %}">Login</a>
-    {% endif %}
+	{% else %}
+	<div class="row justify-content-center">
+		<a href="{% url 'login' %}">Login</a>
+	</div>
+	<div class="row justify-content-center">
+		<a href="{% url 'register' %}">Register</a>
+	</div>
+
+	{% endif %}
 </div>
 {% endblock %}

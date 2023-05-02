@@ -416,7 +416,7 @@ def parse_game(game_log):
 		if game.valid == False:
 			return game
 	
-	if game.current_turn == 0 or game.current_turn == 1:
+	if game.last_move == None:
 		game.valid = False
 
 	return game

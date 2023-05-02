@@ -1,7 +1,19 @@
 from django.conf import settings
 from django.db import models
 
+from games.models import Player
 # Create your models here.
+class UserPSUsernameRelation(models.Model):
+	site_user = models.ForeignKey(
+		settings.AUTH_USER_MODEL,
+		on_delete=models.PROTECT,
+		related_name='ps_names_of_user')
+	ps_username = models.ForeignKey(
+		'games.Player',
+		on_delete=models.PROTECT,
+		related_name='users_with_ps_name')
+	include = models.BooleanField(default=True)
+
 class UserTeam(models.Model):
 	site_user = models.ForeignKey(
 		settings.AUTH_USER_MODEL,

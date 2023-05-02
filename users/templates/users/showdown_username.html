@@ -1,8 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
 <div class="container">
+	<div>
+		<div>
+			<h3>
+				Registered Showdown Usernames
+			</h3>
+		</div>
+		{% for u in usernames %}
+		<div>
+			{{ u.username }}			
+		</div>
+		{% endfor %}
+	</div>
+	<div>
+		<h3>
+			Add Showdown Username
+		</h3>
+	</div>
 	<form action="" method="post">
 		{% csrf_token %}
 		{{ form }}
@@ -10,6 +26,18 @@
 	</form>
 
 	{{ validation }}	
+	<div>
+		<h3>Instructions</h3>
+	</div>
+	<div>
+		<p>1. Type in a username that you use on Pokemon Showdown (capitalization matters)</p>
+		<p>2. Go to <a href="https://replay.pokemonshowdown.com/" target="_blank">https://replay.pokemonshowdown.com/</a></p> 
+		<p>3. Make sure you are logged into Pokemon Showdown with the appropriate username on your browser</p>
+		<p>4. Search for your own username</p>
+		<p>5. Switch from Public to Private replays (this option is only available if you are logged in with the username you are searching for)</p>
+		<p>6. Get 2 links against unique opponents and submit them here</p>
+		<p>You can connect multiple Showdown Usernames to your AbraKadata account, however each Showdown Username may only be connected to one account. If you attempt to add your username and find it is mistakenly connected to another account, please email abrakadata@gmail.com.</p>
+	</div>
 </div>
 
 {% endblock %}
