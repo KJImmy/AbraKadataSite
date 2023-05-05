@@ -19,3 +19,6 @@ class LinkSerializer(serializers.ModelSerializer):
 		# Needs to ensure that 2 users with extension don't upload game at same time
 		link = self.validated_data['link']
 		add_game_from_link(link)
+
+class LinkAndTeamSerializer(serializers.ModelSerializer):
+	link = serializers.CharField(max_length=1000);

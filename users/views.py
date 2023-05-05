@@ -4,8 +4,9 @@ import json
 from django.shortcuts import render,redirect
 from django.urls import reverse
 from django.db import connection
+from django.forms import formset_factory
 
-from .forms import ShowdownUsernameForm,SubmitGameForm,CustomUserCreationForm,ChangeEmailForm
+from .forms import ShowdownUsernameForm,SubmitGameForm,CustomUserCreationForm,ChangeEmailForm,PokemonFormSet
 from .utils import validate_username
 from games.utils import add_game_from_link
 from games.models import Player,GamePlayerRelation,PokemonUsage,Game
@@ -330,19 +331,30 @@ def submit_game_view(request):
 
 def change_email_view(request):
 	response = request.POST
-	user = get_user(request)
 
 	context = {
 		'form':ChangeEmailForm
 	}
 
-	if response and request.user.is_authenticated:
-		new_email = response['email']
-		context['new_email'] = new_email
-		user.email = new_email
-		user.save()
+	if request.user.is_authenticated:
+		user = get_user(request)
+		context['cur_email'] = user.email
 
-
-	context['cur_email'] = user.email
+		if response:
+			new_email = response['email']
+			context['new_email'] = new_email
+			user.email = new_email
+			user.save()
 
 	return render(request,'registration/email_reset.html',context)
+
+def teambuilder_view(request):
+
+	context = {
+		'form':PokemonFormSet
+	}
+	
+	if request.user.is_authenticated:
+		user = get_user(request)
+
+	return render(request,'users/build_a_team.html',context)

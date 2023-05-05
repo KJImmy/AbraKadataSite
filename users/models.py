@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.forms import formset_factory
 
 from games.models import Player
 # Create your models here.
@@ -14,21 +15,12 @@ class UserPSUsernameRelation(models.Model):
 		related_name='users_with_ps_name')
 	include = models.BooleanField(default=True)
 
-class UserTeam(models.Model):
-	site_user = models.ForeignKey(
-		settings.AUTH_USER_MODEL,
-		on_delete=models.PROTECT,
-		related_name='team_of_user')
-
 class PokemonOnTeam(models.Model):
-	team = models.ForeignKey(
-		'UserTeam',
-		on_delete=models.PROTECT,
-		related_name='pokemon_on_user_team')
 	pokemon = models.ForeignKey(
 		'pokemon.Pokemon',
 		on_delete=models.PROTECT,
-		related_name='user_team_of_pokemon')
+		related_name='user_team_of_pokemon'),
+	null=True
 	level = models.PositiveIntegerField(default=100)
 	ev_hp = models.PositiveIntegerField(default=0)
 	ev_atk = models.PositiveIntegerField(default=0)
@@ -89,3 +81,41 @@ class PokemonOnTeam(models.Model):
 		max_length=1,
 		choices = GENDER_CHOICES,
 		default = RANDOM)
+
+	nature = models.CharField(null=True,max_length=1000)
+
+class UserTeam(models.Model):
+	site_user = models.ForeignKey(
+		settings.AUTH_USER_MODEL,
+		on_delete=models.PROTECT,
+		related_name='team_of_user')
+	pokemon1 = models.ForeignKey(
+		'PokemonOnTeam',
+		on_delete=models.PROTECT,
+		related_name='user_team_of_pokemon1',
+		null=True)
+	pokemon2 = models.ForeignKey(
+		'PokemonOnTeam',
+		on_delete=models.PROTECT,
+		related_name='user_team_of_pokemon2',
+		null=True)
+	pokemon3 = models.ForeignKey(
+		'PokemonOnTeam',
+		on_delete=models.PROTECT,
+		related_name='user_team_of_pokemon3',
+		null=True)
+	pokemon4 = models.ForeignKey(
+		'PokemonOnTeam',
+		on_delete=models.PROTECT,
+		related_name='user_team_of_pokemon4',
+		null=True)
+	pokemon5 = models.ForeignKey(
+		'PokemonOnTeam',
+		on_delete=models.PROTECT,
+		related_name='user_team_of_pokemon5',
+		null=True)
+	pokemon6 = models.ForeignKey(
+		'PokemonOnTeam',
+		on_delete=models.PROTECT,
+		related_name='user_team_of_pokemon6',
+		null=True)
