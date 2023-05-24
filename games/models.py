@@ -47,15 +47,17 @@ class PokemonUsage(models.Model):
 		on_delete=models.PROTECT,
 		null=True,
 		default=None)
+	evs_hp = models.PositiveIntegerField(default=None,null=True)
+	evs_attack = models.PositiveIntegerField(default=None,null=True)
+	evs_defense = models.PositiveIntegerField(default=None,null=True)
+	evs_special_attack = models.PositiveIntegerField(default=None,null=True)
+	evs_special_defense = models.PositiveIntegerField(default=None,null=True)
+	evs_speed = models.PositiveIntegerField(default=None,null=True)
+	nature = models.CharField(max_length=100,default=None,null=True)
 	dynamaxed = models.BooleanField(null=True)
 	tera_type = models.ForeignKey(
 		'pokemon.Type',
 		related_name='tera_type_of_pokemon',
-		on_delete=models.PROTECT,
-		null=True)
-	user_pokemon = models.ForeignKey(
-		'users.PokemonOnTeam',
-		related_name='game_of_user_pokemon',
 		on_delete=models.PROTECT,
 		null=True)
 
@@ -71,7 +73,6 @@ class MoveUsage(models.Model):
 		'pokemon.Move',
 		related_name='pokemon_that_used_move',
 		on_delete=models.PROTECT)
-	used = models.BooleanField(default=True)
 
 	class Meta:
 		unique_together = ['pokemon','move']
