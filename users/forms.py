@@ -1,8 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
-from .models import PokemonOnTeam
-
 class CustomUserCreationForm(UserCreationForm):
 	class Meta(UserCreationForm.Meta):
 		fields = UserCreationForm.Meta.fields + ("email",)
@@ -17,14 +15,3 @@ class SubmitGameForm(forms.Form):
 
 class ChangeEmailForm(forms.Form):
 	email = forms.EmailField(label='New Email Address')
-
-# class PokemonForm(forms.ModelForm):
-# 	class Meta:
-# 		model = PokemonOnTeam
-# 		fields = "__all__"
-
-PokemonFormSet = forms.modelformset_factory(
-	PokemonOnTeam,
-	fields="__all__",
-	extra=6,
-	max_num=6)
