@@ -41,6 +41,50 @@
 			</div>
 		</div>
 	</div>
+	<div class="container">
+		<p>
+			<h3 style="text-align: center;">UPDATE 6/22/2023</h3>
+		</p>
+		<p>
+			I did not expect to have a whole month between updates. With my own travelling to regionals, practicing, job search, and just general life stuff I've been working on this a little more slowly than I would have liked. That being said, I have all of the pieces ready to go for the new plugin and now it's just a matter of putting them all together. In order to do this, I have to overhaul some of the website. I already have this working on my own computer, but putting it online may unexpectedly break things. So if there is an outage on the website that is why (although it really should only affect personalized statistics).
+		</p>
+		<p>
+			The new plugin should do a lot of things, but most importantly for the advent of Regulation D it will address some bugs you may have already noticed. The replay logs cannot differentiate between Urshifu's forms unless it gets used in the battle. This is because Showdown's team preview always defaults to showing Single-Strike form. Additionally, if you've tried messing around with Hisuian-Zoroark (or just regular Zoroark for that matter), the website flatout ignores Zoroark completely. This is because the Illusion ability breaks pretty much everything and there are no surefire ways to account for it in all edge cases. It will still be some time before I actually implement the code to track Zoroark, but the changes to the website and plugin will at least finally make this possible.
+		</p>
+		<p>
+			In addition to fixing these bugs, the new plugin will be able to track different variations of your teams beyond just the 6 pokemon used. This includes changes to movesets and spreads.
+		</p>
+		<p>
+			<h3 style="text-align: center;">UPDATE 5/25/2023</h3>
+		</p>
+		<p>
+			I should have thought of this sooner, but I’m just going to start writing updates directly to the player Dashboard. There's no obligation to read all this, but I wanted to have this here for anyone who's curious about what's going on with the site. There is always work happening on the website but it isn’t always visible, so I figured it would be good to just write updates for everyone who might be curious.
+		</p>
+		<p>
+			Right now all my attention is being put into refining personalized user statistics. However, I believe the key to that is making sure that the Chrome Plugin is ready to go. To that end, I have now made it capable of scraping player’s team data from the tooltips. This means that even though the replay logs do not show your unused moves, items, or abilities, I can collect that data from the plugin and tie it to the teams you’re using. This will let me do a few things:
+		</p>
+		<p>
+			1. Obviously, I can start showing personalized statistics that include your full movesets, items, and spreads
+		</p>
+		<p>
+			2. As I’m sure you’ve noticed, your “teams” are the sets of 6 pokemon. But I cannot identify changes among those pokemon, so you could completely alter every moveset and it would still be considered the same “team”. I plan on allowing you to choose whether or not those changes make it a distinct team because sometimes you might make small changes and still ultimately want that new version of your team to be a part of the same data set.
+		</p>
+		<p>
+			3. In the long term, once I reach a critical mass of users sending data through the plugin, I can start doing more detailed analysis on the metagame using that information and I will no longer be restricted by the limitations of the replay logs. I do want to add a caveat to this though: it is incredibly important to me to protect user data. Which is to say, I don’t want people to feel that sending their data to the website means revealing their secrets or unique techs to the world. Nothing you do will be publicly displayed on the website if it isn’t being used by a significant number of players to the point where it can be considered a meta trend.
+		</p>
+		<p>
+			These updates to the plugin are already complete, but they are not yet available because I still have to connect them to the site. In order to do that, functionally I need to implement my own teambuilder. So currently, that’s what’s happening behind the scenes and why there have been a lack of updates to the parts of the site that you are actually seeing.
+		</p>
+		<p>
+			The great news is that a friend of mine has agreed to help out with the website. He’ll mostly be helping out with the design of the website which is wonderful because, although that has been a lower priority for me, it’s still a necessary component. This means I can put so much more of my focus into data collection and analysis. That being said, like myself he isn’t getting paid to do this. I trust him to do quality work, but it’s gonna be on his own time so I ask that you please continue to be patient with updates, they’re on their way. We’re super excited to have it all coming together, but we are human being with our own lives and responsibilities. I do want to stress that nobody has been rude or pushy up to this point, I just don’t like leaving this kind of stuff unsaid. I genuinely appreciate everyone’s patience!
+		</p>
+		<p>
+			Finally, if you know anyone who you think would be interested in using the site’s personalized statistics features, I welcome new users. All I ask is that you put them in touch with me instead of sending them the links yourself. When this is all public I’ll be happy to have this get sent to anyone and everyone, but while this is all still in the development stage I like to know who my users are because you’re all people I want to be able to communicate with about your experiences.
+		</p>
+		<p>
+			If you need want to get in touch, the best way to contact me is through Discord. If we aren’t already friends on there, I’m CaptainFop#6470. If you don’t use Discord and want another way to contact me you can email AbraKadata@gmail.com.
+		</p>
+	</div>
 
 	{% else %}
 	<div class="row justify-content-center">

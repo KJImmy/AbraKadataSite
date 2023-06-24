@@ -422,7 +422,7 @@ def change_email_view(request):
 
 	context['cur_email'] = user.email
 
-	return render(request,'registration/email_reset.html',context)
+	context['cur_email'] = user.email
 
 def teams_view(request):
 	user = get_user(request)
