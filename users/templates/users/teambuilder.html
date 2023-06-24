@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container">
+	{% crispy form %}
+	<div class="row justify-content-center">
+		<button style="text-align: center;">Add Pok&eacute;mon</button>	
+	</div>
+</div>
+
+
+{% endblock %}
