@@ -35,29 +35,15 @@ class PokemonUsage(models.Model):
 	moveset = models.ManyToManyField(Move,related_name='pokemon_moveset',through='MoveUsage')
 	used = models.BooleanField()
 	lead = models.BooleanField()
-	ability = models.ForeignKey(
-		'pokemon.Ability',
-		related_name='ability_for_used_pokemon',
-		on_delete=models.PROTECT,
-		null=True,
-		default=None)
-	item = models.ForeignKey(
-		'pokemon.Item',
-		related_name='item_for_used_pokemon',
-		on_delete=models.PROTECT,
-		null=True,
-		default=None)
-	evs_hp = models.PositiveIntegerField(default=None,null=True)
-	evs_attack = models.PositiveIntegerField(default=None,null=True)
-	evs_defense = models.PositiveIntegerField(default=None,null=True)
-	evs_special_attack = models.PositiveIntegerField(default=None,null=True)
-	evs_special_defense = models.PositiveIntegerField(default=None,null=True)
-	evs_speed = models.PositiveIntegerField(default=None,null=True)
-	nature = models.CharField(max_length=100,default=None,null=True)
 	dynamaxed = models.BooleanField(null=True)
 	tera_type = models.ForeignKey(
 		'pokemon.Type',
 		related_name='tera_type_of_pokemon',
+		on_delete=models.PROTECT,
+		null=True)
+	user_pokemon = models.ForeignKey(
+		'users.PokemonOnTeam',
+		related_name='user_pokemon',
 		on_delete=models.PROTECT,
 		null=True)
 
@@ -92,6 +78,12 @@ class GamePlayerRelation(models.Model):
 	rating_pre = models.PositiveIntegerField(null=True)
 	rating_post = models.PositiveIntegerField(null=True)
 	personal_include = models.BooleanField(default=True)
+	user_team = models.ForeignKey(
+		'users.UserTeam',
+		related_name='user_team',
+		on_delete=models.PROTECT,
+		null=True)
+	gathered_by_plugin = models.BooleanField(default=False)
 
 	class Meta:
 		unique_together = ['game','player']

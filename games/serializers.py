@@ -4,6 +4,8 @@ from .utils import add_game_from_link
 
 class LinkSerializer(serializers.ModelSerializer):
 	link = serializers.CharField(max_length=1000)
+	team_details = serializers.JSONField(required=False)
+	username = serializers.CharField(max_length=1000,required=False)
 
 	class Meta:
 		model = Game
@@ -18,4 +20,6 @@ class LinkSerializer(serializers.ModelSerializer):
 	def upload(self):
 		# Needs to ensure that 2 users with extension don't upload game at same time
 		link = self.validated_data['link']
-		add_game_from_link(link)
+		team_details = self.validated_data['team_details']
+		username = self.validated_data['username']
+		add_game_from_link(link,team_details,username)

@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'crispy_forms',
+    'crispy_bootstrap4',
 
     #My Apps
     'AbraKadataSite',
@@ -173,3 +175,5 @@ LOGOUT_REDIRECT_URL = "dashboard"
 
 EMAIL_HOST = "localhost"
 EMAIL_PORT = 1025
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

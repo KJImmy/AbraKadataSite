@@ -1,12 +1,23 @@
-{% for t in teams %}
-<div>
-	{% for p in t %}
-	{% with p.img_number|slugify as img_num %}
-	{% with "sprites/pokemon/"|add:img_num|add:".png" as img_file %}
-		<img src="{% static img_file %}" style="max-height: 70px;">
-		{{ p.pokemon_display_name }}
-	{% endwith %}
-	{% endwith %}
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class='container'>
+	<h3>
+		ALL TEAMS
+	</h3>
+	{{ id }}
+	<form method="POST" action="">
+		{% csrf_token %}
+		<input type="submit" name="new_team" value="Add Team">	
+	</form>
+	{{ response }}
+	{% for team in teams %}
+
+	{{ team }}
+
 	{% endfor %}
 </div>
-{% endfor %}
+
+
+{% endblock %}

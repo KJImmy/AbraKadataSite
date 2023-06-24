@@ -16,18 +16,30 @@ class Move(models.Model):
 	targets = models.PositiveIntegerField(null=True)
 	effect_chance = models.PositiveIntegerField(null=True)
 
+	def __str__(self):
+		return self.move_display_name
+
 class Item(models.Model):
 	item_unique_name = models.CharField(max_length=100)
 	item_display_name = models.CharField(max_length=100)
+
+	def __str__(self):
+		return self.item_display_name
 
 class Ability(models.Model):
 	ability_unique_name = models.CharField(max_length=100,unique=True)
 	ability_display_name = models.CharField(max_length=100)
 
+	def __str__(self):
+		return self.ability_display_name
+
 class Type(models.Model):
 	type_name = models.CharField(max_length=100,unique=True)
 	type_color = models.CharField(max_length=10,null=True)
 	damage_class = models.CharField(max_length=100,null=True)
+
+	def __str__(self):
+		return self.type_name
 
 class Pokemon(models.Model):
 	pokemon_unique_name = models.CharField(max_length=100,unique=True)
@@ -44,6 +56,9 @@ class Pokemon(models.Model):
 	pokemon_types = models.ManyToManyField(Type,related_name='pokemon_typing',through='PokemonTypeRelation')
 	pokemon_abilities = models.ManyToManyField(Ability,through='PokemonAbilityRelation')
 	learnset = models.ManyToManyField(Move,through='Learnset')
+
+	def __str__(self):
+		return self.pokemon_display_name
 
 class PokemonTypeRelation(models.Model):
 	pokemon = models.ForeignKey('Pokemon',on_delete=models.PROTECT,related_name='types_of_pokemon')

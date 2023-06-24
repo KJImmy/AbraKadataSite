@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<div class="container">
+<div class="container">,
 	<h1 style="text-align: center;">
 		Team Breakdown
 	</h1>
@@ -234,142 +234,106 @@
 			</table>
 		</div>
 	</div>
-	<div class="container">
-		<div class="table-responsive">
-			<table>
-				<thead class="thead-fix">
-					<tr>
-						<th>
-							Type <i class="fa-solid fa-sort arrow"></i>
-						</th>
-						<th>
-							Winrate Against <i class="fa-solid fa-sort arrow"></i>
-						</th>
-						<th>
-							Winrate Against When Used <i class="fa-solid fa-sort arrow"></i>
-						</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for t in types %}
-					<tr>
-						<td>
-							{{ t.type_name }}
-						</td>
-						<td>
-							{{ t.winrate_against }}
-						</td>
-						<td>
-							{{ t.winrate_against_used }}
-						</td>
-					</tr>
-					{% endfor %}
-				</tbody>
-			</table>
-		</div>
-	</div>
 	<div>
 		<div style="text-align: center;">
 			Games
 		</div>
-		<form method="POST">
-			{% csrf_token %}
-			<div class="table-responsive" id="personal-game-list">
-				<table>
-					<thead class="thead-fix">
-						<tr>
-							<th>
-								Opponent's Team
-							</th>
-							<th>
-								Opponent
-							</th>
-							<th>
-								Date
-							</th>
-							<th>
-								Rating
-							</th>
-							<th>
-								Link
-							</th>
-							<th>
-								W/L
-							</th>
-							<th>
-								Include?
-							</th>
-						</tr>
-					</thead>
-					<tbody>
-						{% for obj in game_list %}
-						{% with obj.game.players_in_game.all as players %}
-						{% for opp in players %}
-						{% if opp != obj %}
-						<tr>
-							<td>
-								{% for mon in opp.pokemon_of_player.all %}
-								{% with mon.pokemon.img_number|slugify as img_num %}
-								{% with "sprites/pokemon/"|add:img_num|add:".png" as img_file %}
-								<img src="{% static img_file %}" style="max-height: 70px;">
-								{% endwith %}
-								{% endwith %}
-								{% endfor %}
-							</td>
-							<td>
-								{{ opp.player.username }}
-							</td>
-							<td>
-								{{ obj.game.start_time }}
-							</td>
-							<td>
-								{% if obj.game.ranked %}
-								{{ obj.game.rating }}
-								{% else %}
-								Unrated
-								{% endif %}
-							</td>
-							<td>
-								<a href="{{ obj.game.link }}" target="_blank">
-									Replay
-								</a>
-							</td>
-							<td>
-								{% if obj.winner %}
-									Win
-								{% else %}
-									Loss
-								{% endif %}
-							</td>
-							<td>
+		<div class="table-responsive" id="personal-game-list">
+			<table>
+				<thead class="thead-fix">
+					<tr>
+						<th>
+							Opponent's Team
+						</th>
+						<th>
+							Opponent
+						</th>
+						<th>
+							Date
+						</th>
+						<th>
+							Rating
+						</th>
+						<th>
+							Link
+						</th>
+						<th>
+							W/L
+						</th>
+						<th>
+							Include?
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for obj in game_list %}
+					{% with obj.game.players_in_game.all as players %}
+					{% for opp in players %}
+					{% if opp != obj %}
+					<tr>
+						<td>
+							{% for mon in opp.pokemon_of_player.all %}
+							{% with mon.pokemon.img_number|slugify as img_num %}
+							{% with "sprites/pokemon/"|add:img_num|add:".png" as img_file %}
+							<img src="{% static img_file %}" style="max-height: 70px;">
+							{% endwith %}
+							{% endwith %}
+							{% endfor %}
+						</td>
+						<td>
+							{{ opp.player.username }}
+						</td>
+						<td>
+							{{ obj.game.start_time }}
+						</td>
+						<td>
+							{% if obj.game.ranked %}
+							{{ obj.game.rating }}
+							{% else %}
+							Unrated
+							{% endif %}
+						</td>
+						<td>
+							<a href="{{ obj.game.link }}" target="_blank">
+								Replay
+							</a>
+						</td>
+						<td>
+							{% if obj.winner %}
+								Win
+							{% else %}
+								Loss
+							{% endif %}
+						</td>
+						<td>
+							<form method="POST">
+								{% csrf_token %}
 								{% if not obj.game.ranked %}
 								{% if obj.personal_include %}
 								<input 	onChange="this.form.submit()" 
 										type="checkbox" 
-										name="include_game" 
-										value="{{ obj.id }}" 
+										name="include_game"
 										id="include{{ obj.id }}" 
 										checked>
 								{% elif not obj.personal_include %}
 								<input 	onChange="this.form.submit()" 
 										type="checkbox" 
-										name="include_game" 
-										value="{{ obj.id }}" 
+										name="include_game"
 										id="include{{ obj.id }}">
 								{% endif %}
 								{% endif %}
-							</td>
-						</tr>
-						{% endif %}
-						{% endfor %}
-						{% endwith %}
-						{% endfor %}
-					</tbody>
-				</table>
-			</div>
-    		<input type="hidden" id="games" name="games" value="{{ request.games }}">
-       		<input type="hidden" id="team" name="team" value="{{ request.team }}">
-		</form>
+								<input type="hidden" id="game" name="game" value="{{ obj.id }}">
+								<input type="hidden" id="team" name="team" value="[{% for p in team %}{{ p.id }},{% endfor %}]">
+							</form>
+						</td>
+					</tr>
+					{% endif %}
+					{% endfor %}
+					{% endwith %}
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
 	</div>
 </div>
 {% endblock %}

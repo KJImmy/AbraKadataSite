@@ -4,19 +4,6 @@
 
 {% block content %}
 
-<!-- <div class="wrapper">
-	<div id="sidebar-wrapper">
-		<div id="sidebar">
-			<div class="sidebar-header">
-				<h3 style="text-align: center;">Formats Played</h3>
-				{% for t in tiers %}
-				<div>
-					Gen {{ t.generation }} {{ t.tier_display_name }}
-				</div>
-				{% endfor %}
-			</div>
-		</div>
-	</div> -->
 <div class="container">
 	<div class="accordion">
 	{% for t in tier_stats %}
@@ -94,38 +81,57 @@
 								</tbody>
 							</table>
 						</div>
-						<div>
-							{% for key,value in results.items %}
-							{% if key.id == t.id %}
-							{% for team,stats in value.items %}
-						    <div class="row justify-content-start">
-						        <div class="col-6">
-						        {% for p in team %}
-						            {% with p.img_number|slugify as img_num %}
-						            {% with "sprites/pokemon/"|add:img_num|add:".png" as img_file %}
-						                <img src="{% static img_file %}" style="max-height: 70px;">
-						            {% endwith %}
-						            {% endwith %}
-						        {% endfor %}
-						        </div>
-						        <div class="col-2">
-						        	Winrate: {{ stats.Winrate }}%
-						        </div>
-						        <div class="col-2" style="align-content: center;">
-						            Game Count: {{ stats.Played }}
-						        </div>
-						        <div class="col-2">
-						        	<form action="{% url 'breakdown' %}" method="post">
-						        		{% csrf_token %}
-						        		<input type="hidden" id="games" name="games" value="{{ stats.game_list }}">
-						        		<input type="hidden" id="team" name="team" value="{{ stats.team_ids }}">
-						        		<input type="submit" name="breakdown" value="Team Breakdown">
-						        	</form>    	
-						        </div>
-						    </div>
-						    {% endfor %}
-						    {% endif %}
-						    {% endfor %}
+						<div class="table-responsive">
+							<table>
+								<thead>
+									<tr>
+										<th>
+											Team
+										</th>
+										<th>
+											Winrate
+										</th>
+										<th>
+											Games Played
+										</th>
+										<th>
+											
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for key,value in results.items %}
+									{% if key == t.id %}
+									{% for team,stats in value.items %}
+									<tr>
+										<td>
+										{% for p in team %}
+										{% with p.img_number|slugify as img_num %}
+										{% with "sprites/pokemon/"|add:img_num|add:".png" as img_file %}
+											<img src="{% static img_file %}" style="max-height: 70px;" name="{{ p.pokemon_display_name }}">
+										{% endwith %}
+										{% endwith %}
+										{% endfor %}
+										</td>
+										<td>
+											{{ stats.Winrate }}%
+										</td>
+										<td>
+											{{ stats.Played }}
+										</td>
+										<td>
+											<form action="{% url 'breakdown' %}" method="post">
+												{% csrf_token %}
+												<input type="hidden" id="team" name="team" value="[{% for p in team %}{{ p.id }},{% endfor %}]">
+												<input type="submit" name="breakdown" value="Team Breakdown">
+											</form>
+										</td>
+									</tr>
+									{% endfor %}
+									{% endif %}
+									{% endfor %}
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>
